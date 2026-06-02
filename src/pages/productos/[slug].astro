@@ -1,0 +1,398 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getSimilarProducts, defaultSizeOptions, careInfo, type Product } from '../../data/products';
+
+export async function getStaticPaths() {
+  const { products } = await import('../../data/products');
+  return products.map((product: Product) => ({
+    params: { slug: product.id },
+    props: { product }
+  }));
+}
+
+const { product } = Astro.props;
+
+if (!product) {
+  return Astro.redirect('/404');
+}
+
+const similarProducts = getSimilarProducts(product.similarProducts);
+
+// Fallbacks so every product renders faithfully
+const collection = product.collection ?? 'Colección Principal';
+const gallery = product.gallery && product.gallery.length > 0
+  ? product.gallery
+  : [product.image, ...similarProducts.map(p => p.image)].slice(0, 4);
+const sizeOptions = product.sizeOptions ?? defaultSizeOptions;
+
+const story = product.story ?? {
+  tag: 'La historia del pastel',
+  title: 'Una creación',
+  highlight: 'artesanal',
+  paragraphs: [product.fullDescription || product.description],
+  facts: ['Tiempo de elaboración: 24h', 'Consumir en 48h', 'Conservar refrigerado'],
+  images: [product.image, ...similarProducts.map(p => p.image)].slice(0, 2),
+  craftLabel: 'Artesanal',
+};
+
+const ingredientGroups = product.ingredientGroups ?? (
+  product.ingredients ? [{ group: 'Composición', items: product.ingredients }] : []
+);
+
+const nutritionFull = product.nutritionFull ?? (product.nutrition ? {
+  calories: `${product.nutrition.calories} kcal`,
+  fatTotal: product.nutrition.fat,
+  fatSaturated: '—',
+  carbs: product.nutrition.carbs,
+  sugars: '—',
+  protein: product.nutrition.protein,
+  sodium: '—',
+} : null);
+
+const formatPrice = (n: number) => n.toFixed(2).replace('.', ',');
+---
+
+<Layout title={`${product.name} - Pastelería Mat`}>
+  <Header />
+
+  <!-- Spacer for fixed header -->
+  <div class="h-16 lg:h-20"></div>
+
+  <!-- MAIN PRODUCT ELEMENT -->
+  <section class="py-12 lg:py-16 bg-cream">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+        <!-- Gallery -->
+        <div>
+          <div class="relative">
+            <img id="main-image" class="w-full h-[380px] lg:h-[460px] object-cover" src={gallery[0]} alt={product.name} />
+            {product.badge && (
+              <div class={`absolute top-4 left-4 ${product.badgeColor === 'gold' ? 'bg-gold text-purple' : 'bg-purple text-gold'} text-xs font-bold px-3 py-1.5 tracking-widest uppercase`}>
+                {product.badge}
+              </div>
+            )}
+            <button class="absolute top-4 right-4 bg-white/90 text-purple w-9 h-9 flex items-center justify-center hover:bg-purple hover:text-gold transition-colors">
+              <i class="fa-regular fa-heart text-sm"></i>
+            </button>
+          </div>
+          <div class="grid grid-cols-4 gap-3 mt-3">
+            {gallery.map((img, i) => (
+              <button class={`thumb h-20 lg:h-24 overflow-hidden border ${i === 0 ? 'border-purple' : 'border-transparent'}`} data-src={img}>
+                <img class="w-full h-full object-cover" src={img} alt={`${product.name} ${i + 1}`} />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <!-- Product Info -->
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <p class="text-xs text-gold tracking-[0.2em] uppercase">{product.category} · {collection}</p>
+          </div>
+
+          <h1 class="font-serif text-4xl lg:text-5xl font-light text-purple mb-3">
+            {product.name} {product.nameHighlight && (<em class="italic text-gold">{product.nameHighlight}</em>)}
+          </h1>
+
+          <div class="flex items-center gap-3 mb-6">
+            <span class="gold-line h-px w-10 inline-block"></span>
+            <p class="text-xs text-gray-400 tracking-[0.2em] uppercase">Elaboración diaria · Disponible hoy</p>
+          </div>
+
+          <div class="flex items-center gap-3 mb-6">
+            <span class="font-serif text-3xl text-purple">{formatPrice(product.price)} €</span>
+            {product.originalPrice && (
+              <span class="text-gray-400 line-through text-lg">{formatPrice(product.originalPrice)} €</span>
+            )}
+            {product.discount && (
+              <span class="bg-gold/20 text-purple text-xs font-bold px-2 py-1 rounded">-{product.discount}%</span>
+            )}
+          </div>
+
+          <p class="text-gray-600 leading-relaxed mb-8 pl-4 border-l-2 border-gold/40">{product.description}</p>
+
+          <!-- Size Selector -->
+          <div class="mb-8">
+            <p class="section-tag mb-3">Tamaño</p>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {sizeOptions.map((size, i) => (
+                <button class={`size-btn border px-3 py-3 text-left transition-colors ${i === 0 ? 'bg-purple border-purple text-gold' : 'border-purple/20 text-purple hover:border-purple'}`} data-size={`${size.name} · ${size.detail}`}>
+                  <span class="block text-sm font-medium tracking-wide uppercase">{size.name}</span>
+                  <span class="block text-xs opacity-70 mt-0.5">{size.detail}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <!-- Quantity + Cart -->
+          <div class="flex items-center gap-3 mb-8">
+            <div class="flex items-center border border-purple/20">
+              <button class="qty-minus px-4 py-3 text-purple hover:bg-purple hover:text-gold transition-colors"><i class="fas fa-minus text-xs"></i></button>
+              <input id="qty" type="text" value="1" readonly class="w-12 text-center py-3 border-x border-purple/20 focus:outline-none" />
+              <button class="qty-plus px-4 py-3 text-purple hover:bg-purple hover:text-gold transition-colors"><i class="fas fa-plus text-xs"></i></button>
+            </div>
+            <button
+              id="add-to-cart-btn"
+              class="btn-gold flex-1 px-6 py-3.5 text-sm font-medium tracking-widest uppercase flex items-center justify-center gap-2"
+              data-id={product.id}
+              data-name={`${product.name}${product.nameHighlight ? ' ' + product.nameHighlight : ''}`}
+              data-price={product.price}
+              data-image={product.image}
+              data-category={product.category}
+            >
+              <i class="fa-solid fa-bag-shopping text-xs"></i> Añadir al carrito
+            </button>
+            <button class="border border-purple/20 text-purple w-12 h-12 flex items-center justify-center hover:bg-purple hover:text-gold transition-colors">
+              <i class="fa-regular fa-heart"></i>
+            </button>
+          </div>
+
+          <!-- Trust Features -->
+          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-purple/10 text-center">
+            <div>
+              <i class="fa-solid fa-truck-fast text-gold mb-2"></i>
+              <p class="text-xs text-gray-500">Envío el mismo día</p>
+            </div>
+            <div>
+              <i class="fa-solid fa-leaf text-gold mb-2"></i>
+              <p class="text-xs text-gray-500">Ingredientes naturales</p>
+            </div>
+            <div>
+              <i class="fa-solid fa-award text-gold mb-2"></i>
+              <p class="text-xs text-gray-500">Elaboración artesanal</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TABS SECTION (full width, below main element) -->
+  <section class="bg-cream pb-20 lg:pb-28">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <!-- Tab Nav -->
+      <div class="border-b border-purple/15">
+        <div class="flex gap-10 justify-center">
+          <button class="tab-btn pb-4 text-purple font-medium border-b-2 border-gold text-sm tracking-widest uppercase" data-tab="description">Descripción</button>
+          <button class="tab-btn pb-4 text-gray-400 hover:text-purple transition-colors text-sm tracking-widest uppercase" data-tab="ingredients">Ingredientes</button>
+          <button class="tab-btn pb-4 text-gray-400 hover:text-purple transition-colors text-sm tracking-widest uppercase" data-tab="care">Info &amp; Cuidados</button>
+        </div>
+      </div>
+
+      <!-- DESCRIPCIÓN -->
+      <div id="tab-description" class="tab-panel py-14">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <p class="section-tag mb-4">{story.tag}</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-light text-purple mb-6">
+              {story.title} <em class="italic text-gold">{story.highlight}</em>
+            </h2>
+            {story.paragraphs.map((p) => (
+              <p class="text-gray-600 leading-relaxed mb-4">{p}</p>
+            ))}
+            <div class="flex flex-wrap gap-6 mt-8">
+              {story.facts.map((fact) => (
+                <span class="flex items-center gap-2 text-xs text-gray-500">
+                  <i class="fa-solid fa-circle text-gold text-[6px]"></i> {fact}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div class="relative">
+            <div class="grid grid-cols-2 gap-4">
+              <img class="w-full h-64 object-cover" src={story.images[0]} alt="Elaboración" />
+              <img class="w-full h-64 object-cover mt-8" src={story.images[1] ?? story.images[0]} alt="Detalle" />
+            </div>
+            <div class="absolute left-0 bottom-4 bg-purple text-white px-6 py-4">
+              <p class="text-[10px] text-gold tracking-[0.2em] uppercase mb-1">Elaboración</p>
+              <p class="font-serif text-xl">{story.craftLabel}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INGREDIENTES -->
+      <div id="tab-ingredients" class="tab-panel py-14 hidden">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20">
+          <div>
+            <p class="section-tag mb-4">Composición</p>
+            <h2 class="font-serif text-3xl lg:text-4xl font-light text-purple mb-8">
+              Ingredientes <em class="italic text-gold">seleccionados</em>
+            </h2>
+            <div class="space-y-6">
+              {ingredientGroups.map((grp) => (
+                <div>
+                  <p class="text-xs text-gold tracking-[0.2em] uppercase mb-3">{grp.group}</p>
+                  <div class="flex flex-wrap gap-2">
+                    {grp.items.map((item) => (
+                      <span class="border border-purple/20 text-gray-600 text-sm px-3 py-1.5">{item}</span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          {nutritionFull && (
+            <div>
+              <p class="section-tag mb-4">Información nutricional</p>
+              <h2 class="font-serif text-3xl lg:text-4xl font-light text-purple mb-8">
+                Por porción <em class="italic text-gold">(100g)</em>
+              </h2>
+              <div class="divide-y divide-purple/10">
+                <div class="flex justify-between py-3"><span class="text-gray-500">Calorías</span><span class="font-medium text-purple">{nutritionFull.calories}</span></div>
+                <div class="flex justify-between py-3"><span class="text-gray-500">Grasas totales</span><span class="font-medium text-purple">{nutritionFull.fatTotal}</span></div>
+                <div class="flex justify-between py-3 pl-4"><span class="text-gray-400 italic text-sm">· Grasas saturadas</span><span class="text-gray-400">{nutritionFull.fatSaturated}</span></div>
+                <div class="flex justify-between py-3"><span class="text-gray-500">Carbohidratos</span><span class="font-medium text-purple">{nutritionFull.carbs}</span></div>
+                <div class="flex justify-between py-3 pl-4"><span class="text-gray-400 italic text-sm">· Azúcares</span><span class="text-gray-400">{nutritionFull.sugars}</span></div>
+                <div class="flex justify-between py-3"><span class="text-gray-500">Proteínas</span><span class="font-medium text-purple">{nutritionFull.protein}</span></div>
+                <div class="flex justify-between py-3"><span class="text-gray-500">Sodio</span><span class="font-medium text-purple">{nutritionFull.sodium}</span></div>
+              </div>
+              {product.allergens && (
+                <div class="mt-6 flex items-center gap-2 bg-red-50 text-red-400 text-sm px-4 py-3">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                  <span>Contiene: {product.allergens.join(', ').toLowerCase()}</span>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+
+      <!-- INFO & CUIDADOS -->
+      <div id="tab-care" class="tab-panel py-14 hidden">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {careInfo.map((item) => (
+            <div class="bg-white p-8">
+              <div class="w-10 h-10 bg-gold/15 flex items-center justify-center mb-5">
+                <i class={`fa-solid ${item.icon} text-gold`}></i>
+              </div>
+              <h3 class="font-serif text-xl text-purple mb-3">{item.title}</h3>
+              <p class="text-gray-500 text-sm leading-relaxed">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Creaciones Similares -->
+  {similarProducts.length > 0 && (
+    <section class="py-20 lg:py-28 bg-cream-dark">
+      <div class="max-w-7xl mx-auto px-6 lg:px-10">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+          <div>
+            <p class="section-tag mb-4">También te puede gustar</p>
+            <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple">Creaciones <em class="italic text-gold">similares</em></h2>
+          </div>
+          <a href="/" class="inline-flex items-center gap-2 text-purple font-medium text-xs tracking-widest uppercase border-b border-purple pb-1 hover:text-gold hover:border-gold transition-colors self-start md:self-auto">
+            Ver todo el menú <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {similarProducts.map(similarProduct => (
+            <ProductCard product={similarProduct} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <Footer />
+
+  <script>
+    import Cart from '../../scripts/cart';
+
+    document.addEventListener('DOMContentLoaded', function () {
+      // Add to cart (with selected size + quantity)
+      const addBtn = document.getElementById('add-to-cart-btn');
+      if (addBtn) {
+        addBtn.addEventListener('click', () => {
+          const qtyInput = document.getElementById('qty') as HTMLInputElement | null;
+          const qty = qtyInput ? parseInt(qtyInput.value, 10) || 1 : 1;
+          const activeSize = document.querySelector<HTMLElement>('.size-btn.bg-purple');
+          Cart.add(
+            {
+              id: addBtn.dataset.id || '',
+              name: addBtn.dataset.name || '',
+              price: parseFloat(addBtn.dataset.price || '0'),
+              image: addBtn.dataset.image || '',
+              category: addBtn.dataset.category || '',
+              size: activeSize?.dataset.size || '',
+            },
+            qty,
+          );
+          const original = addBtn.innerHTML;
+          addBtn.innerHTML = '<i class="fa-solid fa-check text-xs"></i> Añadido al carrito';
+          window.setTimeout(() => { addBtn.innerHTML = original; }, 1300);
+        });
+      }
+
+      // Tabs
+      const tabButtons = document.querySelectorAll<HTMLElement>('.tab-btn');
+      const panels = document.querySelectorAll<HTMLElement>('.tab-panel');
+      tabButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          tabButtons.forEach((b) => {
+            b.classList.remove('text-purple', 'font-medium', 'border-b-2', 'border-gold');
+            b.classList.add('text-gray-400');
+          });
+          btn.classList.remove('text-gray-400');
+          btn.classList.add('text-purple', 'font-medium', 'border-b-2', 'border-gold');
+
+          const target = btn.getAttribute('data-tab');
+          panels.forEach((p) => p.classList.add('hidden'));
+          const panel = document.getElementById('tab-' + target);
+          if (panel) panel.classList.remove('hidden');
+        });
+      });
+
+      // Gallery thumbnails
+      const mainImage = document.getElementById('main-image') as HTMLImageElement | null;
+      const thumbs = document.querySelectorAll<HTMLElement>('.thumb');
+      thumbs.forEach((thumb) => {
+        thumb.addEventListener('click', () => {
+          const src = thumb.getAttribute('data-src');
+          if (mainImage && src) mainImage.setAttribute('src', src);
+          thumbs.forEach((t) => {
+            t.classList.remove('border-purple');
+            t.classList.add('border-transparent');
+          });
+          thumb.classList.remove('border-transparent');
+          thumb.classList.add('border-purple');
+        });
+      });
+
+      // Size selector
+      const sizeButtons = document.querySelectorAll<HTMLElement>('.size-btn');
+      sizeButtons.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          sizeButtons.forEach((b) => {
+            b.classList.remove('bg-purple', 'border-purple', 'text-gold');
+            b.classList.add('border-purple/20', 'text-purple');
+          });
+          btn.classList.remove('border-purple/20', 'text-purple');
+          btn.classList.add('bg-purple', 'border-purple', 'text-gold');
+        });
+      });
+
+      // Quantity
+      const qtyInput = document.getElementById('qty') as HTMLInputElement | null;
+      const minus = document.querySelector('.qty-minus');
+      const plus = document.querySelector('.qty-plus');
+      if (qtyInput && minus && plus) {
+        minus.addEventListener('click', () => {
+          const v = parseInt(qtyInput.value, 10) || 1;
+          if (v > 1) qtyInput.value = String(v - 1);
+        });
+        plus.addEventListener('click', () => {
+          const v = parseInt(qtyInput.value, 10) || 1;
+          qtyInput.value = String(v + 1);
+        });
+      }
+    });
+  </script>
+</Layout>

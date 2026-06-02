@@ -1,0 +1,52 @@
+---
+import type { Product } from '../data/products.ts';
+
+interface Props {
+  product: Product;
+  showAddButton?: boolean;
+  showHeartButton?: boolean;
+}
+
+const { product, showAddButton = true, showHeartButton = true } = Astro.props;
+---
+
+<a href={`/productos/${product.id}`} class="card-hover bg-cream group cursor-pointer block">
+  <div class="relative h-64 lg:h-72 overflow-hidden">
+    <img 
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
+      src={product.image} 
+      alt={product.name} 
+    />
+    {product.badge && (
+      <div class={`absolute top-4 left-4 ${product.badgeColor === 'gold' ? 'bg-gold text-purple' : 'bg-purple text-gold'} text-xs font-bold px-3 py-1 tracking-widest uppercase`}>
+        {product.badge}
+      </div>
+    )}
+    {showHeartButton && (
+      <button class="heart-btn absolute top-4 right-4 bg-white/90 text-purple w-9 h-9 flex items-center justify-center hover:bg-purple hover:text-gold transition-colors">
+        <i class="fa-regular fa-heart text-sm"></i>
+      </button>
+    )}
+  </div>
+  <div class="p-6">
+    <p class="text-xs text-gold tracking-widest uppercase mb-2">{product.category}</p>
+    <h3 class="font-serif text-xl lg:text-2xl text-purple font-light mb-2">{product.name}</h3>
+    <p class="text-gray-500 text-sm font-light leading-relaxed mb-4">{product.description}</p>
+    <div class="flex items-center justify-between">
+      <span class="font-serif text-2xl text-purple">{product.price.toFixed(2).replace('.', ',')} €</span>
+      {showAddButton && (
+        <button
+          class="btn-gold px-5 py-2 text-xs font-medium tracking-widest uppercase flex items-center gap-2"
+          data-add-to-cart
+          data-id={product.id}
+          data-name={`${product.name}${product.nameHighlight ? ' ' + product.nameHighlight : ''}`}
+          data-price={product.price}
+          data-image={product.image}
+          data-category={product.category}
+        >
+          <i class="fa-solid fa-bag-shopping text-xs"></i> Agregar
+        </button>
+      )}
+    </div>
+  </div>
+</a>

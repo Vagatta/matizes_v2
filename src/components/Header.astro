@@ -1,0 +1,44 @@
+---
+const links = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Menú', href: '/menu' },
+  { label: 'Contacto', href: '/contacto' },
+];
+---
+
+<header id="header" class="fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-gold/20">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 h-16 lg:h-20 grid grid-cols-3 items-center">
+    <!-- Desktop Nav Left -->
+    <nav id="main-nav" class="hidden md:flex items-center gap-8 lg:gap-10">
+      {links.map((link) => (
+        <a href={link.href} class="nav-link text-gray-600 hover:text-purple font-medium text-sm tracking-widest uppercase transition-colors">{link.label}</a>
+      ))}
+    </nav>
+    <!-- Mobile menu button left -->
+    <div class="flex md:hidden items-center">
+      <button id="mobile-menu-btn" class="text-purple text-xl" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+    <!-- Logo Center -->
+    <a href="/" id="logo" class="flex items-center justify-center">
+      <span class="font-serif text-2xl lg:text-3xl font-light text-purple tracking-wide">Mat<span class="logo-exclamation font-normal">!</span>zes</span>
+    </a>
+
+    <!-- Cart Right -->
+    <div class="flex items-center justify-end gap-4 lg:gap-6">
+      <a href="/carrito" id="cart-icon" class="relative text-purple hover:text-gold transition-colors">
+        <i class="fa-solid fa-bag-shopping text-lg lg:text-xl"></i>
+        <span data-cart-count class="hidden absolute -top-2 -right-2 bg-gold text-purple text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-cream border-t border-gold/20 px-6 py-4 flex flex-col gap-4">
+    {links.map((link) => (
+      <a href={link.href} class="text-gray-600 font-medium text-sm tracking-widest uppercase">{link.label}</a>
+    ))}
+  </div>
+</header>
