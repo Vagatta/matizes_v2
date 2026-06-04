@@ -1,4 +1,6 @@
 ---
+import MatizesLogo from './MatizesLogo.astro';
+
 const links = [
   { label: 'Inicio', href: '/' },
   { label: 'Menú', href: '/menu' },
@@ -22,8 +24,8 @@ const links = [
     </div>
 
     <!-- Logo Center -->
-    <a href="/" id="logo" class="flex items-center justify-center">
-      <span class="font-serif text-2xl lg:text-3xl font-light text-purple tracking-wide">Mat<span class="logo-exclamation font-normal">!</span>zes</span>
+    <a href="/" id="logo" aria-label="Matizes — Inicio" class="flex items-center justify-center text-purple hover:text-gold transition-colors">
+      <MatizesLogo class="h-9 lg:h-11 w-auto" />
     </a>
 
     <!-- Cart Right -->

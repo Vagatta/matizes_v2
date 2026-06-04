@@ -1,12 +1,13 @@
 ---
+import MatizesWordmark from './MatizesWordmark.astro';
 ---
 
 <footer id="footer" class="bg-gray-900 text-white py-16 lg:py-20">
   <div class="max-w-7xl mx-auto px-6 lg:px-10">
     <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-12">
       <div class="lg:col-span-2">
-        <a href="/" class="inline-block mb-4">
-          <span class="font-serif text-3xl font-light text-white tracking-wide">Mat<span class="text-gold">!</span>zes</span>
+        <a href="/" aria-label="Matizes" class="inline-block mb-5 text-white hover:text-gold transition-colors">
+          <MatizesWordmark class="h-7 w-auto" />
         </a>
         <p class="text-gray-400 font-light leading-relaxed mb-6 max-w-xs">Pastelería fina artesanal. Cada creación es una experiencia de sabor, textura y elegancia.</p>
         <div class="flex gap-4">
@@ -56,7 +57,7 @@
       </div>
     </div>
     <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-      <p class="text-gray-600 text-xs tracking-wide">© 2024 Mat!zes Pastelería Fina. Todos los derechos reservados.</p>
+      <p class="text-gray-600 text-xs tracking-wide flex items-center gap-1.5">© 2024 <MatizesWordmark class="inline-block h-3 w-auto align-middle" /> Pastelería Fina. Todos los derechos reservados.</p>
       <div class="flex gap-6">
         <a href="#" class="text-gray-600 hover:text-gold text-xs tracking-wide transition-colors">Política de Privacidad</a>
         <a href="#" class="text-gray-600 hover:text-gold text-xs tracking-wide transition-colors">Aviso Legal</a>

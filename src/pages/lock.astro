@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MatizesVertical from '../components/MatizesVertical.astro';
+---
+
+<Layout title="Acceso — Matizes">
+  <main class="lock-screen relative min-h-screen flex items-center justify-center overflow-hidden px-6 py-12">
+    <!-- Decorative gold corners -->
+    <div class="pointer-events-none absolute inset-5 lg:inset-8 border border-gold/25"></div>
+    <span class="pointer-events-none absolute top-5 left-5 lg:top-8 lg:left-8 w-10 h-10 border-t-2 border-l-2 border-gold/60"></span>
+    <span class="pointer-events-none absolute top-5 right-5 lg:top-8 lg:right-8 w-10 h-10 border-t-2 border-r-2 border-gold/60"></span>
+    <span class="pointer-events-none absolute bottom-5 left-5 lg:bottom-8 lg:left-8 w-10 h-10 border-b-2 border-l-2 border-gold/60"></span>
+    <span class="pointer-events-none absolute bottom-5 right-5 lg:bottom-8 lg:right-8 w-10 h-10 border-b-2 border-r-2 border-gold/60"></span>
+
+    <div class="lock-card relative z-10 w-full max-w-sm flex flex-col items-center text-center">
+      <p class="section-tag mb-6">Acceso privado</p>
+
+      <MatizesVertical class="h-[44vh] max-h-[400px] w-auto text-purple mb-2" />
+
+      <div class="gold-line h-px w-20 my-8"></div>
+
+      <p class="text-gray-500 font-light text-sm leading-relaxed mb-8 max-w-xs">
+        Esta sección es privada. Introduce tu clave para continuar.
+      </p>
+
+      <form id="lock-form" class="w-full flex flex-col gap-4" novalidate>
+        <div class="relative">
+          <i class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gold text-sm"></i>
+          <input
+            id="lock-input"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Clave de acceso"
+            class="w-full bg-white border border-gold/30 pl-11 pr-4 py-3.5 text-sm text-gray-700 tracking-wide placeholder:text-gray-400 focus:outline-none focus:border-purple focus:ring-1 focus:ring-purple transition-colors"
+          />
+        </div>
+        <p id="lock-error" class="hidden text-purple text-xs tracking-wide">Clave incorrecta. Inténtalo de nuevo.</p>
+        <button
+          type="submit"
+          class="btn-purple inline-flex items-center justify-center gap-3 px-8 py-3.5 font-medium text-sm tracking-widest uppercase"
+        >
+          <i class="fa-solid fa-unlock-keyhole text-xs"></i>
+          Desbloquear
+        </button>
+      </form>
+
+      <a href="/" class="mt-8 text-gray-400 hover:text-purple text-xs tracking-widest uppercase transition-colors">
+        Volver al inicio
+      </a>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .lock-screen {
+    background:
+      radial-gradient(120% 120% at 50% 0%, rgba(130, 0, 87, 0.06) 0%, rgba(130, 0, 87, 0) 45%),
+      linear-gradient(180deg, #faf8f4 0%, #f3efe8 100%);
+  }
+  .lock-card {
+    animation: lock-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes lock-rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .lock-shake { animation: lock-shake 0.4s ease; }
+  @keyframes lock-shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+  }
+</style>
+
+<script>
+  const ACCESS_KEY = 'matizes';
+  const form = document.getElementById('lock-form') as HTMLFormElement | null;
+  const input = document.getElementById('lock-input') as HTMLInputElement | null;
+  const error = document.getElementById('lock-error');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const value = (input?.value ?? '').trim().toLowerCase();
+    if (value === ACCESS_KEY) {
+      try {
+        sessionStorage.setItem('matizes_unlocked', '1');
+      } catch (_) {}
+      window.location.href = '/';
+      return;
+    }
+    error?.classList.remove('hidden');
+    form.classList.add('lock-shake');
+    input?.focus();
+    input?.select();
+    window.setTimeout(() => form.classList.remove('lock-shake'), 450);
+  });
+</script>

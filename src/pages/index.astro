@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import ProductCard from '../components/ProductCard.astro';
+import MatizesWordmark from '../components/MatizesWordmark.astro';
 import { products } from '../data/products';
 ---
 
@@ -57,7 +58,7 @@ import { products } from '../data/products';
           </h2>
           <div class="gold-line h-px w-16 mb-6"></div>
           <p class="text-gray-600 font-light leading-relaxed mb-5 text-base lg:text-lg">
-            En Mat!zes creemos que la pastelería fina es una forma de arte. Cada creación nace de la precisión técnica y la pasión por los sabores auténticos.
+            En <MatizesWordmark class="inline-block h-[0.78em] w-auto align-[-0.04em] text-purple" /> creemos que la pastelería fina es una forma de arte. Cada creación nace de la precisión técnica y la pasión por los sabores auténticos.
           </p>
           <p class="text-gray-600 font-light leading-relaxed mb-8 text-base lg:text-lg">
             Trabajamos con ingredientes de primera calidad, técnicas clásicas y una visión contemporánea para ofrecerte experiencias únicas en cada pieza.
@@ -211,7 +212,7 @@ import { products } from '../data/products';
     <div class="max-w-7xl mx-auto px-6 lg:px-10">
       <div class="text-center mb-12 lg:mb-16">
         <p class="section-tag mb-4">Lo que dicen nuestros clientes</p>
-        <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple">Experiencias <em class="italic text-gold">Mat!zes</em></h2>
+        <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple flex items-center justify-center gap-3">Experiencias <MatizesWordmark class="inline-block h-[0.62em] w-auto text-gold" /></h2>
       </div>
       <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
         <div id="testimonial-1" class="testimonial-card bg-cream p-8">
