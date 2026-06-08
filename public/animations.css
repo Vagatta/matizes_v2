@@ -1,0 +1,263 @@
+/* =========================================================
+   MATIZES — Animation System
+   Pure CSS + minimal IntersectionObserver (no libraries)
+   ========================================================= */
+
+/* -----------------------------------------------------------
+   1. SCROLL-REVEAL  (default: fade + slide up)
+   Elements start hidden; JS adds .is-visible when in viewport
+   ----------------------------------------------------------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Variant: fade from left */
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-36px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Variant: fade from right */
+.reveal-right {
+  opacity: 0;
+  transform: translateX(36px);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Variant: scale-in (for images/figures) */
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* -----------------------------------------------------------
+   2. STAGGER — grid children animate in sequence
+   ----------------------------------------------------------- */
+.stagger-grid {
+  align-items: stretch;
+}
+
+.stagger-grid > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.stagger-grid.is-visible > *:nth-child(1)  { transition-delay: 0ms;   opacity: 1; transform: none; }
+.stagger-grid.is-visible > *:nth-child(2)  { transition-delay: 90ms;  opacity: 1; transform: none; }
+.stagger-grid.is-visible > *:nth-child(3)  { transition-delay: 180ms; opacity: 1; transform: none; }
+.stagger-grid.is-visible > *:nth-child(4)  { transition-delay: 270ms; opacity: 1; transform: none; }
+.stagger-grid.is-visible > *:nth-child(5)  { transition-delay: 360ms; opacity: 1; transform: none; }
+.stagger-grid.is-visible > *:nth-child(6)  { transition-delay: 450ms; opacity: 1; transform: none; }
+.stagger-grid.is-visible > *:nth-child(n+7){ transition-delay: 540ms; opacity: 1; transform: none; }
+
+/* -----------------------------------------------------------
+   3. CARD ELEVATION  (progressive shadow on hover)
+   ----------------------------------------------------------- */
+.card-hover {
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, box-shadow;
+}
+
+.card-hover:hover {
+  transform: translateY(-10px);
+  box-shadow:
+    0 4px 8px rgba(130, 0, 87, 0.06),
+    0 12px 24px rgba(130, 0, 87, 0.12),
+    0 24px 48px rgba(130, 0, 87, 0.08);
+}
+
+/* -----------------------------------------------------------
+   4. BUTTON TRANSITIONS  (fluid + slight lift)
+   ----------------------------------------------------------- */
+.btn-gold,
+.btn-purple {
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease,
+              color 0.3s ease,
+              transform 0.2s ease,
+              box-shadow 0.3s ease;
+}
+
+.btn-gold:hover,
+.btn-purple:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(130, 0, 87, 0.25);
+}
+
+.btn-gold:active,
+.btn-purple:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Ripple-style highlight on click */
+.btn-gold::after,
+.btn-purple::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.12);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.btn-gold:active::after,
+.btn-purple:active::after {
+  opacity: 1;
+}
+
+/* -----------------------------------------------------------
+   5. HEADER — sticky shrink transition
+   ----------------------------------------------------------- */
+#header {
+  transition: background-color 0.4s ease,
+              box-shadow 0.4s ease,
+              backdrop-filter 0.4s ease,
+              height 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#header.scrolled {
+  background-color: rgba(250, 248, 244, 0.98);
+  box-shadow: 0 2px 20px rgba(130, 0, 87, 0.08);
+  backdrop-filter: blur(12px);
+}
+
+/* -----------------------------------------------------------
+   6. STAT / NUMBER COUNTER
+   The actual counting is driven by JS; this handles the visual
+   ----------------------------------------------------------- */
+[data-stat-target] {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  transition: color 0.3s ease;
+}
+
+/* -----------------------------------------------------------
+   7. HERO content entrance  (runs once on load, CSS-only)
+   ----------------------------------------------------------- */
+@keyframes heroSlideUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-animate > * {
+  animation: heroSlideUp 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-animate > *:nth-child(1) { animation-delay: 0.1s; }
+.hero-animate > *:nth-child(2) { animation-delay: 0.22s; }
+.hero-animate > *:nth-child(3) { animation-delay: 0.34s; }
+.hero-animate > *:nth-child(4) { animation-delay: 0.46s; }
+.hero-animate > *:nth-child(5) { animation-delay: 0.58s; }
+
+/* -----------------------------------------------------------
+   8. GOLD LINE grow animation  (triggered by parent reveal)
+   Only applies when explicitly nested inside a reveal wrapper.
+   Standalone .gold-line (e.g. inside hero) is unaffected.
+   ----------------------------------------------------------- */
+.reveal-left .gold-line,
+.reveal-right .gold-line,
+.reveal .gold-line {
+  transform-origin: left center;
+  transform: scaleX(0);
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.35s;
+}
+
+.reveal-left.is-visible .gold-line,
+.reveal-right.is-visible .gold-line,
+.reveal.is-visible .gold-line {
+  transform: scaleX(1);
+}
+
+/* -----------------------------------------------------------
+   9. NAV-LINK underline (already in global, enhanced here)
+   ----------------------------------------------------------- */
+.nav-link::after {
+  transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* -----------------------------------------------------------
+   10. IMAGE hover overlay pulse
+   ----------------------------------------------------------- */
+.img-hover-wrap {
+  overflow: hidden;
+}
+
+.img-hover-wrap img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              filter 0.5s ease;
+  will-change: transform;
+}
+
+.img-hover-wrap:hover img {
+  transform: scale(1.06);
+  filter: brightness(1.04);
+}
+
+/* -----------------------------------------------------------
+   11. Respect reduced-motion preference
+   ----------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-left, .reveal-right, .reveal-scale,
+  .stagger-grid > *,
+  .hero-animate > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .reveal-left .gold-line,
+  .reveal-right .gold-line,
+  .reveal .gold-line {
+    transform: scaleX(1) !important;
+    transition: none !important;
+  }
+
+  .card-hover:hover {
+    transform: none;
+  }
+
+  .btn-gold:hover,
+  .btn-purple:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}

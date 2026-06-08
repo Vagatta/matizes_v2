@@ -1,0 +1,331 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MatizesWordmark from '../components/MatizesWordmark.astro';
+
+const features = [
+  { icon: 'fa-clock', title: 'Respuesta rápida', text: 'Menos de 24h' },
+  { icon: 'fa-cake-candles', title: 'Pedidos especiales', text: 'Eventos y bodas' },
+  { icon: 'fa-whatsapp', brand: true, title: 'WhatsApp', text: 'Atención directa' },
+  { icon: 'fa-location-dot', title: 'Visítanos', text: 'Valladolid · España' },
+];
+
+const schedule = [
+  { day: 'Lunes', hours: 'Cerrado', closed: true },
+  { day: 'Martes – Viernes', hours: '9:00 – 20:00' },
+  { day: 'Sábado', hours: '9:00 – 21:00' },
+  { day: 'Domingo', hours: '10:00 – 18:00' },
+];
+
+const faqs = [
+  {
+    q: '¿Con cuánto tiempo debo hacer mi pedido especial?',
+    a: 'Para pasteles personalizados y pedidos especiales, recomendamos contactarnos con al menos 72 horas de anticipación. Para bodas y eventos grandes, sugerimos reservar con 2 a 4 semanas de anticipación.',
+  },
+  {
+    q: '¿Hacen entregas a domicilio?',
+    a: 'Sí, realizamos entregas en toda la ciudad. Los pedidos realizados antes de las 12pm pueden ser entregados el mismo día. Para zonas fuera de Valladolid, contáctanos para coordinar.',
+  },
+  {
+    q: '¿Tienen opciones para personas con alergias?',
+    a: 'Contamos con opciones sin gluten, sin lactosa y veganas en varios de nuestros productos. Siempre especifica tus alergias al momento de realizar tu pedido para garantizar tu seguridad.',
+  },
+  {
+    q: '¿Puedo personalizar el diseño de mi pastel?',
+    a: '¡Por supuesto! La personalización es parte de nuestra esencia. Puedes elegir sabores, rellenos, decoración y temática. Agenda una consulta con nuestro equipo de pastelería para diseñar juntos tu creación.',
+  },
+  {
+    q: '¿Cuáles son los métodos de pago aceptados?',
+    a: 'Aceptamos tarjetas de crédito y débito (Visa, Mastercard, Amex), transferencia bancaria, PayPal y pago en efectivo en tienda. Para pedidos especiales, solicitamos un anticipo del 50%.',
+  },
+];
+
+const contactReasons = ['Pedido especial', 'Evento o boda', 'Consulta general', 'Colaboración', 'Otro'];
+---
+
+<Layout title="Contacto y Pedidos Especiales | Mat!zes">
+  <Header />
+
+  <!-- Spacer for fixed header -->
+  <div class="h-16 lg:h-20"></div>
+
+  <!-- HERO -->
+  <section class="py-14 lg:py-20 bg-cream">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
+        <div>
+          <p class="section-tag mb-4">Estamos aquí para ti</p>
+          <h1 class="font-serif text-4xl lg:text-6xl font-light text-purple">Ponte en <em class="italic text-gold">Contacto</em></h1>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-gray-500">
+          <i class="fa-solid fa-circle text-gold text-[7px]"></i>
+          <span>Respondemos en menos de 24 horas</span>
+        </div>
+      </div>
+
+      <!-- Feature cards -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {features.map((f) => (
+          <div class="bg-white p-5 flex items-center gap-4">
+            <div class="w-10 h-10 bg-gold/15 flex items-center justify-center shrink-0">
+              <i class={`${f.brand ? 'fa-brands' : 'fa-solid'} ${f.icon} text-gold`}></i>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-purple">{f.title}</p>
+              <p class="text-xs text-gray-400">{f.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM + INFO -->
+  <section class="pb-16 lg:pb-24 bg-cream">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Form -->
+        <div class="lg:col-span-2 bg-white p-8 lg:p-10">
+          <p class="section-tag mb-3">Escríbenos</p>
+          <h2 class="font-serif text-3xl lg:text-4xl font-light text-purple mb-3">Envíanos un <em class="italic text-gold">Mensaje</em></h2>
+          <p class="text-gray-500 text-sm mb-8">Ya sea para pedidos especiales, eventos corporativos o simplemente para decirnos hola, estamos felices de escucharte.</p>
+
+          <form class="space-y-6">
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-xs tracking-widest uppercase text-purple mb-2">Nombre *</label>
+                <input type="text" required placeholder="Tu nombre completo" class="w-full bg-cream-dark px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-gold" />
+              </div>
+              <div>
+                <label class="block text-xs tracking-widest uppercase text-purple mb-2">Apellido *</label>
+                <input type="text" required placeholder="Tu apellido" class="w-full bg-cream-dark px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-gold" />
+              </div>
+            </div>
+            <div class="grid sm:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-xs tracking-widest uppercase text-purple mb-2">Correo electrónico *</label>
+                <input type="email" required placeholder="tu@correo.com" class="w-full bg-cream-dark px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-gold" />
+              </div>
+              <div>
+                <label class="block text-xs tracking-widest uppercase text-purple mb-2">Teléfono</label>
+                <input type="tel" placeholder="+34 600 000 000" class="w-full bg-cream-dark px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-gold" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs tracking-widest uppercase text-purple mb-2">Motivo de contacto</label>
+              <select class="w-full bg-cream-dark px-4 py-3 text-sm text-gray-500 focus:outline-none focus:ring-1 focus:ring-gold">
+                <option value="">Selecciona una opción</option>
+                {contactReasons.map((r) => (<option value={r}>{r}</option>))}
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs tracking-widest uppercase text-purple mb-2">Fecha del evento <span class="text-gray-400 normal-case tracking-normal">(si aplica)</span></label>
+              <input type="date" class="w-full bg-cream-dark px-4 py-3 text-sm text-gray-500 focus:outline-none focus:ring-1 focus:ring-gold" />
+            </div>
+            <div>
+              <label class="block text-xs tracking-widest uppercase text-purple mb-2">Mensaje *</label>
+              <textarea rows="5" required placeholder="Cuéntanos los detalles de tu pedido, el número de personas, sabores de tu preferencia, fecha de entrega..." class="w-full bg-cream-dark px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-gold resize-none"></textarea>
+            </div>
+            <label class="flex items-start gap-3 text-xs text-gray-500">
+              <input type="checkbox" required class="mt-0.5 accent-purple" />
+              <span>Acepto el <a href="#" class="text-gold hover:underline">Aviso de Privacidad</a> y autorizo el uso de mis datos para recibir respuesta a mi consulta.</span>
+            </label>
+            <button type="submit" class="btn-purple w-full py-4 text-sm font-medium tracking-widest uppercase flex items-center justify-center gap-2">
+              <i class="fa-solid fa-paper-plane text-xs"></i> Enviar mensaje
+            </button>
+          </form>
+        </div>
+
+        <!-- Info sidebar -->
+        <div class="space-y-8">
+          <div class="bg-white p-8">
+            <p class="section-tag mb-3">Encuéntranos</p>
+            <h3 class="font-serif text-2xl lg:text-3xl font-light text-purple mb-6">Información de <em class="italic text-gold">Contacto</em></h3>
+            <ul class="space-y-5">
+              <li class="flex items-start gap-4 border-b border-gold/20 pb-5">
+                <div class="w-9 h-9 bg-gold/15 flex items-center justify-center shrink-0"><i class="fa-solid fa-location-dot text-gold text-sm"></i></div>
+                <div>
+                  <p class="text-xs tracking-widest uppercase text-gold mb-1">Dirección</p>
+                  <p class="text-sm text-gray-600">Calle Gran Vía 47, 3º,<br/>28013 Madrid, España</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4 border-b border-gold/20 pb-5">
+                <div class="w-9 h-9 bg-gold/15 flex items-center justify-center shrink-0"><i class="fa-solid fa-phone text-gold text-sm"></i></div>
+                <div>
+                  <p class="text-xs tracking-widest uppercase text-gold mb-1">Teléfono</p>
+                  <p class="text-sm text-gray-600">+34 91 234 56 78</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4 border-b border-gold/20 pb-5">
+                <div class="w-9 h-9 bg-gold/15 flex items-center justify-center shrink-0"><i class="fa-solid fa-envelope text-gold text-sm"></i></div>
+                <div>
+                  <p class="text-xs tracking-widest uppercase text-gold mb-1">Correo electrónico</p>
+                  <p class="text-sm text-gray-600">hola@matizes.es</p>
+                </div>
+              </li>
+              <li class="flex items-start gap-4">
+                <div class="w-9 h-9 bg-gold/15 flex items-center justify-center shrink-0"><i class="fa-brands fa-whatsapp text-gold text-sm"></i></div>
+                <div>
+                  <p class="text-xs tracking-widest uppercase text-gold mb-1">WhatsApp</p>
+                  <p class="text-sm text-gray-600">+34 612 345 678</p>
+                  <p class="text-xs text-gray-400">Respuesta inmediata</p>
+                </div>
+              </li>
+            </ul>
+            <div class="mt-6 pt-6 border-t border-gold/20">
+              <p class="section-tag mb-4">Síguenos</p>
+              <div class="flex gap-3">
+                <a href="#" class="w-9 h-9 border border-purple/20 flex items-center justify-center text-purple hover:border-gold hover:text-gold transition-colors"><i class="fa-brands fa-instagram text-sm"></i></a>
+                <a href="#" class="w-9 h-9 border border-purple/20 flex items-center justify-center text-purple hover:border-gold hover:text-gold transition-colors"><i class="fa-brands fa-facebook-f text-sm"></i></a>
+                <a href="#" class="w-9 h-9 border border-purple/20 flex items-center justify-center text-purple hover:border-gold hover:text-gold transition-colors"><i class="fa-brands fa-tiktok text-sm"></i></a>
+                <a href="#" class="w-9 h-9 border border-purple/20 flex items-center justify-center text-purple hover:border-gold hover:text-gold transition-colors"><i class="fa-brands fa-pinterest-p text-sm"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Schedule -->
+          <div class="bg-white p-8">
+            <p class="section-tag mb-3">Horario de atención</p>
+            <h3 class="font-serif text-2xl lg:text-3xl font-light text-purple mb-6">Estamos <em class="italic text-gold">Abiertos</em></h3>
+            <ul class="divide-y divide-gold/20">
+              {schedule.map((s) => (
+                <li class="flex justify-between py-3 text-sm">
+                  <span class={s.closed ? 'text-gray-400' : 'text-purple font-medium'}>{s.day}</span>
+                  <span class={s.closed ? 'text-gray-400' : 'text-gold'}>{s.hours}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-5 flex items-start gap-2 bg-gold/10 px-4 py-3 text-xs text-gray-500">
+              <i class="fa-solid fa-circle-info text-gold mt-0.5"></i>
+              <span>Para pedidos especiales y eventos, contáctanos con al menos <strong class="text-purple">72 horas</strong> de anticipación.</span>
+            </div>
+            <a href="#" class="btn-gold mt-6 w-full py-3.5 text-sm font-medium tracking-widest uppercase flex items-center justify-center gap-2">
+              <i class="fa-brands fa-whatsapp"></i> Chatear por WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="py-16 lg:py-24 bg-cream-dark">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+        <div>
+          <p class="section-tag mb-4">Cómo llegarnos</p>
+          <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple">Encuéntranos en el <em class="italic text-gold">Mapa</em></h2>
+        </div>
+        <a href="https://maps.google.com/?q=Gran+Via+47+Madrid" target="_blank" rel="noopener" class="inline-flex items-center gap-2 text-purple font-medium text-xs tracking-widest uppercase border-b border-purple pb-1 hover:text-gold hover:border-gold transition-colors self-start md:self-auto">
+          Obtener indicaciones <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 overflow-hidden min-h-[360px]">
+          <iframe
+            class="w-full h-full min-h-[360px]"
+            src="https://www.google.com/maps?q=Gran+Via,+Madrid&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Mapa Matizes"
+          ></iframe>
+        </div>
+        <div class="space-y-6">
+          <div class="bg-white p-8">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-9 h-9 bg-purple flex items-center justify-center"><i class="fa-solid fa-location-dot text-gold text-sm"></i></div>
+              <div>
+                <p class="text-xs tracking-widest uppercase text-gold">Nuestra ubicación</p>
+                <p class="font-serif text-lg text-purple">Gran Vía, Madrid</p>
+              </div>
+            </div>
+            <div class="border-t border-gold/20 pt-4 mb-4">
+              <p class="text-xs tracking-widest uppercase text-purple mb-2">Dirección completa</p>
+              <p class="text-sm text-gray-600">Calle Gran Vía 47, 3º,<br/>28013 Madrid,<br/>España</p>
+            </div>
+            <div class="border-t border-gold/20 pt-4 mb-4">
+              <p class="text-xs tracking-widest uppercase text-purple mb-2">Referencias</p>
+              <p class="text-sm text-gray-600">A 2 minutos del metro Gran Vía, junto al Teatro Callao.</p>
+            </div>
+            <div class="border-t border-gold/20 pt-4">
+              <p class="text-xs tracking-widest uppercase text-purple mb-3">Cómo llegar</p>
+              <ul class="space-y-2 text-sm text-gray-600">
+                <li class="flex items-center gap-2"><i class="fa-solid fa-train-subway text-gold text-xs"></i> Metro Gran Vía (L1 / L5)</li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-bus text-gold text-xs"></i> EMT líneas 1, 44, 133</li>
+                <li class="flex items-center gap-2"><i class="fa-solid fa-square-parking text-gold text-xs"></i> Parking Callao disponible</li>
+              </ul>
+            </div>
+          </div>
+          <div class="bg-purple text-white p-6">
+            <div class="flex items-start gap-3">
+              <i class="fa-solid fa-star text-gold mt-0.5"></i>
+              <div>
+                <p class="text-xs tracking-widest uppercase text-gold mb-2">Recomendación</p>
+                <p class="text-sm text-white/90">Visítanos por la mañana para encontrar nuestra selección completa de pasteles del día.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-16 lg:py-24 bg-cream">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16">
+        <div>
+          <p class="section-tag mb-4">Preguntas frecuentes</p>
+          <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple mb-4">Lo que más nos <em class="italic text-gold">preguntan</em></h2>
+          <p class="text-gray-500 text-sm mb-8">Si no encuentras la respuesta que buscas, no dudes en contactarnos directamente. Estamos encantados de ayudarte.</p>
+          <div class="relative overflow-hidden">
+            <img class="w-full h-72 object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/96fb75ed41-f75b3674eca840ad9ed0.png" alt="Interior pastelería" />
+            <span class="absolute bottom-4 left-4 flex items-center gap-2 text-white text-xs tracking-widest uppercase"><MatizesWordmark class="inline-block h-3 w-auto align-middle" /> · Valladolid</span>
+          </div>
+        </div>
+
+        <div class="divide-y divide-gold/20">
+          {faqs.map((item) => (
+            <div class="faq-item">
+              <button class="faq-toggle w-full flex items-center justify-between gap-4 py-5 text-left">
+                <span class="text-purple font-medium text-sm lg:text-base">{item.q}</span>
+                <i class="faq-icon fa-solid fa-plus text-gold text-sm shrink-0 transition-transform"></i>
+              </button>
+              <div class="faq-answer hidden pb-5 text-sm text-gray-500 leading-relaxed">
+                {item.a}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const items = document.querySelectorAll('.faq-item');
+      items.forEach((item) => {
+        const toggle = item.querySelector('.faq-toggle');
+        const answer = item.querySelector('.faq-answer');
+        const icon = item.querySelector('.faq-icon');
+        if (!toggle || !answer || !icon) return;
+        toggle.addEventListener('click', () => {
+          const isOpen = !answer.classList.contains('hidden');
+          if (isOpen) {
+            answer.classList.add('hidden');
+            icon.classList.remove('fa-minus', 'rotate-180');
+            icon.classList.add('fa-plus');
+          } else {
+            answer.classList.remove('hidden');
+            icon.classList.remove('fa-plus');
+            icon.classList.add('fa-minus');
+          }
+        });
+      });
+    });
+  </script>
+</Layout>

@@ -1,0 +1,217 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { products } from '../data/products';
+
+const pasteles = products.filter((p) => p.category.toLowerCase().includes('pastel'));
+const individuales = products.filter((p) => p.category.toLowerCase().includes('individual'));
+
+const petitFours = [
+  { id: 'macarons-temporada', name: 'Macarons de Temporada', desc: 'Selección de 6 macarons artesanales con rellenos de ganache y cremas especiales.', price: 12.00, img: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/75bd7fae56-e069fe5c9656d0450438.png', badge: 'Estrella', badgeClass: 'bg-gold text-purple' },
+  { id: 'trufas-chocolate', name: 'Trufas de Chocolate', desc: 'Caja de 8 trufas artesanales de chocolate de origen con recubrimientos variados.', price: 9.50, img: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/52dc8885f9-7b96135997d58656e6a1.png' },
+  { id: 'financiers-madeleines', name: 'Financiers & Madeleines', desc: 'Caja mixta de 12 piezas: financiers de avellana y madeleines de vainilla y limón.', price: 11.00, img: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/22201143d1-c1c1dfcfef15dd81d55f.png', badge: 'Nuevo', badgeClass: 'bg-purple text-gold' },
+  { id: 'caneles-burdeos', name: 'Canelés de Burdeos', desc: 'Canelés auténticos: corteza caramelizada, interior suave de ron y vainilla. Caja de 6.', price: 9.00, img: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/539421df68-00b49ff082bf978c1d2a.png' },
+];
+
+const viennoiserie = [
+  { id: 'croissant-beurre', name: 'Croissant au Beurre', desc: 'Croissant de mantequilla AOP, laminado a mano, hojaldrado y dorado al horno artesanal.', price: 4.50, img: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/be0ca15106-b7cbc54a3b2af8cf47a6.png', badge: 'Clásico', badgeClass: 'bg-gold text-purple' },
+  { id: 'pain-chocolat', name: 'Pain au Chocolat', desc: 'Hojaldre artesanal con dos barras de chocolate negro Valrhona, crujiente y suave por dentro.', price: 5.00, img: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/539421df68-00b49ff082bf978c1d2a.png' },
+  { id: 'kouign-amann', name: 'Kouign-Amann', desc: 'Pastel bretón de capas caramelizadas con mantequilla salada y azúcar dorado al horno.', price: 6.50, img: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/22201143d1-c1c1dfcfef15dd81d55f.png', badge: 'Nuevo', badgeClass: 'bg-purple text-gold' },
+  { id: 'brioche-tressee', name: 'Brioche Tressée', desc: 'Brioche trenzada, esponjosa y dorada, elaborada con mantequilla francesa y huevos frescos.', price: 8.50, img: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/52dc8885f9-7b96135997d58656e6a1.png' },
+];
+
+const formatPrice = (n: number) => n.toFixed(2).replace('.', ',');
+---
+
+<Layout title="Menú — Pasteles, Tartas y Petit Fours | Mat!zes">
+  <Header />
+
+  <!-- Spacer for fixed header -->
+  <div class="h-16 lg:h-20"></div>
+
+  <!-- HERO -->
+  <section class="py-16 lg:py-24 bg-purple relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 right-0 w-96 h-96 rounded-full border border-gold" style="transform: translate(30%, -30%)"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 rounded-full border border-gold" style="transform: translate(-30%, 30%)"></div>
+    </div>
+    <div class="reveal max-w-7xl mx-auto px-6 lg:px-10 relative z-10 text-center">
+      <p class="section-tag mb-4 text-gold/70">Explora nuestra oferta</p>
+      <h1 class="font-serif text-4xl lg:text-6xl font-light text-white">Carta de <em class="italic text-gold">Creaciones</em></h1>
+      <div class="gold-line h-px w-24 mx-auto mt-6"></div>
+      <p class="text-white/70 font-light max-w-xl mx-auto mt-6">Descubre nuestra selección completa de pasteles, postres individuales, petit fours y viennoiserie, elaborados a diario de forma artesanal.</p>
+    </div>
+  </section>
+
+  <!-- Quick nav -->
+  <section class="bg-cream-dark border-b border-gold/15 sticky top-16 lg:top-20 z-30">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="flex flex-wrap items-center justify-center gap-6 lg:gap-10 py-4">
+        <a href="#pasteles" class="text-xs tracking-widest uppercase text-purple hover:text-gold transition-colors">Pasteles</a>
+        <a href="#individuales" class="text-xs tracking-widest uppercase text-purple hover:text-gold transition-colors">Postres Individuales</a>
+        <a href="#petit-fours" class="text-xs tracking-widest uppercase text-purple hover:text-gold transition-colors">Petit Fours</a>
+        <a href="#viennoiserie" class="text-xs tracking-widest uppercase text-purple hover:text-gold transition-colors">Viennoiserie</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PASTELES -->
+  <section id="pasteles" class="py-16 lg:py-24 bg-cream">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="reveal flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+        <div>
+          <p class="section-tag mb-4">Nuestras tartas y pasteles</p>
+          <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple">Pasteles <em class="italic text-gold">& Tartas</em></h2>
+          <div class="gold-line h-px w-16 mt-4"></div>
+        </div>
+        <p class="text-xs text-gray-500 tracking-widest uppercase">{pasteles.length} CREACIONES</p>
+      </div>
+      <div class="stagger-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        {pasteles.map((product) => (<ProductCard product={product} />))}
+      </div>
+    </div>
+  </section>
+
+  <!-- POSTRES INDIVIDUALES -->
+  <section id="individuales" class="py-16 lg:py-24 bg-cream-dark">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="reveal flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+        <div>
+          <p class="section-tag mb-4">Postres individuales</p>
+          <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple">Delicias <em class="italic text-gold">Personales</em></h2>
+          <div class="gold-line h-px w-16 mt-4"></div>
+        </div>
+        <p class="text-xs text-gray-500 tracking-widest uppercase">{individuales.length} CREACIONES</p>
+      </div>
+      <div class="stagger-grid grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        {individuales.map((product) => (<ProductCard product={product} />))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PETIT FOURS -->
+  <section id="petit-fours" class="py-16 lg:py-24 bg-cream">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="reveal flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+        <div>
+          <p class="section-tag mb-4">Bocados de Elegancia</p>
+          <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple">Petit <em class="italic text-gold">Fours</em></h2>
+          <div class="gold-line h-px w-16 mt-4"></div>
+        </div>
+        <p class="text-xs text-gray-500 tracking-widest uppercase">{petitFours.length} CREACIONES</p>
+      </div>
+      <div class="stagger-grid grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        {petitFours.map((item) => (
+          <div class="card-hover bg-cream-dark group cursor-pointer flex flex-col h-full">
+            <div class="relative h-64 overflow-hidden img-hover-wrap flex-shrink-0">
+              <img class="w-full h-full object-cover" src={item.img} alt={item.name} />
+              {item.badge && (<div class={`absolute top-4 left-4 ${item.badgeClass} text-xs font-bold px-3 py-1 tracking-widest uppercase`}>{item.badge}</div>)}
+              <button class="absolute top-4 right-4 bg-white/90 text-purple w-9 h-9 flex items-center justify-center hover:bg-purple hover:text-gold transition-colors">
+                <i class="fa-regular fa-heart text-sm"></i>
+              </button>
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="font-serif text-xl text-purple font-light mb-2">{item.name}</h3>
+              <p class="text-gray-500 text-sm font-light leading-relaxed mb-4 flex-grow">{item.desc}</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="font-serif text-2xl text-purple">{formatPrice(item.price)} €</span>
+                <button class="btn-gold px-5 py-2 text-xs font-medium tracking-widest uppercase flex items-center gap-2" data-add-to-cart data-id={item.id} data-name={item.name} data-price={item.price} data-image={item.img} data-category="Petit Fours">
+                  <i class="fa-solid fa-bag-shopping text-xs"></i> Agregar
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- VIENNOISERIE -->
+  <section id="viennoiserie" class="py-16 lg:py-24 bg-cream-dark">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="reveal flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+        <div>
+          <p class="section-tag mb-4">Para el desayuno</p>
+          <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple">Viennoi<em class="italic text-gold">sserie</em></h2>
+          <div class="gold-line h-px w-16 mt-4"></div>
+        </div>
+        <p class="text-xs text-gray-500 tracking-widest uppercase">{viennoiserie.length} CREACIONES</p>
+      </div>
+      <div class="stagger-grid grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+        {viennoiserie.map((item) => (
+          <div class="card-hover bg-cream group cursor-pointer flex flex-col h-full">
+            <div class="relative h-64 overflow-hidden img-hover-wrap flex-shrink-0">
+              <img class="w-full h-full object-cover" src={item.img} alt={item.name} />
+              {item.badge && (<div class={`absolute top-4 left-4 ${item.badgeClass} text-xs font-bold px-3 py-1 tracking-widest uppercase`}>{item.badge}</div>)}
+              <button class="absolute top-4 right-4 bg-white/90 text-purple w-9 h-9 flex items-center justify-center hover:bg-purple hover:text-gold transition-colors">
+                <i class="fa-regular fa-heart text-sm"></i>
+              </button>
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="font-serif text-xl text-purple font-light mb-2">{item.name}</h3>
+              <p class="text-gray-500 text-sm font-light leading-relaxed mb-4 flex-grow">{item.desc}</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="font-serif text-2xl text-purple">{formatPrice(item.price)} €</span>
+                <button class="btn-gold px-5 py-2 text-xs font-medium tracking-widest uppercase flex items-center gap-2" data-add-to-cart data-id={item.id} data-name={item.name} data-price={item.price} data-image={item.img} data-category="Viennoiserie">
+                  <i class="fa-solid fa-bag-shopping text-xs"></i> Agregar
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CREACIONES A MEDIDA -->
+  <section class="py-16 lg:py-24 bg-purple relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 right-0 w-96 h-96 rounded-full border border-gold" style="transform: translate(35%, -35%)"></div>
+      <div class="absolute bottom-0 left-0 w-72 h-72 rounded-full border border-gold" style="transform: translate(-35%, 35%)"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 relative z-10">
+      <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <!-- Texto -->
+        <div class="order-2 lg:order-1 reveal-left">
+          <p class="section-tag mb-4 text-gold/70">Creaciones a medida</p>
+          <h2 class="font-serif text-4xl lg:text-5xl font-light text-white leading-snug mb-6">
+            ¿Buscas algo<br/>
+            <em class="italic text-gold">especial?</em>
+          </h2>
+          <div class="gold-line h-px w-16 mb-6"></div>
+          <p class="text-white/70 font-light leading-relaxed mb-8 max-w-md">
+            Diseñamos creaciones personalizadas para bodas, eventos y celebraciones únicas. Cuéntanos tu visión y la convertiremos en una obra de sabor.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a href="/contacto" class="btn-gold inline-flex items-center justify-center gap-3 px-8 py-3.5 font-medium text-sm tracking-widest uppercase">
+              <i class="fa-regular fa-envelope text-xs"></i> Solicitar Pedido
+            </a>
+            <a href="https://wa.me/34612345678" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 px-8 py-3.5 border border-white/40 text-white font-medium text-sm tracking-widest uppercase hover:border-gold hover:text-gold transition-colors">
+              <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <!-- Mosaico de imágenes -->
+        <div class="order-1 lg:order-2 stagger-grid grid grid-cols-2 gap-4">
+          <div class="h-44 lg:h-52 overflow-hidden">
+            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/d5c590a30e-598ca973c003b8932b79.png" alt="pastel de boda de dos pisos con flores rosas" />
+          </div>
+          <div class="h-44 lg:h-52 overflow-hidden">
+            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/1c4c05253a-2bef564969f2e25e9664.png" alt="pastelero decorando un pastel artesanal" />
+          </div>
+          <div class="h-44 lg:h-52 overflow-hidden">
+            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/7438793c2a-f6fd1c1966279610809f.png" alt="pastel personalizado con detalles dorados" />
+          </div>
+          <div class="h-44 lg:h-52 overflow-hidden">
+            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/52dc8885f9-7b96135997d58656e6a1.png" alt="bombones y chocolates artesanales" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
