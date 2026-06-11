@@ -189,27 +189,26 @@ const features = [
       const href = `/productos/${item.id}`;
       const size = item.size ? `<p class="text-xs text-gray-400 mt-0.5">${esc(item.size)}</p>` : '';
       return `
-        <div class="grid grid-cols-12 gap-4 items-center py-6 border-b border-purple/10">
-          <div class="col-span-12 md:col-span-6 flex gap-4">
-            <a href="${href}" class="shrink-0"><img class="w-20 h-20 object-cover" src="${esc(item.image)}" alt="${esc(item.name)}" /></a>
-            <div>
-              <p class="text-xs tracking-widest uppercase text-gold mb-1">${esc(item.category || '')}</p>
-              <a href="${href}" class="font-serif text-lg text-purple hover:text-gold transition-colors">${esc(item.name)}</a>
+        <div class="py-5 border-b border-purple/10">
+          <div class="flex gap-4">
+            <a href="${href}" class="shrink-0"><img class="w-16 h-16 md:w-20 md:h-20 object-cover" src="${esc(item.image)}" alt="${esc(item.name)}" /></a>
+            <div class="flex-1 min-w-0">
+              <p class="text-xs tracking-widest uppercase text-gold mb-0.5">${esc(item.category || '')}</p>
+              <a href="${href}" class="font-serif text-base md:text-lg text-purple hover:text-gold transition-colors leading-tight block">${esc(item.name)}</a>
               ${size}
-              <div class="flex items-center gap-4 mt-2 text-xs">
-                <button class="cart-remove text-gray-400 hover:text-purple transition-colors flex items-center gap-1" data-id="${esc(item.id)}" data-size="${esc(item.size || '')}"><i class="fa-solid fa-trash-can"></i> Eliminar</button>
+              <div class="flex items-center justify-between mt-3 gap-3 flex-wrap">
+                <div class="flex items-center border border-purple/20">
+                  <button class="qty-minus w-8 h-8 flex items-center justify-center text-purple hover:bg-purple hover:text-gold transition-colors" data-id="${esc(item.id)}" data-size="${esc(item.size || '')}"><i class="fas fa-minus text-xs"></i></button>
+                  <span class="w-8 text-center border-x border-purple/20 text-sm leading-8">${item.qty}</span>
+                  <button class="qty-plus w-8 h-8 flex items-center justify-center text-purple hover:bg-purple hover:text-gold transition-colors" data-id="${esc(item.id)}" data-size="${esc(item.size || '')}"><i class="fas fa-plus text-xs"></i></button>
+                </div>
+                <div class="flex items-center gap-4">
+                  <span class="font-serif text-lg text-purple">${fmt(item.price * item.qty)} €</span>
+                  <button class="cart-remove text-gray-300 hover:text-purple transition-colors" data-id="${esc(item.id)}" data-size="${esc(item.size || '')}"><i class="fa-solid fa-trash-can text-sm"></i></button>
+                </div>
               </div>
             </div>
           </div>
-          <div class="col-span-4 md:col-span-2 text-left md:text-right text-gray-600">${fmt(item.price)} €</div>
-          <div class="col-span-4 md:col-span-2 flex justify-center">
-            <div class="flex items-center border border-purple/20">
-              <button class="qty-minus px-3 py-2 text-purple hover:bg-purple hover:text-gold transition-colors" data-id="${esc(item.id)}" data-size="${esc(item.size || '')}"><i class="fas fa-minus text-xs"></i></button>
-              <span class="w-10 text-center py-2 border-x border-purple/20 text-sm">${item.qty}</span>
-              <button class="qty-plus px-3 py-2 text-purple hover:bg-purple hover:text-gold transition-colors" data-id="${esc(item.id)}" data-size="${esc(item.size || '')}"><i class="fas fa-plus text-xs"></i></button>
-            </div>
-          </div>
-          <div class="col-span-4 md:col-span-2 text-right font-serif text-lg text-purple">${fmt(item.price * item.qty)} €</div>
         </div>`;
     }
 
