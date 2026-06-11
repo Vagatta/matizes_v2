@@ -9,57 +9,52 @@ import Footer from '../components/Footer.astro';
 
   <div class="h-16 lg:h-20"></div>
 
-  <section class="min-h-[70vh] bg-cream flex items-center">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 w-full">
-      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+  <section class="min-h-[calc(100vh-5rem)] bg-purple relative overflow-hidden flex items-center">
+    <!-- Decorative circles -->
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+      <div class="absolute top-0 right-0 w-[600px] h-[600px] rounded-full border border-gold" style="transform: translate(30%, -30%)"></div>
+      <div class="absolute bottom-0 left-0 w-96 h-96 rounded-full border border-gold" style="transform: translate(-30%, 30%)"></div>
+    </div>
 
-        <!-- Text -->
-        <div class="reveal">
-          <p class="section-tag mb-6">Error 404</p>
-          <h1 class="font-serif text-6xl lg:text-8xl font-light text-purple leading-none mb-4">
-            Oops,<br/><em class="italic text-gold">esta página</em><br/>no existe.
-          </h1>
-          <div class="gold-line h-px w-16 my-8"></div>
-          <p class="text-gray-500 font-light leading-relaxed text-lg mb-10 max-w-md">
-            Puede que el enlace haya cambiado o que hayas escrito mal la dirección. Pero no te preocupes — en Mat!zes siempre hay algo bueno esperándote.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4">
-            <a href="/" class="btn-purple inline-flex items-center gap-3 px-8 py-3.5 font-medium text-sm tracking-widest uppercase">
-              <i class="fa-solid fa-house text-xs"></i> Volver al inicio
-            </a>
-            <a href="/menu" class="btn-gold inline-flex items-center gap-3 px-8 py-3.5 font-medium text-sm tracking-widest uppercase">
-              <i class="fa-solid fa-utensils text-xs"></i> Ver el menú
-            </a>
-          </div>
+    <div class="relative z-10 w-full max-w-4xl mx-auto px-6 lg:px-10 py-20 text-center">
+      <div class="reveal">
+
+        <!-- 404 + heading stacked, no overlap -->
+        <p class="font-serif text-[100px] lg:text-[140px] font-light leading-none text-white/10 select-none tracking-widest mb-2" aria-hidden="true">404</p>
+        <h1 class="font-serif text-4xl lg:text-6xl font-light text-white mb-6">
+          Esta página <em class="italic text-gold">no existe</em>
+        </h1>
+
+        <div class="gold-line h-px w-16 mx-auto mb-8"></div>
+
+        <p class="text-white/60 font-light leading-relaxed text-lg max-w-lg mx-auto mb-12">
+          Puede que el enlace haya cambiado o que hayas escrito mal la dirección.<br class="hidden sm:block" />
+          En Mat!zes siempre hay algo bueno esperándote.
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+          <a href="/" class="btn-gold inline-flex items-center gap-3 px-8 py-3.5 font-medium text-sm tracking-widest uppercase">
+            <i class="fa-solid fa-house text-xs"></i> Volver al inicio
+          </a>
+          <a href="/menu" class="inline-flex items-center gap-3 px-8 py-3.5 border border-white/30 text-white font-medium text-sm tracking-widest uppercase hover:border-gold hover:text-gold transition-colors">
+            <i class="fa-solid fa-utensils text-xs"></i> Ver el menú
+          </a>
         </div>
 
-        <!-- Visual -->
-        <div class="reveal flex flex-col items-center justify-center text-center">
-          <div class="relative">
-            <div class="font-serif text-[180px] lg:text-[240px] font-light text-purple/8 leading-none select-none">
-              404
-            </div>
-            <div class="absolute inset-0 flex flex-col items-center justify-center gap-4">
-              <div class="w-24 h-24 bg-purple flex items-center justify-center">
-                <i class="fa-solid fa-cake-candles text-gold text-3xl"></i>
-              </div>
-              <p class="font-serif text-xl text-purple font-light italic">La receta no se encontró</p>
-            </div>
-          </div>
-          <!-- Quick links -->
-          <div class="mt-8 grid grid-cols-2 gap-3 w-full max-w-xs">
-            {[
-              { href: '/menu', icon: 'fa-utensils', label: 'Menú' },
-              { href: '/blog', icon: 'fa-newspaper', label: 'Blog' },
-              { href: '/contacto', icon: 'fa-envelope', label: 'Contacto' },
-              { href: '/carrito', icon: 'fa-bag-shopping', label: 'Carrito' },
-            ].map(link => (
-              <a href={link.href} class="flex items-center gap-3 bg-white p-4 text-sm text-purple hover:text-gold hover:border-gold border border-transparent transition-colors">
-                <i class={`fa-solid ${link.icon} text-gold text-xs`}></i>
-                <span class="font-medium tracking-widest uppercase text-xs">{link.label}</span>
-              </a>
-            ))}
-          </div>
+        <!-- Quick links -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-lg mx-auto">
+          {[
+            { href: '/menu',     icon: 'fa-utensils',    label: 'Menú' },
+            { href: '/blog',     icon: 'fa-newspaper',   label: 'Blog' },
+            { href: '/contacto', icon: 'fa-envelope',    label: 'Contacto' },
+            { href: '/carrito',  icon: 'fa-bag-shopping',label: 'Carrito' },
+          ].map(link => (
+            <a href={link.href} class="flex flex-col items-center gap-2 py-4 px-3 border border-white/10 text-white/50 hover:border-gold/50 hover:text-gold transition-colors">
+              <i class={`fa-solid ${link.icon} text-gold/70 text-sm`}></i>
+              <span class="text-xs tracking-widest uppercase">{link.label}</span>
+            </a>
+          ))}
         </div>
 
       </div>
