@@ -47,22 +47,27 @@ const contactReasons = ['Pedido especial', 'Evento o boda', 'Consulta general', 
 <Layout title="Contacto y Pedidos Especiales | Mat!zes">
   <Header />
 
-  <!-- Spacer for fixed header -->
   <div class="h-16 lg:h-20"></div>
 
   <!-- HERO -->
-  <section class="py-14 lg:py-20 bg-cream">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10">
-      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12">
-        <div>
-          <p class="section-tag mb-4">Estamos aquí para ti</p>
-          <h1 class="font-serif text-4xl lg:text-6xl font-light text-purple">Ponte en <em class="italic text-gold">Contacto</em></h1>
-        </div>
-        <div class="flex items-center gap-2 text-sm text-gray-500">
-          <i class="fa-solid fa-circle text-gold text-[7px]"></i>
-          <span>Respondemos en menos de 24 horas</span>
-        </div>
+  <section class="py-16 lg:py-24 bg-purple relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+      <div class="absolute top-0 right-0 w-96 h-96 rounded-full border border-gold" style="transform: translate(30%, -30%)"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 rounded-full border border-gold" style="transform: translate(-30%, 30%)"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 relative z-10 text-center">
+      <div class="reveal">
+        <p class="section-tag mb-4 text-gold/70">Estamos aquí para ti</p>
+        <h1 class="font-serif text-4xl lg:text-6xl font-light text-white">Ponte en <em class="italic text-gold">Contacto</em></h1>
+        <div class="gold-line h-px w-24 mx-auto mt-6 mb-6"></div>
+        <p class="text-white/70 font-light max-w-xl mx-auto">Respondemos en menos de 24 horas. Escríbenos para pedidos especiales, eventos o cualquier consulta.</p>
       </div>
+    </div>
+  </section>
+
+  <!-- FEATURE CARDS -->
+  <section class="bg-cream py-10">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
 
       <!-- Feature cards -->
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">

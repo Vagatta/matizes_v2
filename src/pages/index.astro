@@ -1,38 +1,57 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import ProductCard from '../components/ProductCard.astro';
-import MatizesWordmark from '../components/MatizesWordmark.astro';
-import { products } from '../data/products';
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ProductCard from "../components/ProductCard.astro";
+import MatizesWordmark from "../components/MatizesWordmark.astro";
+import { products } from "../data/products";
 ---
 
 <Layout title="Mat!zes — Pastelería Fina Artesanal">
   <Header />
 
   <!-- HERO SECTION -->
-  <section id="hero" class="relative h-[700px] lg:h-[820px] flex items-center overflow-hidden mt-16 lg:mt-20">
+  <section
+    id="hero"
+    class="relative h-[700px] lg:h-[820px] flex items-center overflow-hidden mt-16 lg:mt-20"
+  >
     <div class="absolute inset-0 overflow-hidden">
-      <img id="hero-parallax-img" class="w-full h-[120%] object-cover object-center absolute top-[-10%] left-0" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/3fd9c28d4d-cd1f86b109f2f92c0c84.png" alt="elegant pastry shop interior, fine patisserie, macarons and cakes on display, warm golden lighting, luxurious ambiance, editorial photography" />
+      <img
+        id="hero-parallax-img"
+        class="w-full h-[120%] object-cover object-center absolute top-[-10%] left-0"
+        src="https://storage.googleapis.com/uxpilot-auth.appspot.com/3fd9c28d4d-cd1f86b109f2f92c0c84.png"
+        alt="elegant pastry shop interior, fine patisserie, macarons and cakes on display, warm golden lighting, luxurious ambiance, editorial photography"
+      />
     </div>
     <div class="hero-overlay absolute inset-0"></div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 w-full">
       <div class="max-w-xl lg:max-w-2xl hero-animate">
-        <h1 class="font-serif text-5xl lg:text-7xl xl:text-8xl font-light text-white leading-tight mb-4 lg:mb-6">
-          El arte en<br/>
+        <h1
+          class="font-serif text-5xl lg:text-7xl xl:text-8xl font-light text-white leading-tight mb-4 lg:mb-6"
+        >
+          El arte en<br />
           <em class="italic text-gold">cada bocado</em>
         </h1>
         <div class="gold-line h-px w-24 mb-6 lg:mb-8"></div>
-        <p class="text-white/80 font-light text-base lg:text-lg leading-relaxed mb-8 lg:mb-10 max-w-md">
-          Creaciones de pastelería fina elaboradas con ingredientes selectos. Cada pieza es una obra de sabor, textura y elegancia.
+        <p
+          class="text-white/80 font-light text-base lg:text-lg leading-relaxed mb-8 lg:mb-10 max-w-md"
+        >
+          Creaciones de pastelería fina elaboradas con ingredientes selectos.
+          Cada pieza es una obra de sabor, textura y elegancia.
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
-          <a href="/menu" class="btn-gold inline-flex items-center justify-center gap-3 px-8 py-3.5 font-medium text-sm tracking-widest uppercase rounded-none">
+          <a
+            href="/menu"
+            class="btn-gold inline-flex items-center justify-center gap-3 px-8 py-3.5 font-medium text-sm tracking-widest uppercase rounded-none"
+          >
             <i class="fa-solid fa-utensils text-xs"></i>
             Explorar Menú
           </a>
-          <a href="#featured-products" class="inline-flex items-center justify-center gap-3 px-8 py-3.5 border border-white/50 text-white font-medium text-sm tracking-widest uppercase rounded-none hover:border-gold hover:text-gold transition-colors">
+          <a
+            href="#featured-products"
+            class="inline-flex items-center justify-center gap-3 px-8 py-3.5 border border-white/50 text-white font-medium text-sm tracking-widest uppercase rounded-none hover:border-gold hover:text-gold transition-colors"
+          >
             Nuestras Creaciones
           </a>
         </div>
@@ -40,7 +59,9 @@ import { products } from '../data/products';
     </div>
 
     <!-- Scroll indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50">
+    <div
+      class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50"
+    >
       <span class="text-xs tracking-widest uppercase">Descubrir</span>
       <i class="fa-solid fa-chevron-down text-xs animate-bounce"></i>
     </div>
@@ -52,29 +73,54 @@ import { products } from '../data/products';
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div class="reveal-left">
           <p class="section-tag mb-5">Nuestra Filosofía</p>
-          <h2 class="font-serif text-4xl lg:text-5xl xl:text-6xl font-light text-purple leading-snug mb-6">
-            Donde la técnica<br/>
+          <h2
+            class="font-serif text-4xl lg:text-5xl xl:text-6xl font-light text-purple leading-snug mb-6"
+          >
+            Donde la técnica<br />
             encuentra el <em class="italic text-gold">alma</em>
           </h2>
           <div class="gold-line h-px w-16 mb-6"></div>
-          <p class="text-gray-600 font-light leading-relaxed mb-5 text-base lg:text-lg">
-            En <MatizesWordmark class="inline-block h-[0.78em] w-auto align-[-0.04em] text-purple" /> creemos que la pastelería fina es una forma de arte. Cada creación nace de la precisión técnica y la pasión por los sabores auténticos.
+          <p
+            class="text-gray-600 font-light leading-relaxed mb-5 text-base lg:text-lg"
+          >
+            En <MatizesWordmark
+              class="inline-block h-[0.78em] w-auto align-[-0.04em] text-purple"
+            /> creemos que la pastelería fina es una forma de arte. Cada creación
+            nace de la precisión técnica y la pasión por los sabores auténticos.
           </p>
-          <p class="text-gray-600 font-light leading-relaxed mb-8 text-base lg:text-lg">
-            Trabajamos con ingredientes de primera calidad, técnicas clásicas y una visión contemporánea para ofrecerte experiencias únicas en cada pieza.
+          <p
+            class="text-gray-600 font-light leading-relaxed mb-8 text-base lg:text-lg"
+          >
+            Trabajamos con ingredientes de primera calidad, técnicas clásicas y
+            una visión contemporánea para ofrecerte experiencias únicas en cada
+            pieza.
           </p>
 
-          <a href="#featured-products" class="btn-purple inline-flex items-center gap-3 px-8 py-3.5 font-medium text-sm tracking-widest uppercase">
+          <a
+            href="#featured-products"
+            class="btn-purple inline-flex items-center gap-3 px-8 py-3.5 font-medium text-sm tracking-widest uppercase"
+          >
             Conocer Más <i class="fa-solid fa-arrow-right text-xs"></i>
           </a>
         </div>
         <div class="relative reveal-right">
-          <div class="absolute -top-4 -left-4 w-full h-full border border-gold/30 z-0"></div>
-          <div class="relative z-10 h-[420px] lg:h-[520px] overflow-hidden img-hover-wrap">
-            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/1c4c05253a-2bef564969f2e25e9664.png" alt="pastry chef hands carefully decorating an elegant cake, fine patisserie, artisanal detail, editorial food photography" />
+          <div
+            class="absolute -top-4 -left-4 w-full h-full border border-gold/30 z-0"
+          >
+          </div>
+          <div
+            class="relative z-10 h-[420px] lg:h-[520px] overflow-hidden img-hover-wrap"
+          >
+            <img
+              class="w-full h-full object-cover"
+              src="https://storage.googleapis.com/uxpilot-auth.appspot.com/1c4c05253a-2bef564969f2e25e9664.png"
+              alt="pastry chef hands carefully decorating an elegant cake, fine patisserie, artisanal detail, editorial food photography"
+            />
           </div>
           <div class="absolute -bottom-6 -right-6 bg-purple p-6 z-20">
-            <p class="font-serif text-xl text-gold italic">"Tira y vete Cacahuete"</p>
+            <p class="font-serif text-xl text-gold italic">
+              "Tira y vete Cacahuete"
+            </p>
           </div>
         </div>
       </div>
@@ -84,20 +130,31 @@ import { products } from '../data/products';
   <!-- FEATURED PRODUCTS -->
   <section id="featured-products" class="py-20 lg:py-28 bg-cream-dark">
     <div class="max-w-7xl mx-auto px-6 lg:px-10">
-      <div class="reveal flex flex-col md:flex-row md:items-end justify-between mb-12 lg:mb-16 gap-6">
+      <div
+        class="reveal flex flex-col md:flex-row md:items-end justify-between mb-12 lg:mb-16 gap-6"
+      >
         <div>
           <p class="section-tag mb-4">Destacados de temporada</p>
-          <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple">Nuestras <em class="italic text-gold">Estrellas</em></h2>
+          <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple">
+            Nuestras <em class="italic text-gold">Estrellas</em>
+          </h2>
         </div>
-        <a href="/menu" class="inline-flex items-center gap-2 text-purple font-medium text-sm tracking-widest uppercase border-b border-purple pb-1 hover:text-gold hover:border-gold transition-colors self-start md:self-auto">
+        <a
+          href="/menu"
+          class="inline-flex items-center gap-2 text-purple font-medium text-sm tracking-widest uppercase border-b border-purple pb-1 hover:text-gold hover:border-gold transition-colors self-start md:self-auto"
+        >
           Ver todo el menú <i class="fa-solid fa-arrow-right text-xs"></i>
         </a>
       </div>
 
-      <div class="stagger-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-        {products.slice(0, 6).map(product => (
-          <ProductCard product={product} />
-        ))}
+      <div
+        class="stagger-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+      >
+        {
+          products
+            .slice(0, 6)
+            .map((product) => <ProductCard product={product} />)
+        }
       </div>
     </div>
   </section>
@@ -107,56 +164,121 @@ import { products } from '../data/products';
     <div class="max-w-7xl mx-auto px-6 lg:px-10">
       <div class="reveal text-center mb-12 lg:mb-16">
         <p class="section-tag mb-4 text-gold/70">Explora nuestra oferta</p>
-        <h2 class="font-serif text-4xl lg:text-5xl font-light text-white">Categorías del <em class="italic text-gold">Menú</em></h2>
+        <h2 class="font-serif text-4xl lg:text-5xl font-light text-white">
+          Categorías del <em class="italic text-gold">Menú</em>
+        </h2>
       </div>
       <div class="stagger-grid grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-        <a href="/menu#pasteles" id="cat-1" class="relative group cursor-pointer overflow-hidden h-52 lg:h-64 block">
-          <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/be0ca15106-b7cbc54a3b2af8cf47a6.png" alt="elegant celebration cakes, tiered wedding cake, fine patisserie, dark background" />
-          <div class="absolute inset-0 bg-gradient-to-t from-purple/90 via-purple/30 to-transparent"></div>
+        <a
+          href="/menu#pasteles"
+          id="cat-1"
+          class="relative group cursor-pointer overflow-hidden h-52 lg:h-64 block"
+        >
+          <img
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/be0ca15106-b7cbc54a3b2af8cf47a6.png"
+            alt="elegant celebration cakes, tiered wedding cake, fine patisserie, dark background"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-purple/90 via-purple/30 to-transparent"
+          >
+          </div>
           <div class="absolute bottom-0 left-0 right-0 p-5">
             <p class="text-xs text-gold tracking-widest uppercase mb-1">01</p>
             <h3 class="font-serif text-xl text-white font-light">Pasteles</h3>
           </div>
-          <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-            <i class="fa-solid fa-arrow-up-right-from-square text-gold text-sm"></i>
+          <div
+            class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            <i class="fa-solid fa-arrow-up-right-from-square text-gold text-sm"
+            ></i>
           </div>
         </a>
-        <a href="/menu#pasteles" id="cat-2" class="relative group cursor-pointer overflow-hidden h-52 lg:h-64 block">
-          <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/539421df68-00b49ff082bf978c1d2a.png" alt="beautiful fruit tarts and cream tarts, fine pastry, elegant presentation, dark background" />
-          <div class="absolute inset-0 bg-gradient-to-t from-purple/90 via-purple/30 to-transparent"></div>
+        <a
+          href="/menu#pasteles"
+          id="cat-2"
+          class="relative group cursor-pointer overflow-hidden h-52 lg:h-64 block"
+        >
+          <img
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/539421df68-00b49ff082bf978c1d2a.png"
+            alt="beautiful fruit tarts and cream tarts, fine pastry, elegant presentation, dark background"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-purple/90 via-purple/30 to-transparent"
+          >
+          </div>
           <div class="absolute bottom-0 left-0 right-0 p-5">
             <p class="text-xs text-gold tracking-widest uppercase mb-1">02</p>
             <h3 class="font-serif text-xl text-white font-light">Tartas</h3>
           </div>
-          <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-            <i class="fa-solid fa-arrow-up-right-from-square text-gold text-sm"></i>
+          <div
+            class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            <i class="fa-solid fa-arrow-up-right-from-square text-gold text-sm"
+            ></i>
           </div>
         </a>
-        <a href="/menu#petit-fours" id="cat-3" class="relative group cursor-pointer overflow-hidden h-52 lg:h-64 block">
-          <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/bc3982a0fd-3cf4f7e323259d859ee2.png" alt="French macarons and petit fours assortment, elegant presentation, dark background, fine patisserie" />
-          <div class="absolute inset-0 bg-gradient-to-t from-purple/90 via-purple/30 to-transparent"></div>
+        <a
+          href="/menu#petit-fours"
+          id="cat-3"
+          class="relative group cursor-pointer overflow-hidden h-52 lg:h-64 block"
+        >
+          <img
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/bc3982a0fd-3cf4f7e323259d859ee2.png"
+            alt="French macarons and petit fours assortment, elegant presentation, dark background, fine patisserie"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-purple/90 via-purple/30 to-transparent"
+          >
+          </div>
           <div class="absolute bottom-0 left-0 right-0 p-5">
             <p class="text-xs text-gold tracking-widest uppercase mb-1">03</p>
-            <h3 class="font-serif text-xl text-white font-light">Petit Fours</h3>
+            <h3 class="font-serif text-xl text-white font-light">
+              Petit Fours
+            </h3>
           </div>
-          <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-            <i class="fa-solid fa-arrow-up-right-from-square text-gold text-sm"></i>
+          <div
+            class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            <i class="fa-solid fa-arrow-up-right-from-square text-gold text-sm"
+            ></i>
           </div>
         </a>
-        <a href="/menu#viennoiserie" id="cat-4" class="relative group cursor-pointer overflow-hidden h-52 lg:h-64 block">
-          <img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/22201143d1-c1c1dfcfef15dd81d55f.png" alt="artisan croissants and viennoiserie pastries, fine bakery, dark background, editorial" />
-          <div class="absolute inset-0 bg-gradient-to-t from-purple/90 via-purple/30 to-transparent"></div>
+        <a
+          href="/menu#viennoiserie"
+          id="cat-4"
+          class="relative group cursor-pointer overflow-hidden h-52 lg:h-64 block"
+        >
+          <img
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/22201143d1-c1c1dfcfef15dd81d55f.png"
+            alt="artisan croissants and viennoiserie pastries, fine bakery, dark background, editorial"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-purple/90 via-purple/30 to-transparent"
+          >
+          </div>
           <div class="absolute bottom-0 left-0 right-0 p-5">
             <p class="text-xs text-gold tracking-widest uppercase mb-1">04</p>
-            <h3 class="font-serif text-xl text-white font-light">Viennoserie</h3>
+            <h3 class="font-serif text-xl text-white font-light">
+              Viennoserie
+            </h3>
           </div>
-          <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-            <i class="fa-solid fa-arrow-up-right-from-square text-gold text-sm"></i>
+          <div
+            class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            <i class="fa-solid fa-arrow-up-right-from-square text-gold text-sm"
+            ></i>
           </div>
         </a>
       </div>
       <div class="text-center mt-10">
-        <a href="/menu" class="inline-flex items-center gap-3 border border-gold/50 text-gold px-10 py-3.5 font-medium text-sm tracking-widest uppercase hover:bg-gold hover:text-purple transition-all">
+        <a
+          href="/menu"
+          class="inline-flex items-center gap-3 border border-gold/50 text-gold px-10 py-3.5 font-medium text-sm tracking-widest uppercase hover:bg-gold hover:text-purple transition-all"
+        >
           Ver Menú Completo <i class="fa-solid fa-arrow-right text-xs"></i>
         </a>
       </div>
@@ -169,36 +291,68 @@ import { products } from '../data/products';
       <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div class="order-2 lg:order-1 stagger-grid grid grid-cols-2 gap-4">
           <div class="h-52 lg:h-64 overflow-hidden">
-            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/7438793c2a-f6fd1c1966279610809f.png" alt="custom decorated birthday cake with flowers and gold details, fine patisserie, elegant" />
+            <img
+              class="w-full h-full object-cover"
+              src="https://storage.googleapis.com/uxpilot-auth.appspot.com/7438793c2a-f6fd1c1966279610809f.png"
+              alt="custom decorated birthday cake with flowers and gold details, fine patisserie, elegant"
+            />
           </div>
           <div class="h-52 lg:h-64 overflow-hidden mt-8">
-            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/d5c590a30e-598ca973c003b8932b79.png" alt="wedding cake with floral decorations, white and gold, fine patisserie, elegant editorial" />
+            <img
+              class="w-full h-full object-cover"
+              src="https://storage.googleapis.com/uxpilot-auth.appspot.com/d5c590a30e-598ca973c003b8932b79.png"
+              alt="wedding cake with floral decorations, white and gold, fine patisserie, elegant editorial"
+            />
           </div>
           <div class="h-52 lg:h-64 overflow-hidden -mt-8">
-            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/0e25ea55a3-0f9128973255b58ca297.png" alt="pastry chef piping cream on elegant cake, fine pastry making process, editorial photography" />
+            <img
+              class="w-full h-full object-cover"
+              src="https://storage.googleapis.com/uxpilot-auth.appspot.com/0e25ea55a3-0f9128973255b58ca297.png"
+              alt="pastry chef piping cream on elegant cake, fine pastry making process, editorial photography"
+            />
           </div>
           <div class="h-52 lg:h-64 overflow-hidden">
-            <img class="w-full h-full object-cover" src="https://storage.googleapis.com/uxpilot-auth.appspot.com/52dc8885f9-7b96135997d58656e6a1.png" alt="beautiful chocolate bonbons and truffles on marble, fine confectionery, editorial photography" />
+            <img
+              class="w-full h-full object-cover"
+              src="https://storage.googleapis.com/uxpilot-auth.appspot.com/52dc8885f9-7b96135997d58656e6a1.png"
+              alt="beautiful chocolate bonbons and truffles on marble, fine confectionery, editorial photography"
+            />
           </div>
         </div>
         <div class="order-1 lg:order-2 reveal-right">
           <p class="section-tag mb-5">Pedidos Especiales</p>
-          <h2 class="font-serif text-4xl lg:text-5xl xl:text-6xl font-light text-purple leading-snug mb-6">
-            Tu ocasión,<br/>
+          <h2
+            class="font-serif text-4xl lg:text-5xl xl:text-6xl font-light text-purple leading-snug mb-6"
+          >
+            Tu ocasión,<br />
             nuestra <em class="italic text-gold">creación</em>
           </h2>
           <div class="gold-line h-px w-16 mb-6"></div>
-          <p class="text-gray-600 font-light leading-relaxed mb-5 text-base lg:text-lg">
-            Diseñamos pasteles y creaciones personalizadas para bodas, cumpleaños, eventos empresariales y cualquier celebración especial.
+          <p
+            class="text-gray-600 font-light leading-relaxed mb-5 text-base lg:text-lg"
+          >
+            Diseñamos pasteles y creaciones personalizadas para bodas,
+            cumpleaños, eventos empresariales y cualquier celebración especial.
           </p>
-          <p class="text-gray-600 font-light leading-relaxed mb-8 text-base lg:text-lg">
-            Cuéntanos tu visión y la haremos realidad con nuestra técnica y dedicación.
+          <p
+            class="text-gray-600 font-light leading-relaxed mb-8 text-base lg:text-lg"
+          >
+            Cuéntanos tu visión y la haremos realidad con nuestra técnica y
+            dedicación.
           </p>
           <div class="flex flex-col sm:flex-row gap-4">
-            <a href="/contacto" class="btn-purple inline-flex items-center justify-center gap-3 px-8 py-3.5 font-medium text-sm tracking-widest uppercase">
+            <a
+              href="/contacto"
+              class="btn-purple inline-flex items-center justify-center gap-3 px-8 py-3.5 font-medium text-sm tracking-widest uppercase"
+            >
               <i class="fa-regular fa-envelope text-xs"></i> Solicitar Pedido
             </a>
-            <a href="https://wa.me/34612345678" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-3 px-8 py-3.5 border border-purple text-purple font-medium text-sm tracking-widest uppercase hover:bg-purple hover:text-gold transition-colors">
+            <a
+              href="https://wa.me/34612345678"
+              target="_blank"
+              rel="noopener"
+              class="inline-flex items-center justify-center gap-3 px-8 py-3.5 border border-purple text-purple font-medium text-sm tracking-widest uppercase hover:bg-purple hover:text-gold transition-colors"
+            >
               <i class="fa-brands fa-whatsapp text-sm"></i> WhatsApp
             </a>
           </div>
@@ -207,86 +361,222 @@ import { products } from '../data/products';
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
-  <section id="testimonials" class="py-20 lg:py-28 bg-cream-dark">
+  <!-- HOW IT WORKS -->
+  <section id="como-funciona" class="py-20 lg:py-28 bg-cream">
     <div class="max-w-7xl mx-auto px-6 lg:px-10">
-      <div class="reveal text-center mb-12 lg:mb-16">
-        <p class="section-tag mb-4">Lo que dicen nuestros clientes</p>
-        <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple flex items-center justify-center gap-3">Experiencias <MatizesWordmark class="inline-block h-[0.62em] w-auto text-gold" /></h2>
+      <div class="reveal text-center mb-14 lg:mb-20">
+        <p class="section-tag mb-4">Sin complicaciones</p>
+        <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple">
+          ¿Cómo funciona <em class="italic text-gold">tu pedido</em>?
+        </h2>
+        <div class="gold-line h-px w-16 mx-auto mt-6"></div>
       </div>
-      <div class="stagger-grid grid md:grid-cols-3 gap-6 lg:gap-8">
-        <div id="testimonial-1" class="testimonial-card bg-cream p-8">
-          <div class="flex gap-1 mb-4">
-            <i class="fa-solid fa-star text-gold text-sm"></i>
-            <i class="fa-solid fa-star text-gold text-sm"></i>
-            <i class="fa-solid fa-star text-gold text-sm"></i>
-            <i class="fa-solid fa-star text-gold text-sm"></i>
-            <i class="fa-solid fa-star text-gold text-sm"></i>
-          </div>
-          <p class="font-serif text-lg text-gray-700 italic font-light leading-relaxed mb-6">"El pastel de bodas superó todas nuestras expectativas. Hermoso, delicioso y perfectamente ejecutado. ¡Un recuerdo para siempre!"</p>
-          <div class="flex items-center gap-3">
-            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/acers/avatar-1.jpg" class="w-10 h-10 rounded-full object-cover" alt="avatar" />
-            <div>
-              <p class="text-purple font-medium text-sm">Sofía Martínez</p>
-              <p class="text-gray-400 text-xs tracking-wide">Boda · Junio 2024</p>
-            </div>
-          </div>
+      <div class="stagger-grid grid md:grid-cols-4 gap-0 relative">
+        <!-- Línea conectora desktop -->
+        <div
+          class="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-px bg-gold/25 z-0"
+        >
         </div>
-        <div id="testimonial-2" class="testimonial-card bg-cream p-8">
-          <div class="flex gap-1 mb-4">
-            <i class="fa-solid fa-star text-gold text-sm"></i>
-            <i class="fa-solid fa-star text-gold text-sm"></i>
-            <i class="fa-solid fa-star text-gold text-sm"></i>
-            <i class="fa-solid fa-star text-gold text-sm"></i>
-            <i class="fa-solid fa-star text-gold text-sm"></i>
-          </div>
-          <p class="font-serif text-lg text-gray-700 italic font-light leading-relaxed mb-6">"Los macarons son simplemente extraordinarios. Calidad que no encuentras en otro lugar. Ya son mis favoritos de toda la ciudad."</p>
-          <div class="flex items-center gap-3">
-            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/acers/avatar-5.jpg" class="w-10 h-10 rounded-full object-cover" alt="avatar" />
-            <div>
-              <p class="text-purple font-medium text-sm">Valentina Sánchez</p>
-              <p class="text-gray-400 text-xs tracking-wide">Clienta habitual</p>
+        {
+          [
+            {
+              icon: "fa-comment-dots",
+              title: "Cuéntanos",
+              desc: "Escríbenos por formulario, WhatsApp o visítanos en nuestra pastelería de Valladolid. Explícanos qué necesitas.",
+            },
+            {
+              icon: "fa-pencil-ruler",
+              title: "Diseñamos juntos",
+              desc: "Agendamos una consulta, elegimos sabores, tamaños y acabado visual. Te enviamos presupuesto en 24 h.",
+            },
+            {
+              icon: "fa-fire-burner",
+              title: "Lo elaboramos",
+              desc: "Con ingredientes frescos y sin conservadores. Cada pieza se hornea en el momento, no días antes.",
+            },
+            {
+              icon: "fa-box-open",
+              title: "Lo recibes",
+              desc: "Recogida en tienda o entrega a domicilio en Valladolid. Embalaje para que llegue perfecto.",
+            },
+          ].map((item) => (
+            <div class="relative z-10 flex flex-col items-center text-center px-6 py-2">
+              <div class="w-20 h-20 bg-purple flex items-center justify-center mb-6 relative">
+                <i class={`fa-solid ${item.icon} text-gold text-xl`} />
+              </div>
+              <h3 class="font-serif text-xl font-light text-purple mb-3">
+                {item.title}
+              </h3>
+              <p class="text-gray-500 text-sm font-light leading-relaxed">
+                {item.desc}
+              </p>
             </div>
-          </div>
-        </div>
-        <div id="testimonial-3" class="testimonial-card bg-cream p-8">
-          <div class="flex gap-1 mb-4">
-            <i class="fa-solid fa-star text-gold text-sm"></i>
-            <i class="fa-solid fa-star text-gold text-sm"></i>
-            <i class="fa-solid fa-star text-gold text-sm"></i>
-            <i class="fa-solid fa-star text-gold text-sm"></i>
-            <i class="fa-solid fa-star text-gold text-sm"></i>
-          </div>
-          <p class="font-serif text-lg text-gray-700 italic font-light leading-relaxed mb-6">"Encargué un pastel corporativo para 80 personas y quedó impecable. Presentación de lujo y sabor increíble. Volveremos sin duda."</p>
-          <div class="flex items-center gap-3">
-            <img src="https://storage.googleapis.com/uxpilot-auth.appspot.com/acers/avatar-8.jpg" class="w-10 h-10 rounded-full object-cover" alt="avatar" />
-            <div>
-              <p class="text-purple font-medium text-sm">Andrés García</p>
-              <p class="text-gray-400 text-xs tracking-wide">Evento empresarial</p>
-            </div>
-          </div>
-        </div>
+          ))
+        }
+      </div>
+      <div class="reveal text-center mt-14">
+        <a
+          href="/contacto"
+          class="btn-purple inline-flex items-center gap-3 px-10 py-4 font-medium text-sm tracking-widest uppercase"
+        >
+          Hacer un pedido <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- NEWSLETTER / CTA BANNER -->
-  <section id="newsletter-cta" class="py-20 lg:py-28 bg-purple relative overflow-hidden">
-    <div class="pointer-events-none absolute inset-0 opacity-10">
-      <div class="absolute top-0 right-0 w-96 h-96 rounded-full border border-gold" style="transform: translate(30%, -30%)"></div>
-      <div class="absolute bottom-0 left-0 w-64 h-64 rounded-full border border-gold" style="transform: translate(-30%, 30%)"></div>
+  <!-- TESTIMONIALS -->
+  <section id="testimonials" class="py-20 lg:py-28 bg-cream-dark">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="reveal text-center mb-4">
+        <p class="section-tag mb-4">Opiniones verificadas · Google</p>
+        <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple flex items-center justify-center gap-3">
+          Lo que dicen en <em class="italic text-gold ml-2">Valladolid</em>
+        </h2>
+      </div>
+      <!-- Rating summary (se actualiza con JS si la API responde) -->
+      <div class="reveal flex items-center justify-center gap-3 mb-14">
+        <span id="reviews-rating" class="font-serif text-5xl font-light text-purple">4,9</span>
+        <div>
+          <div class="flex gap-1 mb-1" id="reviews-stars">
+            {[1,2,3,4,5].map(() => <i class="fa-solid fa-star text-gold text-base" />)}
+          </div>
+          <p class="text-xs text-gray-400 tracking-widest uppercase">
+            <span id="reviews-count">Basado en +120 reseñas</span>
+          </p>
+        </div>
+      </div>
+      <!-- Grid: datos estáticos de fallback, sustituidos por JS si la API responde -->
+      <div id="reviews-grid" class="stagger-grid grid md:grid-cols-3 gap-6 lg:gap-8">
+        {[
+          { initials: 'LM', name: 'Laura M.', context: 'Tarta de boda · Septiembre 2024', rating: 5, text: 'Encargamos la tarta nupcial con 6 semanas de antelación. El resultado fue impresionante: tres pisos con flores naturales y un fraisier como relleno que hizo llorar a mi madre de emoción. Repetiría sin dudarlo.' },
+          { initials: 'JR', name: 'Javier R.', context: 'Cliente habitual · Valladolid', rating: 5, text: 'Llevo dos años viniendo cada sábado por los croissants. Son los mejores que he comido fuera de París, sin exagerar. El kouign-amann de los domingos es adictivo. El café también es de especialidad de verdad.' },
+          { initials: 'CR', name: 'Carmen R.', context: 'Evento corporativo · Mayo 2024', rating: 5, text: 'Contratamos el catering dulce para una presentación de empresa con 90 personas. La bandeja de petit fours fue el tema de conversación de la tarde. Presentación impecable y puntualidad total.' },
+        ].map((t) => (
+          <div class="testimonial-card bg-cream p-8 flex flex-col">
+            <div class="flex gap-1 mb-5">
+              {[1,2,3,4,5].map((n) => <i class={`fa-solid fa-star text-sm ${n <= t.rating ? 'text-gold' : 'text-gray-200'}`} />)}
+            </div>
+            <p class="font-serif text-lg text-gray-700 italic font-light leading-relaxed mb-6 flex-grow">"{t.text}"</p>
+            <div class="flex items-center gap-3 pt-4 border-t border-gold/15">
+              <div class="w-10 h-10 rounded-full bg-purple flex items-center justify-center flex-shrink-0">
+                <span class="text-gold text-xs font-bold tracking-wide">{t.initials}</span>
+              </div>
+              <div>
+                <p class="text-purple font-medium text-sm">{t.name}</p>
+                <p class="text-gray-400 text-xs tracking-wide">{t.context}</p>
+              </div>
+              <i class="fa-brands fa-google text-gray-300 ml-auto text-lg" />
+            </div>
+          </div>
+        ))}
+      </div>
+      <div class="reveal text-center mt-10">
+        <a href="https://g.page/r/matizes-valladolid/review" target="_blank" rel="noopener"
+          class="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-gold transition-colors tracking-widest uppercase border-b border-gray-200 hover:border-gold pb-0.5">
+          <i class="fa-brands fa-google text-sm"></i> Déjanos tu reseña en Google
+        </a>
+      </div>
     </div>
-    <div class="reveal relative z-10 max-w-3xl mx-auto px-6 lg:px-10 text-center">
+  </section>
+
+  <script is:inline>
+    (function () {
+      function initials(name) {
+        return name.split(' ').map(function (w) { return w[0]; }).join('').slice(0, 2).toUpperCase();
+      }
+      function stars(rating) {
+        var html = '';
+        for (var i = 1; i <= 5; i++) {
+          html += '<i class="fa-solid fa-star text-sm ' + (i <= rating ? 'text-gold' : 'text-gray-200') + '"></i>';
+        }
+        return html;
+      }
+      function renderCard(r) {
+        var avatar = r.profilePhoto
+          ? '<img src="' + r.profilePhoto + '" class="w-10 h-10 rounded-full object-cover flex-shrink-0" alt="' + r.author + '" />'
+          : '<div class="w-10 h-10 rounded-full bg-purple flex items-center justify-center flex-shrink-0"><span class="text-gold text-xs font-bold tracking-wide">' + initials(r.author) + '</span></div>';
+        return '<div class="testimonial-card bg-cream p-8 flex flex-col">'
+          + '<div class="flex gap-1 mb-5">' + stars(r.rating) + '</div>'
+          + '<p class="font-serif text-lg text-gray-700 italic font-light leading-relaxed mb-6 flex-grow">"' + r.text + '"</p>'
+          + '<div class="flex items-center gap-3 pt-4 border-t border-gold/15">'
+          + avatar
+          + '<div><p class="text-purple font-medium text-sm">' + r.author + '</p>'
+          + '<p class="text-gray-400 text-xs tracking-wide">' + r.relativeTime + '</p></div>'
+          + '<i class="fa-brands fa-google text-gray-300 ml-auto text-lg"></i>'
+          + '</div></div>';
+      }
+
+      fetch('https://matizes-google-reviews.tusubdominio.workers.dev')
+        .then(function (res) { return res.ok ? res.json() : null; })
+        .then(function (data) {
+          if (!data || !data.reviews || data.reviews.length === 0) return;
+          /* Update rating bar */
+          if (data.rating) {
+            document.getElementById('reviews-rating').textContent = data.rating.toFixed(1).replace('.', ',');
+          }
+          if (data.totalReviews) {
+            document.getElementById('reviews-count').textContent = 'Basado en ' + data.totalReviews + ' reseñas';
+          }
+          /* Replace grid with real reviews (max 5) */
+          var grid = document.getElementById('reviews-grid');
+          var top = data.reviews.filter(function (r) { return r.text && r.text.length > 40; }).slice(0, 5);
+          if (top.length >= 3) {
+            grid.innerHTML = top.map(renderCard).join('');
+          }
+        })
+        .catch(function () { /* silently keep fallback */ });
+    })();
+  </script>
+
+  <!-- NEWSLETTER / CTA BANNER -->
+  <section
+    id="newsletter-cta"
+    class="py-20 lg:py-28 bg-purple relative overflow-hidden"
+  >
+    <div class="pointer-events-none absolute inset-0 opacity-10">
+      <div
+        class="absolute top-0 right-0 w-96 h-96 rounded-full border border-gold"
+        style="transform: translate(30%, -30%)"
+      >
+      </div>
+      <div
+        class="absolute bottom-0 left-0 w-64 h-64 rounded-full border border-gold"
+        style="transform: translate(-30%, 30%)"
+      >
+      </div>
+    </div>
+    <div
+      class="reveal relative z-10 max-w-3xl mx-auto px-6 lg:px-10 text-center"
+    >
       <p class="section-tag mb-5 text-gold/70">Mantente al día</p>
-      <h2 class="font-serif text-4xl lg:text-5xl font-light text-white mb-4">Suscríbete y recibe<br/><em class="italic text-gold">novedades exclusivas</em></h2>
-      <p class="text-white/60 font-light mb-10 text-base lg:text-lg">Entérate primero de nuevas creaciones, temporadas especiales y promociones únicas.</p>
-      <form class="flex flex-col sm:flex-row gap-0 max-w-lg mx-auto" onsubmit="return false;">
-        <input type="email" placeholder="Tu correo electrónico" class="flex-1 px-6 py-4 bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm focus:outline-none focus:border-gold" />
-        <button type="submit" class="btn-gold px-8 py-4 font-medium text-sm tracking-widest uppercase whitespace-nowrap">
+      <h2 class="font-serif text-4xl lg:text-5xl font-light text-white mb-4">
+        Suscríbete y recibe<br /><em class="italic text-gold"
+          >novedades exclusivas</em>
+      </h2>
+      <p class="text-white/60 font-light mb-10 text-base lg:text-lg">
+        Entérate primero de nuevas creaciones, temporadas especiales y
+        promociones únicas.
+      </p>
+      <form
+        class="flex flex-col sm:flex-row gap-0 max-w-lg mx-auto"
+        onsubmit="return false;"
+      >
+        <input
+          type="email"
+          placeholder="Tu correo electrónico"
+          class="flex-1 px-6 py-4 bg-white/10 border border-white/20 text-white placeholder-white/40 text-sm focus:outline-none focus:border-gold"
+        />
+        <button
+          type="submit"
+          class="btn-gold px-8 py-4 font-medium text-sm tracking-widest uppercase whitespace-nowrap"
+        >
           Suscribirse
         </button>
       </form>
-      <p class="text-white/30 text-xs mt-4">Sin spam. Cancela cuando quieras.</p>
+      <p class="text-white/30 text-xs mt-4">
+        Sin spam. Cancela cuando quieras.
+      </p>
     </div>
   </section>
 
@@ -294,9 +584,14 @@ import { products } from '../data/products';
 
   <script is:inline>
     (function () {
-      var img = document.getElementById('hero-parallax-img');
-      var hero = document.getElementById('hero');
-      if (!img || !hero || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var img = document.getElementById("hero-parallax-img");
+      var hero = document.getElementById("hero");
+      if (
+        !img ||
+        !hero ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      )
+        return;
 
       var ticking = false;
       function onScroll() {
@@ -305,7 +600,7 @@ import { products } from '../data/products';
             var scrollY = window.scrollY;
             var heroBottom = hero.offsetTop + hero.offsetHeight;
             if (scrollY < heroBottom) {
-              img.style.transform = 'translateY(' + (scrollY * 0.35) + 'px)';
+              img.style.transform = "translateY(" + scrollY * 0.35 + "px)";
             }
             ticking = false;
           });
@@ -313,7 +608,7 @@ import { products } from '../data/products';
         }
       }
 
-      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener("scroll", onScroll, { passive: true });
     })();
   </script>
 </Layout>

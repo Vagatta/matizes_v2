@@ -1,0 +1,6 @@
+name = "matizes-google-reviews"
+main = "google-reviews.js"
+compatibility_date = "2024-01-01"
+
+# El secret GOOGLE_PLACES_API_KEY se añade con:
+# wrangler secret put GOOGLE_PLACES_API_KEY

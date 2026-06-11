@@ -224,7 +224,7 @@ const { title } = Astro.props;
               revealObs.unobserve(entry.target);
             }
           });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        }, { threshold: 0.08 });
 
         document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale,.stagger-grid').forEach(function (el) {
           revealObs.observe(el);
@@ -271,5 +271,110 @@ const { title } = Astro.props;
         }
       })();
     </script>
+
+    <!-- ===== TEMP: Color picker oro ===== -->
+    <div id="color-picker-panel" style="
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9998;
+      background: #1a1a1a;
+      border: 1px solid rgba(201,168,76,0.4);
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      min-width: 180px;
+    ">
+      <button id="color-picker-toggle" style="
+        display:flex;align-items:center;justify-content:space-between;
+        width:100%;padding:10px 14px;background:none;border:none;
+        cursor:pointer;color:rgba(255,255,255,0.4);font-family:'Jost',sans-serif;
+        font-size:9px;letter-spacing:0.2em;text-transform:uppercase;
+      ">
+        <span>Estudio cromático</span>
+        <span id="color-picker-arrow" style="font-size:10px;transition:transform 0.2s">▲</span>
+      </button>
+      <div id="color-picker-body" style="padding:0 14px 12px;display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;flex-direction:column;gap:6px" id="color-options">
+          <!-- opciones inyectadas por JS -->
+        </div>
+      </div>
+    </div>
+    <script is:inline>
+      (function () {
+        var GOLD_RGB = 'rgb(201,168,76)';
+        var current = null;
+
+        var options = [
+          { id: 'gold',   color: '#C9A84C', label: 'Oro original'  },
+          { id: 'sage',   color: '#8A9E7E', label: 'Verde salvia'  },
+          { id: 'slate',  color: '#7A8FA6', label: 'Azul pizarra'  },
+          { id: 'sand',   color: '#C4A882', label: 'Arena dorada'  },
+          { id: 'rose',   color: '#C4828A', label: 'Rosa palo'     },
+          { id: 'ivory',  color: '#F0EAD6', label: 'Marfil'        },
+        ];
+
+        function toRgbNorm(hex) {
+          var r = parseInt(hex.slice(1,3),16);
+          var g = parseInt(hex.slice(3,5),16);
+          var b = parseInt(hex.slice(5,7),16);
+          return 'rgb(' + r + ',' + g + ',' + b + ')';
+        }
+
+        function colorsMatch(a, b) {
+          return a.replace(/\s/g,'') === b.replace(/\s/g,'');
+        }
+
+        function applyColor(targetHex) {
+          var fromRgb = current ? toRgbNorm(current) : GOLD_RGB;
+          document.querySelectorAll('.btn-gold, .btn-purple').forEach(function (el) {
+            var cs = window.getComputedStyle(el);
+            ['color','background-color','border-top-color','border-bottom-color','border-left-color','border-right-color'].forEach(function (prop) {
+              var val = cs.getPropertyValue(prop).replace(/\s/g,'');
+              if (colorsMatch(val, fromRgb)) {
+                el.style.setProperty(prop, targetHex, 'important');
+              }
+            });
+          });
+          current = targetHex;
+        }
+
+        /* Collapse / expand */
+        var toggleBtn = document.getElementById('color-picker-toggle');
+        var body = document.getElementById('color-picker-body');
+        var arrow = document.getElementById('color-picker-arrow');
+        var collapsed = false;
+        toggleBtn.addEventListener('click', function () {
+          collapsed = !collapsed;
+          body.style.display = collapsed ? 'none' : 'flex';
+          arrow.style.transform = collapsed ? 'rotate(180deg)' : 'rotate(0deg)';
+        });
+
+        /* Build UI */
+        var container = document.getElementById('color-options');
+        options.forEach(function (opt) {
+          var row = document.createElement('button');
+          row.style.cssText = 'display:flex;align-items:center;gap:8px;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;width:100%;text-align:left;transition:border-color 0.2s';
+          row.innerHTML =
+            '<span style="width:14px;height:14px;border-radius:50%;background:' + opt.color + ';flex-shrink:0;border:1px solid rgba(255,255,255,0.15)"></span>' +
+            '<span style="font-family:Jost,sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6)">' + opt.label + '</span>';
+          row.dataset.colorId = opt.id;
+          row.addEventListener('mouseenter', function () { row.style.borderColor = 'rgba(201,168,76,0.5)'; });
+          row.addEventListener('mouseleave', function () { row.style.borderColor = 'rgba(255,255,255,0.08)'; });
+          row.addEventListener('click', function () {
+            applyColor(opt.color);
+            /* mark active */
+            container.querySelectorAll('button').forEach(function (b) {
+              b.style.borderColor = 'rgba(255,255,255,0.08)';
+            });
+            row.style.borderColor = opt.color;
+          });
+          container.appendChild(row);
+        });
+      })();
+    </script>
+    <!-- ===== /TEMP ===== -->
 </body>
 </html>

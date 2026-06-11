@@ -1,0 +1,187 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { posts } from '../../data/blog';
+
+const categories = ['Todos', ...Array.from(new Set(posts.map(p => p.category)))];
+const featured = posts[0];
+const rest = posts.slice(1);
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+---
+
+<Layout title="Blog — Pastelería, Cafetería y Repostería Artesanal en Valladolid | Mat!zes">
+  <Header />
+
+  <div class="h-16 lg:h-20"></div>
+
+  <!-- HERO -->
+  <section class="py-16 lg:py-24 bg-purple relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+      <div class="absolute top-0 right-0 w-96 h-96 rounded-full border border-gold" style="transform: translate(30%, -30%)"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 rounded-full border border-gold" style="transform: translate(-30%, 30%)"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 relative z-10 text-center">
+      <div class="reveal">
+        <p class="section-tag mb-4 text-gold/70">Artículos y recetas</p>
+        <h1 class="font-serif text-5xl lg:text-7xl font-light text-white mb-6">
+          Nuestro <em class="italic text-gold">Blog</em>
+        </h1>
+        <div class="gold-line h-px w-24 mx-auto mb-6"></div>
+        <p class="text-white/70 font-light max-w-xl mx-auto mt-6">
+          Pastelería artesanal, cafetería, ingredientes y todo lo que ocurre en nuestro obrador de Valladolid.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED POST -->
+  <section class="py-16 lg:py-20 bg-cream">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <p class="section-tag mb-8 reveal">Artículo destacado</p>
+      <a href={`/blog/${featured.slug}`} class="reveal group grid lg:grid-cols-2 gap-0 overflow-hidden bg-white card-hover">
+        <div class="relative h-72 lg:h-full overflow-hidden img-hover-wrap">
+          <img class="w-full h-full object-cover" src={featured.image} alt={featured.imageAlt} />
+          <div class="absolute inset-0 bg-gradient-to-r from-purple/40 to-transparent"></div>
+          <span class="absolute top-5 left-5 bg-gold text-purple text-xs font-bold px-3 py-1 tracking-widest uppercase">
+            {featured.category}
+          </span>
+        </div>
+        <div class="p-8 lg:p-12 flex flex-col justify-center">
+          <div class="flex items-center gap-4 mb-5">
+            <time class="text-xs text-gray-400 tracking-widest uppercase">{formatDate(featured.date)}</time>
+            <span class="text-gray-300">·</span>
+            <span class="text-xs text-gray-400 tracking-widest uppercase">{featured.readTime} min lectura</span>
+          </div>
+          <h2 class="font-serif text-3xl lg:text-4xl font-light text-purple mb-4 group-hover:text-gold transition-colors">
+            {featured.title}
+          </h2>
+          <p class="text-gray-500 font-light leading-relaxed mb-8">{featured.excerpt}</p>
+          <div class="flex flex-wrap gap-2 mb-8">
+            {featured.tags.slice(0, 3).map(tag => (
+              <span class="text-xs text-gold tracking-widest uppercase border border-gold/30 px-3 py-1">{tag}</span>
+            ))}
+          </div>
+          <span class="inline-flex items-center gap-2 text-purple font-medium text-sm tracking-widest uppercase border-b border-purple pb-1 group-hover:text-gold group-hover:border-gold transition-colors self-start">
+            Leer artículo <i class="fa-solid fa-arrow-right text-xs"></i>
+          </span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- POST GRID -->
+  <section class="pb-20 lg:pb-28 bg-cream">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="reveal flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+        <h2 class="font-serif text-3xl lg:text-4xl font-light text-purple">Todos los <em class="italic text-gold">artículos</em></h2>
+        <div class="flex flex-wrap gap-2" id="filter-btns">
+          {categories.map((cat) => (
+            <button
+              data-filter={cat === 'Todos' ? 'all' : cat}
+              class="filter-btn text-xs tracking-widest uppercase px-4 py-2 border transition-colors border-purple/30 text-purple hover:border-purple"
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div class="stagger-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8" id="posts-grid">
+        {rest.map(post => (
+          <a href={`/blog/${post.slug}`} data-category={post.category} class="post-card card-hover bg-white group flex flex-col h-full">
+            <div class="relative h-52 overflow-hidden img-hover-wrap flex-shrink-0">
+              <img class="w-full h-full object-cover" src={post.image} alt={post.imageAlt} />
+              <span class="absolute top-4 left-4 bg-purple text-gold text-xs font-bold px-3 py-1 tracking-widest uppercase">
+                {post.category}
+              </span>
+            </div>
+            <div class="p-6 flex flex-col flex-grow">
+              <div class="flex items-center gap-3 mb-4">
+                <time class="text-xs text-gray-400 tracking-widest uppercase">{formatDate(post.date)}</time>
+                <span class="text-gray-300">·</span>
+                <span class="text-xs text-gray-400">{post.readTime} min</span>
+              </div>
+              <h3 class="font-serif text-xl lg:text-2xl text-purple font-light mb-3 group-hover:text-gold transition-colors flex-grow">
+                {post.title}
+              </h3>
+              <p class="text-gray-500 text-sm font-light leading-relaxed mb-5 line-clamp-3">{post.excerpt}</p>
+              <span class="inline-flex items-center gap-2 text-xs text-purple tracking-widest uppercase border-b border-purple/30 pb-0.5 group-hover:text-gold group-hover:border-gold transition-colors self-start mt-auto">
+                Leer más <i class="fa-solid fa-arrow-right text-[10px]"></i>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO BLOQUE LOCAL -->
+  <section class="py-16 bg-cream-dark">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="reveal max-w-3xl mx-auto text-center">
+        <p class="section-tag mb-4">Pastelería y cafetería en Valladolid</p>
+        <h2 class="font-serif text-3xl lg:text-4xl font-light text-purple mb-6">
+          Artesanía, sabor y <em class="italic text-gold">Valladolid</em>
+        </h2>
+        <p class="text-gray-500 font-light leading-relaxed mb-8">
+          Mat!zes es la pastelería y cafetería artesanal de referencia en Valladolid. Elaboramos a diario pasteles, tartas, petit fours, viennoiserie y bollería con ingredientes naturales sin conservadores. También somos tu opción para tartas de boda, pedidos especiales y eventos corporativos en Valladolid y provincia.
+        </p>
+        <a href="/contacto" class="btn-purple inline-flex items-center gap-2 px-8 py-3 text-xs font-medium tracking-widest uppercase">
+          Hacer un pedido <i class="fa-solid fa-arrow-right text-xs"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var btns = document.querySelectorAll('.filter-btn');
+    var cards = document.querySelectorAll('.post-card');
+
+    function applyFilter(filter) {
+      btns.forEach(function (b) {
+        var isActive = b.getAttribute('data-filter') === filter;
+        b.classList.toggle('bg-purple', isActive);
+        b.classList.toggle('text-gold', isActive);
+        b.classList.toggle('border-purple', isActive);
+        b.classList.toggle('border-purple/30', !isActive);
+        b.classList.toggle('text-purple', !isActive);
+      });
+      cards.forEach(function (card) {
+        var cat = card.getAttribute('data-category');
+        card.style.display = (filter === 'all' || cat === filter) ? '' : 'none';
+      });
+    }
+
+    btns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var filter = btn.getAttribute('data-filter');
+        applyFilter(filter);
+        var url = new URL(window.location.href);
+        if (filter === 'all') { url.searchParams.delete('cat'); } else { url.searchParams.set('cat', filter); }
+        history.replaceState(null, '', url.toString());
+      });
+    });
+
+    /* activate from URL on load */
+    var params = new URLSearchParams(window.location.search);
+    var initialCat = params.get('cat') || 'all';
+    applyFilter(initialCat);
+  })();
+</script>

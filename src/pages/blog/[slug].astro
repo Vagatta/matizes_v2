@@ -1,0 +1,216 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { posts, getPost, getRelatedPosts } from '../../data/blog';
+
+export function getStaticPaths() {
+  return posts.map(post => ({ params: { slug: post.slug } }));
+}
+
+const { slug } = Astro.params;
+const post = getPost(slug!);
+if (!post) return Astro.redirect('/blog');
+
+const related = getRelatedPosts(slug!, 3);
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+const paragraphs = post.content
+  .trim()
+  .split('\n')
+  .map(line => line.trim())
+  .filter(line => line.length > 0);
+---
+
+<Layout title={post.metaTitle}>
+  <Header />
+
+  <div class="h-16 lg:h-20"></div>
+
+  <!-- HERO IMAGE -->
+  <div class="relative h-72 lg:h-[480px] overflow-hidden">
+    <img class="w-full h-full object-cover" src={post.image} alt={post.imageAlt} />
+    <div class="absolute inset-0 bg-gradient-to-t from-purple/80 via-purple/30 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 right-0 max-w-7xl mx-auto px-6 lg:px-10 pb-10 lg:pb-14">
+      <span class="inline-block bg-gold text-purple text-xs font-bold px-3 py-1 tracking-widest uppercase mb-4">
+        {post.category}
+      </span>
+      <h1 class="font-serif text-3xl lg:text-5xl font-light text-white max-w-3xl leading-tight">
+        {post.title}
+      </h1>
+    </div>
+  </div>
+
+  <!-- ARTICLE -->
+  <article class="py-14 lg:py-20 bg-cream">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <div class="grid lg:grid-cols-[1fr_320px] gap-12 lg:gap-16 items-start">
+
+        <!-- Main content -->
+        <div>
+          <!-- Meta row -->
+          <div class="flex flex-wrap items-center gap-5 mb-8 pb-8 border-b border-gold/20">
+            <div class="flex items-center gap-2 text-sm text-gray-500">
+              <i class="fa-regular fa-calendar text-gold text-xs"></i>
+              <time>{formatDate(post.date)}</time>
+            </div>
+            <div class="flex items-center gap-2 text-sm text-gray-500">
+              <i class="fa-regular fa-clock text-gold text-xs"></i>
+              <span>{post.readTime} min de lectura</span>
+            </div>
+            <div class="flex gap-2 flex-wrap">
+              {post.tags.slice(0, 3).map(tag => (
+                <span class="text-xs text-gold tracking-widest border border-gold/30 px-2 py-0.5">{tag}</span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Excerpt -->
+          <p class="font-serif text-xl lg:text-2xl text-purple font-light leading-relaxed mb-10 italic">
+            {post.excerpt}
+          </p>
+
+          <!-- Body -->
+          <div class="prose-matizes">
+            {paragraphs.map(line => {
+              if (line.startsWith('## ')) {
+                return <h2 class="font-serif text-2xl lg:text-3xl font-light text-purple mt-12 mb-5">{line.replace('## ', '')}</h2>;
+              }
+              if (line.startsWith('### ')) {
+                return <h3 class="font-serif text-xl font-light text-purple mt-8 mb-3">{line.replace('### ', '')}</h3>;
+              }
+              if (line.startsWith('- **')) {
+                const match = line.match(/^- \*\*(.+?)\*\*:?\s*(.*)/);
+                if (match) {
+                  return (
+                    <div class="flex gap-3 mb-3">
+                      <i class="fa-solid fa-circle text-gold text-[6px] mt-2.5 flex-shrink-0"></i>
+                      <p class="text-gray-600 font-light leading-relaxed"><strong class="text-purple font-medium">{match[1]}</strong>{match[2] ? ': ' + match[2] : ''}</p>
+                    </div>
+                  );
+                }
+              }
+              if (line.startsWith('- ')) {
+                return (
+                  <div class="flex gap-3 mb-3">
+                    <i class="fa-solid fa-circle text-gold text-[6px] mt-2.5 flex-shrink-0"></i>
+                    <p class="text-gray-600 font-light leading-relaxed">{line.replace('- ', '')}</p>
+                  </div>
+                );
+              }
+              if (line.startsWith('1. ') || line.startsWith('2. ') || line.startsWith('3. ') || line.startsWith('4. ') || line.startsWith('5. ')) {
+                const num = line.match(/^(\d+)\./)?.[1];
+                return (
+                  <div class="flex gap-4 mb-3">
+                    <span class="font-serif text-gold text-lg font-light flex-shrink-0 w-5">{num}.</span>
+                    <p class="text-gray-600 font-light leading-relaxed">{line.replace(/^\d+\.\s+/, '')}</p>
+                  </div>
+                );
+              }
+              if (line.startsWith('|')) {
+                return null;
+              }
+              if (line.startsWith('**') && line.endsWith('**')) {
+                return <p class="text-purple font-medium my-4">{line.replace(/\*\*/g, '')}</p>;
+              }
+              return <p class="text-gray-600 font-light leading-relaxed mb-5">{line}</p>;
+            })}
+          </div>
+
+          <!-- Tags -->
+          <div class="mt-12 pt-8 border-t border-gold/20">
+            <p class="text-xs text-gray-400 tracking-widest uppercase mb-4">Etiquetas</p>
+            <div class="flex flex-wrap gap-2">
+              {post.tags.map(tag => (
+                <span class="text-xs text-gold tracking-widest border border-gold/30 px-3 py-1.5 hover:bg-gold hover:text-purple transition-colors cursor-default">{tag}</span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Share -->
+          <div class="mt-8 flex items-center gap-4">
+            <p class="text-xs text-gray-400 tracking-widest uppercase">Compartir</p>
+            <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent('https://matizes.es/blog/' + post.slug)}`} target="_blank" rel="noopener" class="w-9 h-9 border border-gray-200 flex items-center justify-center text-gray-400 hover:border-gold hover:text-gold transition-colors">
+              <i class="fa-brands fa-x-twitter text-sm"></i>
+            </a>
+            <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent('https://matizes.es/blog/' + post.slug)}`} target="_blank" rel="noopener" class="w-9 h-9 border border-gray-200 flex items-center justify-center text-gray-400 hover:border-gold hover:text-gold transition-colors">
+              <i class="fa-brands fa-facebook-f text-sm"></i>
+            </a>
+            <a href={`https://wa.me/?text=${encodeURIComponent(post.title + ' ' + 'https://matizes.es/blog/' + post.slug)}`} target="_blank" rel="noopener" class="w-9 h-9 border border-gray-200 flex items-center justify-center text-gray-400 hover:border-gold hover:text-gold transition-colors">
+              <i class="fa-brands fa-whatsapp text-sm"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="space-y-8">
+          <!-- CTA -->
+          <div class="bg-purple p-8">
+            <p class="section-tag text-gold/70 mb-3">¿Tienes un pedido?</p>
+            <h3 class="font-serif text-2xl font-light text-white mb-4">Estamos en <em class="italic text-gold">Valladolid</em></h3>
+            <p class="text-white/60 text-sm font-light leading-relaxed mb-6">Pasteles artesanales, tartas de boda y pedidos especiales. Contáctanos para cualquier consulta.</p>
+            <a href="/contacto" class="btn-gold inline-flex items-center gap-2 px-6 py-3 text-xs font-medium tracking-widest uppercase w-full justify-center">
+              Contactar <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+          </div>
+
+          <!-- Related -->
+          <div>
+            <p class="section-tag mb-5">Artículos relacionados</p>
+            <div class="space-y-5">
+              {related.map(r => (
+                <a href={`/blog/${r.slug}`} class="group flex gap-4 items-start">
+                  <div class="w-20 h-16 overflow-hidden flex-shrink-0 img-hover-wrap">
+                    <img class="w-full h-full object-cover" src={r.image} alt={r.imageAlt} />
+                  </div>
+                  <div>
+                    <span class="text-xs text-gold tracking-widest uppercase">{r.category}</span>
+                    <h4 class="font-serif text-sm text-purple font-light leading-snug mt-1 group-hover:text-gold transition-colors line-clamp-2">{r.title}</h4>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <!-- Categories -->
+          <div>
+            <p class="section-tag mb-5">Categorías</p>
+            <ul class="space-y-2">
+              {Array.from(new Set(posts.map(p => p.category))).map(cat => (
+                <li>
+                  <a href={`/blog?cat=${encodeURIComponent(cat)}`} class="flex items-center justify-between text-sm text-gray-500 hover:text-gold transition-colors py-2 border-b border-gray-100">
+                    <span>{cat}</span>
+                    <span class="text-xs text-gold">{posts.filter(p => p.category === cat).length}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </article>
+
+  <!-- Back to blog -->
+  <div class="bg-cream-dark py-12">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 text-center">
+      <a href="/blog" class="inline-flex items-center gap-2 text-purple font-medium text-sm tracking-widest uppercase border-b border-purple pb-1 hover:text-gold hover:border-gold transition-colors">
+        <i class="fa-solid fa-arrow-left text-xs"></i> Volver al blog
+      </a>
+    </div>
+  </div>
+
+  <Footer />
+</Layout>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
