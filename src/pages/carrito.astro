@@ -25,7 +25,7 @@ const features = [
 
   <!-- HERO -->
   <section class="py-12 lg:py-16 bg-cream">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-10">
       <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4 mb-8">
         <div>
           <p class="section-tag mb-4">Tu selección</p>
@@ -42,7 +42,7 @@ const features = [
 
   <!-- CART -->
   <section class="pb-16 lg:pb-24 bg-cream">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
       <!-- Empty state -->
       <div id="cart-empty" class="hidden text-center py-20">
         <div class="w-16 h-16 bg-gold/15 flex items-center justify-center mx-auto mb-6"><i class="fa-solid fa-bag-shopping text-gold text-2xl"></i></div>
@@ -68,17 +68,17 @@ const features = [
           <div id="cart-items"></div>
 
           <!-- Actions -->
-          <div class="flex items-center justify-between mt-6">
+          <div class="flex flex-wrap items-center justify-between gap-4 mt-6">
             <a href="/menu" class="inline-flex items-center gap-2 text-purple text-sm font-medium tracking-widest uppercase hover:text-gold transition-colors">
               <i class="fa-solid fa-arrow-left text-xs"></i> Continuar comprando
             </a>
-            <button id="clear-cart" class="inline-flex items-center gap-2 text-gray-400 text-sm hover:text-purple transition-colors">
+            <button id="clear-cart" class="inline-flex items-center gap-2 text-gray-400 text-sm hover:text-purple transition-colors pr-1">
               <i class="fa-solid fa-trash-can text-xs"></i> Vaciar carrito
             </button>
           </div>
 
           <!-- Special note -->
-          <div class="bg-white p-6 mt-8">
+          <div class="bg-white p-5 mt-6 mx-0.5">
             <p class="text-xs tracking-widest uppercase text-purple mb-3 flex items-center gap-2"><i class="fa-regular fa-note-sticky text-gold"></i> Nota especial para tu pedido</p>
             <textarea rows="3" placeholder="¿Alguna dedicatoria, alergia o instrucción especial? Escríbelo aquí." class="w-full bg-cream-dark px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-gold resize-none"></textarea>
           </div>
@@ -189,23 +189,29 @@ const features = [
       const href = `/productos/${item.id}`;
       const size = item.size ? `<p class="text-xs text-gray-400 mt-0.5">${esc(item.size)}</p>` : '';
       return `
-        <div class="py-5 border-b border-purple/10">
+        <div class="bg-white rounded-sm border border-purple/10 p-4 mb-3 shadow-sm mx-0.5">
           <div class="flex gap-4">
-            <a href="${href}" class="shrink-0"><img class="w-16 h-16 md:w-20 md:h-20 object-cover" src="${esc(item.image)}" alt="${esc(item.name)}" /></a>
+            <a href="${href}" class="shrink-0 overflow-hidden rounded-sm">
+              <img class="w-20 h-20 object-cover hover:scale-105 transition-transform duration-300" src="${esc(item.image)}" alt="${esc(item.name)}" />
+            </a>
             <div class="flex-1 min-w-0">
-              <p class="text-xs tracking-widest uppercase text-gold mb-0.5">${esc(item.category || '')}</p>
-              <a href="${href}" class="font-serif text-base md:text-lg text-purple hover:text-gold transition-colors leading-tight block">${esc(item.name)}</a>
-              ${size}
-              <div class="flex items-center justify-between mt-3 gap-3 flex-wrap">
-                <div class="flex items-center border border-purple/20">
-                  <button class="qty-minus w-8 h-8 flex items-center justify-center text-purple hover:bg-purple hover:text-gold transition-colors" data-id="${esc(item.id)}" data-size="${esc(item.size || '')}"><i class="fas fa-minus text-xs"></i></button>
-                  <span class="w-8 text-center border-x border-purple/20 text-sm leading-8">${item.qty}</span>
-                  <button class="qty-plus w-8 h-8 flex items-center justify-center text-purple hover:bg-purple hover:text-gold transition-colors" data-id="${esc(item.id)}" data-size="${esc(item.size || '')}"><i class="fas fa-plus text-xs"></i></button>
+              <div class="flex items-start justify-between gap-2">
+                <div class="min-w-0">
+                  <p class="text-[10px] tracking-widest uppercase text-gold mb-0.5">${esc(item.category || '')}</p>
+                  <a href="${href}" class="font-serif text-base text-purple hover:text-gold transition-colors leading-tight block truncate">${esc(item.name)}</a>
+                  ${size}
                 </div>
-                <div class="flex items-center gap-4">
-                  <span class="font-serif text-lg text-purple">${fmt(item.price * item.qty)} €</span>
-                  <button class="cart-remove text-gray-300 hover:text-purple transition-colors" data-id="${esc(item.id)}" data-size="${esc(item.size || '')}"><i class="fa-solid fa-trash-can text-sm"></i></button>
+                <button class="cart-remove shrink-0 text-gray-300 hover:text-red-400 transition-colors p-1 -mt-0.5" data-id="${esc(item.id)}" data-size="${esc(item.size || '')}">
+                  <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+              </div>
+              <div class="flex items-center justify-between mt-4 gap-2">
+                <div class="flex items-center border border-purple/20 bg-cream">
+                  <button class="qty-minus w-8 h-8 flex items-center justify-center text-purple hover:bg-purple hover:text-gold transition-colors text-xs" data-id="${esc(item.id)}" data-size="${esc(item.size || '')}"><i class="fas fa-minus"></i></button>
+                  <span class="w-8 text-center border-x border-purple/20 text-sm leading-8 font-medium">${item.qty}</span>
+                  <button class="qty-plus w-8 h-8 flex items-center justify-center text-purple hover:bg-purple hover:text-gold transition-colors text-xs" data-id="${esc(item.id)}" data-size="${esc(item.size || '')}"><i class="fas fa-plus"></i></button>
                 </div>
+                <span class="font-serif text-xl text-purple font-light">${fmt(item.price * item.qty)} €</span>
               </div>
             </div>
           </div>
