@@ -71,8 +71,13 @@ const Cart = {
 
 function updateBadges(): void {
   const count = Cart.count();
+  const subtotal = Cart.subtotal();
   document.querySelectorAll<HTMLElement>('[data-cart-count]').forEach((el) => {
     el.textContent = String(count);
+    el.classList.toggle('hidden', count === 0);
+  });
+  document.querySelectorAll<HTMLElement>('[data-cart-subtotal]').forEach((el) => {
+    el.textContent = subtotal.toFixed(2).replace('.', ',') + ' €';
     el.classList.toggle('hidden', count === 0);
   });
 }
