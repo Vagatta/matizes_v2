@@ -61,6 +61,228 @@ import { products } from "../data/products";
     <!-- Scroll indicator -->
   </section>
 
+  <!-- HERO SECTION — VARIANTE STITCH (Artisanal Nuance) -->
+  <section
+    id="hero-stitch"
+    class="relative min-h-[100dvh] hidden flex-col justify-center overflow-hidden pt-16 lg:pt-20"
+    style="background: #fff8f5;"
+  >
+
+    <!-- ── MÓVIL: texto arriba centrado + imágenes apiladas + CTA abajo ── -->
+    <div class="lg:hidden flex flex-col items-center px-6 py-10 min-h-[calc(100dvh-4rem)]">
+
+      <!-- Texto -->
+      <div class="stitch-text text-center mb-10 mt-4">
+        <div class="flex items-center justify-center gap-3 mb-6">
+          <div class="h-px w-10 bg-[#C9A84C]"></div>
+          <div class="w-1.5 h-1.5 rotate-45 bg-[#C9A84C]"></div>
+          <div class="h-px w-10 bg-[#C9A84C]"></div>
+        </div>
+        <h1 class="font-serif font-medium text-[#820057] text-[2.8rem] leading-[1.1] tracking-tight mb-0">
+          El arte en cada bocado
+        </h1>
+      </div>
+
+      <!-- Imágenes apiladas con offset alterno -->
+      <div class="stitch-collage w-full flex flex-col gap-4 flex-1">
+        <div class="self-end w-[72%] aspect-[4/3] bg-white stitch-img-card" style="box-shadow: 0 4px 16px rgba(30,27,24,0.08);">
+          <img
+            src="https://images.unsplash.com/photo-1569864358642-9d1684040f43?q=80&w=800&auto=format&fit=crop"
+            alt="Macarons artesanales en tonos pastel"
+            class="w-full h-full object-cover"
+            loading="eager"
+          />
+        </div>
+        <div class="self-start w-[60%] aspect-[4/3] bg-white stitch-img-card" style="box-shadow: 0 4px 16px rgba(30,27,24,0.08);">
+          <img
+            src="https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=600&auto=format&fit=crop"
+            alt="Petit four de chocolate"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+        <div class="self-end w-[72%] aspect-[4/3]" style="background: #1e1b18; box-shadow: 0 4px 16px rgba(30,27,24,0.14);">
+          <img
+            src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=800&auto=format&fit=crop"
+            alt="Tarta artesanal con frutos rojos"
+            class="w-full h-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="stitch-text mt-10 mb-4 w-full flex justify-center">
+        <a
+          href="/menu"
+          class="stitch-cta inline-flex items-center gap-3 bg-[#820057] text-white px-10 py-4 text-base font-medium tracking-[0.08em] rounded"
+        >
+          Descubrir Colección
+          <i class="fa-solid fa-arrow-right text-sm"></i>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- ── DESKTOP: layout asimétrico 12 columnas (original) ── -->
+    <div class="hidden lg:block max-w-7xl mx-auto w-full px-20 py-0">
+      <div class="grid lg:grid-cols-12 gap-6 items-center">
+
+        <!-- Texto: 4 columnas -->
+        <div class="lg:col-span-4 lg:col-start-1 stitch-text">
+          <div class="flex items-center gap-3 mb-8">
+            <div class="h-px w-10 bg-[#C9A84C]"></div>
+            <div class="w-1.5 h-1.5 rotate-45 bg-[#C9A84C]"></div>
+            <div class="h-px w-10 bg-[#C9A84C]"></div>
+          </div>
+          <h1 class="font-serif font-medium text-[#820057] text-6xl xl:text-7xl leading-[1.1] tracking-tight mb-10">
+            El arte en<br />cada bocado
+          </h1>
+          <a
+            href="/menu"
+            class="stitch-cta inline-flex items-center gap-3 bg-[#820057] text-white px-8 py-3.5 text-sm font-medium tracking-[0.08em] rounded"
+          >
+            Descubrir Colección
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </a>
+        </div>
+
+        <!-- Collage: 7 columnas -->
+        <div class="lg:col-span-7 lg:col-start-6 relative stitch-collage">
+          <div class="relative lg:mr-0 aspect-[5/5.5]" style="background: #f5ece7;">
+            <div class="stitch-card-1 absolute top-[8%] right-[8%] w-[52%] aspect-square bg-white p-3" style="box-shadow: 0 1px 2px rgba(30,27,24,0.05);">
+              <img src="https://images.unsplash.com/photo-1569864358642-9d1684040f43?q=80&w=800&auto=format&fit=crop" alt="Macarons artesanales en tonos pastel" class="w-full h-full object-cover" loading="eager" />
+            </div>
+            <div class="stitch-card-2 absolute top-[38%] left-[6%] w-[38%] aspect-square bg-white p-3" style="box-shadow: 0 1px 2px rgba(30,27,24,0.05);">
+              <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?q=80&w=600&auto=format&fit=crop" alt="Petit four de chocolate con detalle dorado" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div class="stitch-card-3 absolute bottom-[-6%] right-[-5%] w-[58%] aspect-[1/1]" style="background: #1e1b18; box-shadow: 0 2px 8px rgba(30,27,24,0.12);">
+              <img src="https://images.unsplash.com/photo-1565958011703-44f9829ba187?q=80&w=800&auto=format&fit=crop" alt="Tarta artesanal con frutos rojos sobre fondo oscuro" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <style>
+    /* ── Hero Stitch: entrance ── */
+    #hero-stitch.hero-active { display: flex; }
+
+    .stitch-text,
+    .stitch-collage {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    #hero-stitch.hero-active .stitch-text {
+      animation: stitchUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+    }
+    #hero-stitch.hero-active .stitch-collage {
+      animation: stitchUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+    }
+    @keyframes stitchUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Soft inner glow on plum CTA (DESIGN.md §Elevation) */
+    .stitch-cta {
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+      transition: background 0.3s ease;
+    }
+    .stitch-cta:hover { background: #5a003b; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .stitch-text, .stitch-collage {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+
+  <!-- HERO SECTION — VARIANTE 3D (texto centrado) -->
+  <section
+    id="hero-3d"
+    class="relative min-h-[100dvh] hidden flex-col items-center justify-center overflow-hidden pt-16 lg:pt-20"
+    style="background: #fdf3ee;"
+  >
+    <div class="relative z-10 text-center px-6 p3d-content">
+      <div class="flex items-center justify-center gap-3 mb-8">
+        <div class="h-px w-10 bg-[#C9A84C]"></div>
+        <div class="w-1.5 h-1.5 rotate-45 bg-[#C9A84C]"></div>
+        <div class="h-px w-10 bg-[#C9A84C]"></div>
+      </div>
+
+      <h1 class="font-serif font-medium text-[#820057] leading-[1.05] tracking-tight mb-8" style="font-size: clamp(3rem, 8vw, 7rem)">
+        El arte en<br /><em class="italic text-gold font-light">cada bocado</em>
+      </h1>
+
+      <p class="text-[#55414a]/70 font-light text-lg lg:text-xl max-w-md mx-auto mb-10 leading-relaxed">
+        Pastelería fina artesanal en Valladolid
+      </p>
+
+      <a
+        href="/menu"
+        class="stitch-cta inline-flex items-center gap-3 bg-[#820057] text-white px-9 py-4 text-base font-medium tracking-[0.08em] rounded"
+      >
+        Descubrir Colección
+        <i class="fa-solid fa-arrow-right text-xs"></i>
+      </a>
+    </div>
+  </section>
+
+  <style>
+    #hero-3d.hero-active { display: flex; }
+
+    /* ── Texto: entrada ── */
+    .p3d-content { opacity: 0; transform: translateY(24px); }
+    #hero-3d.hero-active .p3d-content {
+      animation: stitchUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .p3d-content {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+  </style>
+
+  <script is:inline>
+    /* ---- Hero variant switcher ---- */
+    (function () {
+      var heroes = {
+        classic: document.getElementById('hero'),
+        stitch: document.getElementById('hero-stitch'),
+        '3d': document.getElementById('hero-3d'),
+      };
+      if (!heroes.classic || !heroes.stitch || !heroes['3d']) return;
+
+      function apply(variant) {
+        if (!heroes[variant]) variant = 'classic';
+        heroes.classic.style.display = variant === 'classic' ? '' : 'none';
+        ['stitch', '3d'].forEach(function (key) {
+          var active = variant === key;
+          heroes[key].classList.toggle('hidden', !active);
+          heroes[key].classList.toggle('hero-active', active);
+        });
+      }
+
+      var saved = 'classic';
+      try { saved = localStorage.getItem('matizes_hero_variant') || 'classic'; } catch (e) {}
+      apply(saved);
+
+      document.addEventListener('hero:variant', function (e) {
+        apply(e.detail);
+      });
+
+    })();
+  </script>
+
   <!-- BRAND STATEMENT -->
   <section id="brand-statement" class="py-20 lg:py-28 bg-cream">
     <div class="max-w-7xl mx-auto px-6 lg:px-10">
@@ -424,16 +646,25 @@ import { products } from "../data/products";
     <div class="max-w-7xl mx-auto px-6 lg:px-10">
       <div class="reveal text-center mb-4">
         <p class="section-tag mb-4">Opiniones verificadas · Google</p>
-        <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple flex items-center justify-center gap-3">
+        <h2
+          class="font-serif text-4xl lg:text-5xl font-light text-purple flex items-center justify-center gap-3"
+        >
           Lo que dicen en <em class="italic text-gold ml-2">Valladolid</em>
         </h2>
       </div>
       <!-- Rating summary (se actualiza con JS si la API responde) -->
       <div class="reveal flex items-center justify-center gap-3 mb-14">
-        <span id="reviews-rating" class="font-serif text-5xl font-light text-purple">4,9</span>
+        <span
+          id="reviews-rating"
+          class="font-serif text-5xl font-light text-purple">4,9</span
+        >
         <div>
           <div class="flex gap-1 mb-1" id="reviews-stars">
-            {[1,2,3,4,5].map(() => <i class="fa-solid fa-star text-gold text-base" />)}
+            {
+              [1, 2, 3, 4, 5].map(() => (
+                <i class="fa-solid fa-star text-gold text-base" />
+              ))
+            }
           </div>
           <p class="text-xs text-gray-400 tracking-widest uppercase">
             <span id="reviews-count">Basado en +120 reseñas</span>
@@ -441,33 +672,68 @@ import { products } from "../data/products";
         </div>
       </div>
       <!-- Grid: datos estáticos de fallback, sustituidos por JS si la API responde -->
-      <div id="reviews-grid" class="stagger-grid grid md:grid-cols-3 gap-6 lg:gap-8">
-        {[
-          { initials: 'LM', name: 'Laura M.', context: 'Tarta de boda · Septiembre 2024', rating: 5, text: 'Encargamos la tarta nupcial con 6 semanas de antelación. El resultado fue impresionante: tres pisos con flores naturales y un fraisier como relleno que hizo llorar a mi madre de emoción. Repetiría sin dudarlo.' },
-          { initials: 'JR', name: 'Javier R.', context: 'Cliente habitual · Valladolid', rating: 5, text: 'Llevo dos años viniendo cada sábado por los croissants. Son los mejores que he comido fuera de París, sin exagerar. El kouign-amann de los domingos es adictivo. El café también es de especialidad de verdad.' },
-          { initials: 'CR', name: 'Carmen R.', context: 'Evento corporativo · Mayo 2024', rating: 5, text: 'Contratamos el catering dulce para una presentación de empresa con 90 personas. La bandeja de petit fours fue el tema de conversación de la tarde. Presentación impecable y puntualidad total.' },
-        ].map((t) => (
-          <div class="testimonial-card bg-cream p-8 flex flex-col">
-            <div class="flex gap-1 mb-5">
-              {[1,2,3,4,5].map((n) => <i class={`fa-solid fa-star text-sm ${n <= t.rating ? 'text-gold' : 'text-gray-200'}`} />)}
-            </div>
-            <p class="font-serif text-lg text-gray-700 italic font-light leading-relaxed mb-6 flex-grow">"{t.text}"</p>
-            <div class="flex items-center gap-3 pt-4 border-t border-gold/15">
-              <div class="w-10 h-10 rounded-full bg-purple flex items-center justify-center flex-shrink-0">
-                <span class="text-gold text-xs font-bold tracking-wide">{t.initials}</span>
+      <div
+        id="reviews-grid"
+        class="stagger-grid grid md:grid-cols-3 gap-6 lg:gap-8"
+      >
+        {
+          [
+            {
+              initials: "LM",
+              name: "Laura M.",
+              context: "Tarta de boda · Septiembre 2024",
+              rating: 5,
+              text: "Encargamos la tarta nupcial con 6 semanas de antelación. El resultado fue impresionante: tres pisos con flores naturales y un fraisier como relleno que hizo llorar a mi madre de emoción. Repetiría sin dudarlo.",
+            },
+            {
+              initials: "JR",
+              name: "Javier R.",
+              context: "Cliente habitual · Valladolid",
+              rating: 5,
+              text: "Llevo dos años viniendo cada sábado por los croissants. Son los mejores que he comido fuera de París, sin exagerar. El kouign-amann de los domingos es adictivo. El café también es de especialidad de verdad.",
+            },
+            {
+              initials: "CR",
+              name: "Carmen R.",
+              context: "Evento corporativo · Mayo 2024",
+              rating: 5,
+              text: "Contratamos el catering dulce para una presentación de empresa con 90 personas. La bandeja de petit fours fue el tema de conversación de la tarde. Presentación impecable y puntualidad total.",
+            },
+          ].map((t) => (
+            <div class="testimonial-card bg-cream p-8 flex flex-col">
+              <div class="flex gap-1 mb-5">
+                {[1, 2, 3, 4, 5].map((n) => (
+                  <i
+                    class={`fa-solid fa-star text-sm ${n <= t.rating ? "text-gold" : "text-gray-200"}`}
+                  />
+                ))}
               </div>
-              <div>
-                <p class="text-purple font-medium text-sm">{t.name}</p>
-                <p class="text-gray-400 text-xs tracking-wide">{t.context}</p>
+              <p class="font-serif text-lg text-gray-700 italic font-light leading-relaxed mb-6 flex-grow">
+                "{t.text}"
+              </p>
+              <div class="flex items-center gap-3 pt-4 border-t border-gold/15">
+                <div class="w-10 h-10 rounded-full bg-purple flex items-center justify-center flex-shrink-0">
+                  <span class="text-gold text-xs font-bold tracking-wide">
+                    {t.initials}
+                  </span>
+                </div>
+                <div>
+                  <p class="text-purple font-medium text-sm">{t.name}</p>
+                  <p class="text-gray-400 text-xs tracking-wide">{t.context}</p>
+                </div>
+                <i class="fa-brands fa-google text-gray-300 ml-auto text-lg" />
               </div>
-              <i class="fa-brands fa-google text-gray-300 ml-auto text-lg" />
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
       <div class="reveal text-center mt-10">
-        <a href="https://search.google.com/local/writereview?placeid=ChIJV3xQEB4TRw0RIU86WohTnT4" target="_blank" rel="noopener"
-          class="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-gold transition-colors tracking-widest uppercase border-b border-gray-200 hover:border-gold pb-0.5">
+        <a
+          href="https://search.google.com/local/writereview?placeid=ChIJV3xQEB4TRw0RIU86WohTnT4"
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 text-xs text-gray-400 hover:text-gold transition-colors tracking-widest uppercase border-b border-gray-200 hover:border-gold pb-0.5"
+        >
           <i class="fa-brands fa-google text-sm"></i> Déjanos tu reseña en Google
         </a>
       </div>
@@ -477,49 +743,86 @@ import { products } from "../data/products";
   <script is:inline>
     (function () {
       function initials(name) {
-        return name.split(' ').map(function (w) { return w[0]; }).join('').slice(0, 2).toUpperCase();
+        return name
+          .split(" ")
+          .map(function (w) {
+            return w[0];
+          })
+          .join("")
+          .slice(0, 2)
+          .toUpperCase();
       }
       function stars(rating) {
-        var html = '';
+        var html = "";
         for (var i = 1; i <= 5; i++) {
-          html += '<i class="fa-solid fa-star text-sm ' + (i <= rating ? 'text-gold' : 'text-gray-200') + '"></i>';
+          html +=
+            '<i class="fa-solid fa-star text-sm ' +
+            (i <= rating ? "text-gold" : "text-gray-200") +
+            '"></i>';
         }
         return html;
       }
       function renderCard(r) {
         var avatar = r.profilePhoto
-          ? '<img src="' + r.profilePhoto + '" class="w-10 h-10 rounded-full object-cover flex-shrink-0" alt="' + r.author + '" />'
-          : '<div class="w-10 h-10 rounded-full bg-purple flex items-center justify-center flex-shrink-0"><span class="text-gold text-xs font-bold tracking-wide">' + initials(r.author) + '</span></div>';
-        return '<div class="testimonial-card bg-cream p-8 flex flex-col">'
-          + '<div class="flex gap-1 mb-5">' + stars(r.rating) + '</div>'
-          + '<p class="font-serif text-lg text-gray-700 italic font-light leading-relaxed mb-6 flex-grow">"' + r.text + '"</p>'
-          + '<div class="flex items-center gap-3 pt-4 border-t border-gold/15">'
-          + avatar
-          + '<div><p class="text-purple font-medium text-sm">' + r.author + '</p>'
-          + '<p class="text-gray-400 text-xs tracking-wide">' + r.relativeTime + '</p></div>'
-          + '<i class="fa-brands fa-google text-gray-300 ml-auto text-lg"></i>'
-          + '</div></div>';
+          ? '<img src="' +
+            r.profilePhoto +
+            '" class="w-10 h-10 rounded-full object-cover flex-shrink-0" alt="' +
+            r.author +
+            '" />'
+          : '<div class="w-10 h-10 rounded-full bg-purple flex items-center justify-center flex-shrink-0"><span class="text-gold text-xs font-bold tracking-wide">' +
+            initials(r.author) +
+            "</span></div>";
+        return (
+          '<div class="testimonial-card bg-cream p-8 flex flex-col">' +
+          '<div class="flex gap-1 mb-5">' +
+          stars(r.rating) +
+          "</div>" +
+          '<p class="font-serif text-lg text-gray-700 italic font-light leading-relaxed mb-6 flex-grow">"' +
+          r.text +
+          '"</p>' +
+          '<div class="flex items-center gap-3 pt-4 border-t border-gold/15">' +
+          avatar +
+          '<div><p class="text-purple font-medium text-sm">' +
+          r.author +
+          "</p>" +
+          '<p class="text-gray-400 text-xs tracking-wide">' +
+          r.relativeTime +
+          "</p></div>" +
+          '<i class="fa-brands fa-google text-gray-300 ml-auto text-lg"></i>' +
+          "</div></div>"
+        );
       }
 
-      fetch('https://matizes-google-reviews.tusubdominio.workers.dev')
-        .then(function (res) { return res.ok ? res.json() : null; })
+      fetch("https://matizes-google-reviews.tusubdominio.workers.dev")
+        .then(function (res) {
+          return res.ok ? res.json() : null;
+        })
         .then(function (data) {
           if (!data || !data.reviews || data.reviews.length === 0) return;
           /* Update rating bar */
           if (data.rating) {
-            document.getElementById('reviews-rating').textContent = data.rating.toFixed(1).replace('.', ',');
+            document.getElementById("reviews-rating").textContent = data.rating
+              .toFixed(1)
+              .replace(".", ",");
           }
           if (data.totalReviews) {
-            document.getElementById('reviews-count').textContent = 'Basado en ' + data.totalReviews + ' reseñas';
+            document.getElementById("reviews-count").textContent =
+              "Basado en " + data.totalReviews + " reseñas";
           }
           /* Replace grid with real reviews (max 5) */
-          var grid = document.getElementById('reviews-grid');
-          var top = data.reviews.filter(function (r) { return r.text && r.text.length > 40; }).slice(0, 5);
+          var grid = document.getElementById("reviews-grid");
+          var top = data.reviews
+            .filter(function (r) {
+              return r.text && r.text.length > 40;
+            })
+            .slice(0, 5);
           if (top.length >= 3) {
-            grid.innerHTML = top.map(renderCard).join('');
+            grid.innerHTML = top.map(renderCard).join("");
           }
         })
-        .catch(function () { /* silently keep fallback */ });
+        .catch(function () {
+          /* silently keep fallback */
+        });
     })();
   </script>
 
@@ -546,7 +849,8 @@ import { products } from "../data/products";
       <p class="section-tag mb-5 text-gold/70">Mantente al día</p>
       <h2 class="font-serif text-4xl lg:text-5xl font-light text-white mb-4">
         Suscríbete y recibe<br /><em class="italic text-gold"
-          >novedades exclusivas</em>
+          >novedades exclusivas</em
+        >
       </h2>
       <p class="text-white/60 font-light mb-10 text-base lg:text-lg">
         Entérate primero de nuevas creaciones, temporadas especiales y

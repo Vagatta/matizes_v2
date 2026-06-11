@@ -26,8 +26,10 @@ const { title } = Astro.props;
         ::-webkit-scrollbar { display: none; }
         html { scroll-behavior: smooth; }
         section[id] { scroll-margin-top: 5rem; }
-        body { font-family: 'Jost', sans-serif; }
-        h1, h2, h3, .serif { font-family: 'Cormorant Garamond', serif; }
+        *, *::before, *::after { font-family: 'Cormorant Garamond', serif !important; }
+        /* Excepción: iconos Font Awesome — usan su propia fuente de iconos */
+        .fa, .fas, .far, .fal, .fab, .fa-solid, .fa-regular, .fa-brands,
+        [class*=" fa-"], [class^="fa-"] { font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important; }
         .nav-link { position: relative; text-decoration: none !important; }
         .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: #C9A84C; transition: width 0.3s ease; }
         .nav-link:hover::after { width: 100%; }
@@ -300,6 +302,14 @@ const { title } = Astro.props;
         <div style="display:flex;flex-direction:column;gap:6px" id="color-options">
           <!-- opciones inyectadas por JS -->
         </div>
+        <div id="hero-switch-section" style="display:none;border-top:1px solid rgba(255,255,255,0.1);margin-top:6px;padding-top:10px">
+          <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin:0 0 6px">Diseño del hero</p>
+          <div style="display:flex;gap:6px">
+            <button id="hero-variant-classic" data-variant="classic" class="hero-variant-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Clásico</button>
+            <button id="hero-variant-stitch" data-variant="stitch" class="hero-variant-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Editorial</button>
+            <button id="hero-variant-3d" data-variant="3d" class="hero-variant-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">3D</button>
+          </div>
+        </div>
       </div>
     </div>
     <script is:inline>
@@ -373,6 +383,34 @@ const { title } = Astro.props;
           });
           container.appendChild(row);
         });
+
+        /* ---- Hero variant switch (solo si la página tiene ambos heroes) ---- */
+        if (document.getElementById('hero') && document.getElementById('hero-stitch') && document.getElementById('hero-3d')) {
+          var section = document.getElementById('hero-switch-section');
+          section.style.display = 'block';
+          var btns = section.querySelectorAll('.hero-variant-btn');
+
+          function markActive(variant) {
+            btns.forEach(function (b) {
+              var active = b.dataset.variant === variant;
+              b.style.borderColor = active ? '#C9A84C' : 'rgba(255,255,255,0.08)';
+              b.style.color = active ? '#C9A84C' : 'rgba(255,255,255,0.6)';
+            });
+          }
+
+          var savedVariant = 'classic';
+          try { savedVariant = localStorage.getItem('matizes_hero_variant') || 'classic'; } catch (e) {}
+          markActive(savedVariant);
+
+          btns.forEach(function (b) {
+            b.addEventListener('click', function () {
+              var v = b.dataset.variant;
+              try { localStorage.setItem('matizes_hero_variant', v); } catch (e) {}
+              markActive(v);
+              document.dispatchEvent(new CustomEvent('hero:variant', { detail: v }));
+            });
+          });
+        }
       })();
     </script>
     <!-- ===== /TEMP ===== -->
