@@ -3,6 +3,12 @@
    Pure CSS + minimal IntersectionObserver (no libraries)
    ========================================================= */
 
+/* Prevent reveal-left / reveal-right translateX from causing
+   horizontal scroll on mobile without blocking sticky elements */
+section, .overflow-clip-x {
+  overflow-x: clip;
+}
+
 /* -----------------------------------------------------------
    1. SCROLL-REVEAL  (default: fade + slide up)
    Elements start hidden; JS adds .is-visible when in viewport
