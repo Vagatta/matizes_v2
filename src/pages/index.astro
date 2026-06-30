@@ -350,7 +350,6 @@ import { products } from "../data/products";
         class="reveal flex flex-col md:flex-row md:items-end justify-between mb-12 lg:mb-16 gap-6"
       >
         <div>
-          <p class="section-tag mb-4">Destacados de temporada</p>
           <h2 class="font-serif text-4xl lg:text-5xl font-light text-purple">
             Nuestras <em class="italic text-gold">Estrellas</em>
           </h2>
@@ -367,9 +366,10 @@ import { products } from "../data/products";
         class="stagger-grid grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
       >
         {
-          products
-            .slice(0, 6)
-            .map((product) => <ProductCard product={product} />)
+          ['cheesecake-roll', 'calendario-azteca', 'brownie', 'tarta-queso-cabra', 'flor-de-la-pasion', 'cubisant']
+            .map(id => products.find(p => p.id === id))
+            .filter(Boolean)
+            .map((product) => <ProductCard product={product!} />)
         }
       </div>
     </div>
@@ -379,29 +379,27 @@ import { products } from "../data/products";
   <section id="categories" class="py-20 lg:py-28 bg-purple">
     <div class="max-w-7xl mx-auto px-6 lg:px-10">
       <div class="reveal text-center mb-12 lg:mb-16">
-        <p class="section-tag mb-4 text-gold/70">Explora nuestra oferta</p>
         <h2 class="font-serif text-4xl lg:text-5xl font-light text-white">
           Categorías del <em class="italic text-gold">Menú</em>
         </h2>
       </div>
-      <div class="stagger-grid grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+      <div class="stagger-grid grid grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
         <a
-          href="/menu#pasteles"
+          href="/menu#viennoiserie"
           id="cat-1"
           class="relative group cursor-pointer overflow-hidden h-52 lg:h-64 block"
         >
           <img
             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
             src="https://storage.googleapis.com/uxpilot-auth.appspot.com/be0ca15106-b7cbc54a3b2af8cf47a6.png"
-            alt="elegant celebration cakes, tiered wedding cake, fine patisserie, dark background"
+            alt="artisan croissants and rolls, fine bakery"
           />
           <div
             class="absolute inset-0 bg-gradient-to-t from-purple/90 via-purple/30 to-transparent"
           >
           </div>
           <div class="absolute bottom-0 left-0 right-0 p-5">
-            <p class="text-xs text-gold tracking-widest uppercase mb-1">01</p>
-            <h3 class="font-serif text-xl text-white font-light">Pasteles</h3>
+            <h3 class="font-serif text-xl text-white font-light">Viennoiserie</h3>
           </div>
           <div
             class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -411,22 +409,21 @@ import { products } from "../data/products";
           </div>
         </a>
         <a
-          href="/menu#pasteles"
+          href="/menu#cakes-autor"
           id="cat-2"
           class="relative group cursor-pointer overflow-hidden h-52 lg:h-64 block"
         >
           <img
             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/539421df68-00b49ff082bf978c1d2a.png"
-            alt="beautiful fruit tarts and cream tarts, fine pastry, elegant presentation, dark background"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/96fb75ed41-f75b3674eca840ad9ed0.png"
+            alt="artisan cakes and brownies, fine patisserie"
           />
           <div
             class="absolute inset-0 bg-gradient-to-t from-purple/90 via-purple/30 to-transparent"
           >
           </div>
           <div class="absolute bottom-0 left-0 right-0 p-5">
-            <p class="text-xs text-gold tracking-widest uppercase mb-1">02</p>
-            <h3 class="font-serif text-xl text-white font-light">Tartas</h3>
+            <h3 class="font-serif text-xl text-white font-light">Cakes de Autor</h3>
           </div>
           <div
             class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
@@ -436,23 +433,22 @@ import { products } from "../data/products";
           </div>
         </a>
         <a
-          href="/menu#petit-fours"
+          href="/menu#cookies"
           id="cat-3"
           class="relative group cursor-pointer overflow-hidden h-52 lg:h-64 block"
         >
           <img
             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/bc3982a0fd-3cf4f7e323259d859ee2.png"
-            alt="French macarons and petit fours assortment, elegant presentation, dark background, fine patisserie"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/52dc8885f9-7b96135997d58656e6a1.png"
+            alt="gourmet cookies assortment, fine bakery"
           />
           <div
             class="absolute inset-0 bg-gradient-to-t from-purple/90 via-purple/30 to-transparent"
           >
           </div>
           <div class="absolute bottom-0 left-0 right-0 p-5">
-            <p class="text-xs text-gold tracking-widest uppercase mb-1">03</p>
             <h3 class="font-serif text-xl text-white font-light">
-              Petit Fours
+              Cookies Gourmet
             </h3>
           </div>
           <div
@@ -463,24 +459,71 @@ import { products } from "../data/products";
           </div>
         </a>
         <a
-          href="/menu#viennoiserie"
+          href="/menu#creaciones"
           id="cat-4"
           class="relative group cursor-pointer overflow-hidden h-52 lg:h-64 block"
         >
           <img
             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/22201143d1-c1c1dfcfef15dd81d55f.png"
-            alt="artisan croissants and viennoiserie pastries, fine bakery, dark background, editorial"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/75bd7fae56-e069fe5c9656d0450438.png"
+            alt="individual pastry creations, fine patisserie"
           />
           <div
             class="absolute inset-0 bg-gradient-to-t from-purple/90 via-purple/30 to-transparent"
           >
           </div>
           <div class="absolute bottom-0 left-0 right-0 p-5">
-            <p class="text-xs text-gold tracking-widest uppercase mb-1">04</p>
             <h3 class="font-serif text-xl text-white font-light">
-              Viennoserie
+              Creaciones Individuales
             </h3>
+          </div>
+          <div
+            class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            <i class="fa-solid fa-arrow-up-right-from-square text-gold text-sm"
+            ></i>
+          </div>
+        </a>
+        <a
+          href="/menu#cheesecakes"
+          id="cat-5"
+          class="relative group cursor-pointer overflow-hidden h-52 lg:h-64 block"
+        >
+          <img
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/7438793c2a-f6fd1c1966279610809f.png"
+            alt="artisan cheesecake, fine patisserie"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-purple/90 via-purple/30 to-transparent"
+          >
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 p-5">
+            <h3 class="font-serif text-xl text-white font-light">Cheesecakes</h3>
+          </div>
+          <div
+            class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"
+          >
+            <i class="fa-solid fa-arrow-up-right-from-square text-gold text-sm"
+            ></i>
+          </div>
+        </a>
+        <a
+          href="/menu#tartas"
+          id="cat-6"
+          class="relative group cursor-pointer overflow-hidden h-52 lg:h-64 block"
+        >
+          <img
+            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            src="https://storage.googleapis.com/uxpilot-auth.appspot.com/d5c590a30e-598ca973c003b8932b79.png"
+            alt="elegant celebration cakes and tartas"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-purple/90 via-purple/30 to-transparent"
+          >
+          </div>
+          <div class="absolute bottom-0 left-0 right-0 p-5">
+            <h3 class="font-serif text-xl text-white font-light">Tartas</h3>
           </div>
           <div
             class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity"

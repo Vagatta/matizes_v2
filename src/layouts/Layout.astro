@@ -20,13 +20,120 @@ const { title } = Astro.props;
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" is:inline></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/animations.css" />
     <style is:global>
         ::-webkit-scrollbar { display: none; }
         html { scroll-behavior: smooth; }
         section[id] { scroll-margin-top: 5rem; }
-        *, *::before, *::after { font-family: 'Cormorant Garamond', serif !important; }
+        
+        /* Tipografías Dinámicas del Estudio */
+        html.font-variant-classic *, 
+        html.font-variant-classic *::before, 
+        html.font-variant-classic *::after { 
+            font-family: 'Cormorant Garamond', serif; 
+        }
+        
+        /* Modificadores de tamaño dinámicos controlados por el Estudio */
+        html.font-variant-classic.font-scale-standard p,
+        html.font-variant-classic.font-scale-standard span:not(.fa),
+        html.font-variant-classic.font-scale-standard a:not(.btn-gold):not(.btn-purple),
+        html.font-variant-classic.font-scale-standard li,
+        html.font-variant-classic.font-scale-standard td,
+        html.font-variant-classic.font-scale-standard th {
+            font-size: 1.02em;
+            letter-spacing: 0.01em;
+        }
+
+        html.font-variant-classic.font-scale-medium p,
+        html.font-variant-classic.font-scale-medium span:not(.fa),
+        html.font-variant-classic.font-scale-medium a:not(.btn-gold):not(.btn-purple),
+        html.font-variant-classic.font-scale-medium li,
+        html.font-variant-classic.font-scale-medium td,
+        html.font-variant-classic.font-scale-medium th {
+            font-size: 1.09em; 
+            letter-spacing: 0.015em;
+        }
+
+        html.font-variant-classic.font-scale-large p,
+        html.font-variant-classic.font-scale-large span:not(.fa),
+        html.font-variant-classic.font-scale-large a:not(.btn-gold):not(.btn-purple),
+        html.font-variant-classic.font-scale-large li,
+        html.font-variant-classic.font-scale-large td,
+        html.font-variant-classic.font-scale-large th {
+            font-size: 1.16em;
+            letter-spacing: 0.02em;
+        }
+
+        html.font-variant-classic .font-sans,
+        html.font-variant-classic .nav-link,
+        html.font-variant-classic button,
+        html.font-variant-classic input,
+        html.font-variant-classic select,
+        html.font-variant-classic textarea,
+        html.font-variant-classic .btn-gold,
+        html.font-variant-classic .btn-purple,
+        html.font-variant-classic .section-tag { 
+            font-family: 'Jost', sans-serif; 
+        }
+
+        html.font-variant-editorial *, 
+        html.font-variant-editorial *::before, 
+        html.font-variant-editorial *::after { 
+            font-family: 'Playfair Display', serif; 
+        }
+
+        /* Escala en Montserrat */
+        html.font-variant-editorial.font-scale-standard p,
+        html.font-variant-editorial.font-scale-standard span:not(.fa),
+        html.font-variant-editorial.font-scale-standard a:not(.btn-gold):not(.btn-purple),
+        html.font-variant-editorial.font-scale-standard li,
+        html.font-variant-editorial.font-scale-standard td,
+        html.font-variant-editorial.font-scale-standard th {
+            font-size: 0.95em;
+        }
+
+        html.font-variant-editorial.font-scale-medium p,
+        html.font-variant-editorial.font-scale-medium span:not(.fa),
+        html.font-variant-editorial.font-scale-medium a:not(.btn-gold):not(.btn-purple),
+        html.font-variant-editorial.font-scale-medium li,
+        html.font-variant-editorial.font-scale-medium td,
+        html.font-variant-editorial.font-scale-medium th {
+            font-size: 1.02em;
+        }
+
+        html.font-variant-editorial.font-scale-large p,
+        html.font-variant-editorial.font-scale-large span:not(.fa),
+        html.font-variant-editorial.font-scale-large a:not(.btn-gold):not(.btn-purple),
+        html.font-variant-editorial.font-scale-large li,
+        html.font-variant-editorial.font-scale-large td,
+        html.font-variant-editorial.font-scale-large th {
+            font-size: 1.09em;
+        }
+
+        html.font-variant-editorial .font-sans,
+        html.font-variant-editorial .nav-link,
+        html.font-variant-editorial button,
+        html.font-variant-editorial input,
+        html.font-variant-editorial select,
+        html.font-variant-editorial textarea,
+        html.font-variant-editorial .btn-gold,
+        html.font-variant-editorial .btn-purple,
+        html.font-variant-editorial .section-tag,
+        html.font-variant-editorial p,
+        html.font-variant-editorial span,
+        html.font-variant-editorial div:not(.font-serif) { 
+            font-family: 'Montserrat', sans-serif; 
+        }
+        html.font-variant-editorial .font-serif,
+        html.font-variant-editorial h1,
+        html.font-variant-editorial h2,
+        html.font-variant-editorial h3,
+        html.font-variant-editorial h4,
+        html.font-variant-editorial em {
+            font-family: 'Playfair Display', serif !important;
+        }
+
         /* Excepción: iconos Font Awesome — usan su propia fuente de iconos */
         .fa, .fas, .far, .fal, .fab, .fa-solid, .fa-regular, .fa-brands,
         [class*=" fa-"], [class^="fa-"] { font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important; }
@@ -46,6 +153,15 @@ const { title } = Astro.props;
     </style>
 </head>
 <body class="bg-cream text-gray-800 overflow-x-hidden w-full">
+    <!-- Script inline de inicialización rápida de fuente y tamaño para evitar FOUC -->
+    <script is:inline>
+      (function() {
+        var savedFont = localStorage.getItem('matizes_font_variant') || 'classic';
+        var savedScale = localStorage.getItem('matizes_font_scale') || 'medium';
+        document.documentElement.classList.add('font-variant-' + savedFont);
+        document.documentElement.classList.add('font-scale-' + savedScale);
+      })();
+    </script>
     <!-- ===================== SPLASH SCREEN ===================== -->
     <style>
       /* --- Base --- */
@@ -302,7 +418,25 @@ const { title } = Astro.props;
         <div style="display:flex;flex-direction:column;gap:6px" id="color-options">
           <!-- opciones inyectadas por JS -->
         </div>
-        <div id="hero-switch-section" style="display:none;border-top:1px solid rgba(255,255,255,0.1);margin-top:6px;padding-top:10px">
+
+        <div id="font-switch-section" style="border-top:1px solid rgba(255,255,255,0.1);margin-top:6px;padding-top:10px">
+          <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin:0 0 6px">Tipografía</p>
+          <div style="display:flex;gap:6px">
+            <button id="font-variant-classic" data-font="classic" class="font-variant-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Cormorant</button>
+            <button id="font-variant-editorial" data-font="editorial" class="font-variant-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Playfair</button>
+          </div>
+        </div>
+
+        <div id="scale-switch-section" style="border-top:1px solid rgba(255,255,255,0.1);margin-top:6px;padding-top:10px">
+          <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin:0 0 6px">Escala de Texto</p>
+          <div style="display:flex;gap:6px">
+            <button id="scale-variant-standard" data-scale="standard" class="scale-variant-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Normal</button>
+            <button id="scale-variant-medium" data-scale="medium" class="scale-variant-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">+8%</button>
+            <button id="scale-variant-large" data-scale="large" class="scale-variant-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">+15%</button>
+          </div>
+        </div>
+        
+        <div id="hero-switch-section" style="border-top:1px solid rgba(255,255,255,0.1);margin-top:6px;padding-top:10px">
           <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin:0 0 6px">Diseño del hero</p>
           <div style="display:flex;gap:6px">
             <button id="hero-variant-classic" data-variant="classic" class="hero-variant-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:'Jost',sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Clásico</button>
@@ -369,7 +503,7 @@ const { title } = Astro.props;
           row.style.cssText = 'display:flex;align-items:center;gap:8px;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;width:100%;text-align:left;transition:border-color 0.2s';
           row.innerHTML =
             '<span style="width:14px;height:14px;border-radius:50%;background:' + opt.color + ';flex-shrink:0;border:1px solid rgba(255,255,255,0.15)"></span>' +
-            '<span style="font-family:Jost,sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6)">' + opt.label + '</span>';
+            '<span style="font-family:sans-serif;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.6)">' + opt.label + '</span>';
           row.dataset.colorId = opt.id;
           row.addEventListener('mouseenter', function () { row.style.borderColor = 'rgba(201,168,76,0.5)'; });
           row.addEventListener('mouseleave', function () { row.style.borderColor = 'rgba(255,255,255,0.08)'; });
@@ -384,32 +518,85 @@ const { title } = Astro.props;
           container.appendChild(row);
         });
 
-        /* ---- Hero variant switch (solo si la página tiene ambos heroes) ---- */
-        if (document.getElementById('hero') && document.getElementById('hero-stitch') && document.getElementById('hero-3d')) {
-          var section = document.getElementById('hero-switch-section');
-          section.style.display = 'block';
-          var btns = section.querySelectorAll('.hero-variant-btn');
-
-          function markActive(variant) {
-            btns.forEach(function (b) {
-              var active = b.dataset.variant === variant;
-              b.style.borderColor = active ? '#C9A84C' : 'rgba(255,255,255,0.08)';
-              b.style.color = active ? '#C9A84C' : 'rgba(255,255,255,0.6)';
-            });
-          }
-
-          var savedVariant = 'classic';
-          try { savedVariant = localStorage.getItem('matizes_hero_variant') || 'classic'; } catch (e) {}
-          markActive(savedVariant);
-
-          btns.forEach(function (b) {
-            b.addEventListener('click', function () {
-              var v = b.dataset.variant;
-              try { localStorage.setItem('matizes_hero_variant', v); } catch (e) {}
-              markActive(v);
-              document.dispatchEvent(new CustomEvent('hero:variant', { detail: v }));
-            });
+        /* ---- Tipografía switch ---- */
+        var fontBtns = document.querySelectorAll('.font-variant-btn');
+        function markActiveFont(font) {
+          fontBtns.forEach(function (b) {
+            var active = b.dataset.font === font;
+            b.style.borderColor = active ? '#C9A84C' : 'rgba(255,255,255,0.08)';
+            b.style.color = active ? '#C9A84C' : 'rgba(255,255,255,0.6)';
           });
+          document.documentElement.classList.remove('font-variant-classic', 'font-variant-editorial');
+          document.documentElement.classList.add('font-variant-' + font);
+        }
+
+        var savedFont = 'classic';
+        try { savedFont = localStorage.getItem('matizes_font_variant') || 'classic'; } catch (e) {}
+        markActiveFont(savedFont);
+
+        fontBtns.forEach(function (b) {
+          b.addEventListener('click', function () {
+            var f = b.dataset.font;
+            try { localStorage.setItem('matizes_font_variant', f); } catch (e) {}
+            markActiveFont(f);
+          });
+        });
+
+        /* ---- Escala de Texto switch ---- */
+        var scaleBtns = document.querySelectorAll('.scale-variant-btn');
+        function markActiveScale(scale) {
+          scaleBtns.forEach(function (b) {
+            var active = b.dataset.scale === scale;
+            b.style.borderColor = active ? '#C9A84C' : 'rgba(255,255,255,0.08)';
+            b.style.color = active ? '#C9A84C' : 'rgba(255,255,255,0.6)';
+          });
+          document.documentElement.classList.remove('font-scale-standard', 'font-scale-medium', 'font-scale-large');
+          document.documentElement.classList.add('font-scale-' + scale);
+        }
+
+        var savedScale = 'medium';
+        try { savedScale = localStorage.getItem('matizes_font_scale') || 'medium'; } catch (e) {}
+        markActiveScale(savedScale);
+
+        scaleBtns.forEach(function (b) {
+          b.addEventListener('click', function () {
+            var s = b.dataset.scale;
+            try { localStorage.setItem('matizes_font_scale', s); } catch (e) {}
+            markActiveScale(s);
+          });
+        });
+
+        /* ---- Hero variant switch (solo si la página tiene algún hero) ---- */
+        var section = document.getElementById('hero-switch-section');
+        if (section) {
+          var hasHero = document.getElementById('hero') || document.getElementById('hero-stitch') || document.getElementById('hero-3d');
+          if (hasHero) {
+            section.style.setProperty('display', 'block', 'important');
+            var btns = section.querySelectorAll('.hero-variant-btn');
+ 
+            function markActive(variant) {
+              btns.forEach(function (b) {
+                var active = b.dataset.variant === variant;
+                b.style.borderColor = active ? '#C9A84C' : 'rgba(255,255,255,0.08)';
+                b.style.color = active ? '#C9A84C' : 'rgba(255,255,255,0.6)';
+              });
+            }
+ 
+            var savedVariant = 'classic';
+            try { savedVariant = localStorage.getItem('matizes_hero_variant') || 'classic'; } catch (e) {}
+            markActive(savedVariant);
+ 
+            btns.forEach(function (b) {
+              b.addEventListener('click', function () {
+                var v = b.dataset.variant;
+                try { localStorage.setItem('matizes_hero_variant', v); } catch (e) {}
+                markActive(v);
+                document.dispatchEvent(new CustomEvent('hero:variant', { detail: v }));
+              });
+            });
+          } else {
+            section.style.setProperty('display', 'none', 'important');
+          }
         }
       })();
     </script>

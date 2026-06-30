@@ -117,293 +117,435 @@ export const careInfo: CareItem[] = [
   },
 ];
 
+/* ─────────────────────────────────────────────
+   Tartas — Configuración de tamaños y precios
+   ───────────────────────────────────────────── */
+
+export interface TartaSize {
+  name: string;
+  servings: string;
+  price: number;
+}
+
+export interface TartaProduct {
+  id: string;
+  name: string;
+  description?: string;
+  sizes: TartaSize[];
+}
+
+export interface TartaCategory {
+  title: string;
+  subtitle?: string;
+  items: TartaProduct[];
+}
+
+export const tartasMenu: TartaCategory[] = [
+  {
+    title: 'Tartas de Creaciones',
+    subtitle: 'Disponibles en los sabores de nuestras Creaciones Individuales',
+    items: [
+      {
+        id: 'tarta-creaciones',
+        name: 'Tarta de Creaciones',
+        description: 'Elige entre Lima, Chocolate, Mascarpone o Vainilla',
+        sizes: [
+          { name: 'Mediana', servings: '6-8 raciones', price: 35 },
+          { name: 'Grande', servings: '10-12 raciones', price: 45 },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Carrot Cake',
+    items: [
+      {
+        id: 'tarta-carrot-cake',
+        name: 'Carrot Cake',
+        sizes: [
+          { name: 'Pequeño', servings: '4-6 raciones', price: 18 },
+          { name: 'Mediana', servings: '6-8 raciones', price: 22 },
+          { name: 'Grande', servings: '10-12 raciones', price: 25 },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Brownie',
+    items: [
+      {
+        id: 'tarta-brownie',
+        name: 'Brownie',
+        sizes: [
+          { name: 'Pequeño', servings: '4-6 raciones', price: 20 },
+          { name: 'Mediana', servings: '6-8 raciones', price: 25 },
+          { name: 'Grande', servings: '10-12 raciones', price: 30 },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Red Velvet',
+    items: [
+      {
+        id: 'tarta-red-velvet',
+        name: 'Red Velvet',
+        sizes: [
+          { name: 'Pequeño', servings: '4-6 raciones', price: 20 },
+          { name: 'Mediana', servings: '6-8 raciones', price: 25 },
+          { name: 'Grande', servings: '10-12 raciones', price: 30 },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Sacher',
+    items: [
+      {
+        id: 'tarta-sacher',
+        name: 'Sacher',
+        sizes: [
+          { name: 'Pequeño', servings: '4-6 raciones', price: 30 },
+          { name: 'Mediana', servings: '6-8 raciones', price: 35 },
+          { name: 'Grande', servings: '10-12 raciones', price: 45 },
+        ],
+      },
+    ],
+  },
+];
+
+/* ─────────────────────────────────────────────
+   Productos individuales (cards con add-to-cart)
+   ───────────────────────────────────────────── */
+
 export const products: Product[] = [
+  // ── VIENNOISERIE ──────────────────────────────
   {
-    id: 'opera-clasica',
-    name: 'Ópera Clásica',
-    category: 'Pasteles clásicos',
-    price: 18.50,
-    description: 'Bizcocho de almendra, crema de café y ganache de chocolate negro en capas perfectas.',
-    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/96fb75ed41-f75b3674eca840ad9ed0.png',
-    badge: 'Favorito',
-    badgeColor: 'gold',
-    similarProducts: ['eclat-chocolat', 'fraisier-temporada', 'tiramisu-revisitado'],
-    fullDescription: 'Una obra maestra de la pastelería francesa. Tres capas de bizcocho de almendra empapadas en café, intercaladas con cremosa mantequilla de café y cubiertas con un espejo brillante de chocolate negro.',
-    ingredients: ['Almendras', 'Harina', 'Huevos', 'Mantequilla', 'Azúcar', 'Café', 'Chocolate negro 70%'],
-    allergens: ['Frutos de cáscara', 'Gluten', 'Huevo', 'Lácteos'],
-    nutrition: {
-      calories: 320,
-      protein: '4g',
-      carbs: '38g',
-      fat: '18g'
-    },
-    menu: {
-      sizes: [
-        { name: 'Individual', price: 18.50, servings: 1, description: 'Porción perfecta para una persona' },
-        { name: 'Pequeño (6-8 personas)', price: 85.00, servings: 6, description: 'Ideal para reuniones pequeñas' },
-        { name: 'Mediano (10-12 personas)', price: 125.00, servings: 10, description: 'Perfecto para celebraciones familiares' },
-        { name: 'Grande (14-16 personas)', price: 165.00, servings: 14, description: 'Para eventos y fiestas grandes' }
-      ],
-      formats: [
-        { name: 'Pastel entero', description: 'Pastel completo decorado artesanalmente', price: 0 },
-        { name: 'Porciones individuales', description: 'Porciones pre-cortadas listas para servir', price: 5.00 },
-        { name: 'Mini versiones', description: 'Versiones individuales tipo muffin', price: 4.50 }
-      ],
-      preparationTime: '24 horas',
-      orderAdvance: '48 horas'
-    }
-  },
-  {
-    id: 'eclat-chocolat',
-    name: 'Éclat au',
-    nameHighlight: 'Chocolat',
-    category: 'Pastel clásico',
-    collection: 'Colección Principal',
-    price: 21.00,
-    originalPrice: 24.00,
-    discount: 12,
-    rating: 4.5,
-    reviewCount: 48,
-    description: 'Mousse de chocolate oscuro 72%, glaseado espejo y crujiente de praliné de avellana. Una creación que equilibra la intensidad del cacao con la suavidad de las texturas.',
-    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/9197ec4187-479ef001cb267f16f8b5.png',
-    gallery: [
-      'https://storage.googleapis.com/uxpilot-auth.appspot.com/9197ec4187-479ef001cb267f16f8b5.png',
-      'https://storage.googleapis.com/uxpilot-auth.appspot.com/96fb75ed41-f75b3674eca840ad9ed0.png',
-      'https://storage.googleapis.com/uxpilot-auth.appspot.com/0e25ea55a3-0f9128973255b58ca297.png',
-      'https://storage.googleapis.com/uxpilot-auth.appspot.com/7438793c2a-f6fd1c1966279610809f.png'
-    ],
-    similarProducts: ['opera-clasica', 'red-velvet-suave', 'fondant-coulant'],
-    fullDescription: 'Una experiencia intensa de chocolate. Mousse aireado de chocolate negro 72% sobre una base crujiente de praliné de avellana, coronado con un glaseado espejo brillante.',
-    ingredients: ['Chocolate negro 72%', 'Avellanas', 'Nata', 'Huevos', 'Azúcar', 'Mantequilla'],
-    allergens: ['Gluten', 'Lácteos', 'Huevo', 'Frutos secos'],
-    story: {
-      tag: 'La historia del pastel',
-      title: 'Una oda al',
-      highlight: 'chocolate',
-      paragraphs: [
-        'El Éclat au Chocolat es nuestra interpretación más refinada del pastel de chocolate. Cada capa ha sido diseñada para ofrecer una experiencia sensorial completa: desde el crujiente del praliné de avellana hasta la suavidad etérea del mousse.',
-        'Utilizamos chocolate oscuro de origen Valrhona al 72% de cacao, seleccionado por su perfil aromático complejo con notas de frutos rojos y especias. El glaseado espejo, elaborado con técnica de temperatura precisa, otorga ese acabado brillante que caracteriza a las creaciones de alta pastelería.',
-        'Cada pastel se elabora con 24 horas de anticipación para garantizar que las texturas alcancen su punto óptimo de maduración.'
-      ],
-      facts: ['Tiempo de elaboración: 24h', 'Consumir en 48h', 'Conservar refrigerado'],
-      images: [
-        'https://storage.googleapis.com/uxpilot-auth.appspot.com/0e25ea55a3-0f9128973255b58ca297.png',
-        'https://storage.googleapis.com/uxpilot-auth.appspot.com/9197ec4187-479ef001cb267f16f8b5.png'
-      ],
-      craftLabel: 'Artesanal'
-    },
-    ingredientGroups: [
-      { group: 'Mousse de chocolate', items: ['Chocolate Valrhona 72%', 'Nata para montar', 'Yemas de huevo', 'Azúcar refinada', 'Mantequilla AOP'] },
-      { group: 'Glaseado espejo', items: ['Glucosa', 'Leche condensada', 'Gelatina natural', 'Cacao en polvo', 'Agua mineral'] },
-      { group: 'Praliné de avellana', items: ['Avellanas del Piamonte', 'Azúcar caramelizado', 'Sal de Añana', 'Chocolate con leche'] }
-    ],
-    nutritionFull: {
-      calories: '385 kcal',
-      fatTotal: '24g',
-      fatSaturated: '14g',
-      carbs: '38g',
-      sugars: '28g',
-      protein: '6g',
-      sodium: '120mg'
-    }
-  },
-  {
-    id: 'fraisier-temporada',
-    name: 'Fraisier de Temporada',
-    category: 'Pasteles de temporada',
-    price: 19.50,
-    description: 'Génoise de vainilla, crema muselina y fresas frescas de temporada con cobertura de mazapán.',
-    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/75bd7fae56-e069fe5c9656d0450438.png',
-    badge: 'Temporada',
-    badgeColor: 'purple',
-    similarProducts: ['opera-clasica', 'tarta-frambuesa', 'panna-cotta-rosa'],
-    fullDescription: 'Clásico francés que celebra la frescura de las fresas. Bizcocho ligero de vainilla, crema muselina generosa y fresas frescas enteras, todo envuelto en una fina capa de mazapán rosa.',
-    ingredients: ['Fresas frescas', 'Harina', 'Huevos', 'Mantequilla', 'Azúcar', 'Vainilla', 'Mazapán'],
-    allergens: ['Gluten', 'Huevo', 'Lácteos', 'Frutos de cáscara'],
-    nutrition: {
-      calories: 290,
-      protein: '3g',
-      carbs: '35g',
-      fat: '15g'
-    },
-    menu: {
-      sizes: [
-        { name: 'Individual', price: 19.50, servings: 1, description: 'Porción perfecta para una persona' },
-        { name: 'Pequeño (6-8 personas)', price: 90.00, servings: 6, description: 'Ideal para reuniones pequeñas' },
-        { name: 'Mediano (10-12 personas)', price: 130.00, servings: 10, description: 'Perfecto para celebraciones familiares' },
-        { name: 'Grande (14-16 personas)', price: 170.00, servings: 14, description: 'Para eventos y fiestas grandes' }
-      ],
-      formats: [
-        { name: 'Pastel entero', description: 'Pastel completo decorado artesanalmente', price: 0 },
-        { name: 'Porciones individuales', description: 'Porciones pre-cortadas listas para servir', price: 5.50 },
-        { name: 'Mini versiones', description: 'Versiones individuales tipo muffin', price: 5.00 }
-      ],
-      preparationTime: '24 horas',
-      orderAdvance: '48 horas'
-    }
-  },
-  {
-    id: 'red-velvet-suave',
-    name: 'Red Velvet Suave',
-    category: 'Pasteles clásicos',
-    price: 17.50,
-    description: 'Bizcocho aterciopelado rojo con crema de queso, toque de vainilla y decoración artesanal.',
-    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/7438793c2a-f6fd1c1966279610809f.png',
-    similarProducts: ['eclat-chocolat', 'tiramisu-revisitado', 'creme-brulee'],
-    fullDescription: 'El icónico pastel rojo aterciopelado en su versión más suave. Bizcocho tierno con un toque sutil de cacao, cubierto con nuestra cremosa crema de queso con vainilla.',
-    ingredients: ['Harina', 'Huevos', 'Mantequilla', 'Queso crema', 'Vainilla', 'Cacao', 'Colorante alimentario'],
-    allergens: ['Gluten', 'Huevo', 'Lácteos'],
-    nutrition: {
-      calories: 340,
-      protein: '4g',
-      carbs: '40g',
-      fat: '19g'
-    },
-    menu: {
-      sizes: [
-        { name: 'Individual', price: 17.50, servings: 1, description: 'Porción perfecta para una persona' },
-        { name: 'Pequeño (6-8 personas)', price: 80.00, servings: 6, description: 'Ideal para reuniones pequeñas' },
-        { name: 'Mediano (10-12 personas)', price: 115.00, servings: 10, description: 'Perfecto para celebraciones familiares' },
-        { name: 'Grande (14-16 personas)', price: 150.00, servings: 14, description: 'Para eventos y fiestas grandes' }
-      ],
-      formats: [
-        { name: 'Pastel entero', description: 'Pastel completo decorado artesanalmente', price: 0 },
-        { name: 'Porciones individuales', description: 'Porciones pre-cortadas listas para servir', price: 4.50 },
-        { name: 'Mini versiones', description: 'Versiones individuales tipo muffin', price: 4.00 }
-      ],
-      preparationTime: '24 horas',
-      orderAdvance: '48 horas'
-    }
-  },
-  {
-    id: 'limon-merengue',
-    name: 'Limón & Merengue',
-    category: 'Pasteles de temporada',
-    price: 18.00,
-    description: 'Bizcocho de limón, curd cremoso y merengue italiano tostado al momento.',
-    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/d5c590a30e-598ca973c003b8932b79.png',
-    badge: 'Temporada',
-    badgeColor: 'purple',
-    similarProducts: ['fraisier-temporada', 'panna-cotta-rosa', 'fondant-coulant'],
-    fullDescription: 'El equilibrio perfecto entre acidez y dulzura. Bizcocho esponjoso de limón, generosa capa de curd de limón cremoso y merengue italiano tostado al momento.',
-    ingredients: ['Limones', 'Harina', 'Huevos', 'Azúcar', 'Mantequilla', 'Merengue italiano'],
-    allergens: ['Gluten', 'Huevo', 'Lácteos'],
-    nutrition: {
-      calories: 310,
-      protein: '3g',
-      carbs: '36g',
-      fat: '17g'
-    },
-    menu: {
-      sizes: [
-        { name: 'Individual', price: 18.00, servings: 1, description: 'Porción perfecta para una persona' },
-        { name: 'Pequeño (6-8 personas)', price: 85.00, servings: 6, description: 'Ideal para reuniones pequeñas' },
-        { name: 'Mediano (10-12 personas)', price: 120.00, servings: 10, description: 'Perfecto para celebraciones familiares' },
-        { name: 'Grande (14-16 personas)', price: 155.00, servings: 14, description: 'Para eventos y fiestas grandes' }
-      ],
-      formats: [
-        { name: 'Pastel entero', description: 'Pastel completo decorado artesanalmente', price: 0 },
-        { name: 'Porciones individuales', description: 'Porciones pre-cortadas listas para servir', price: 5.00 },
-        { name: 'Mini versiones', description: 'Versiones individuales tipo muffin', price: 4.50 }
-      ],
-      preparationTime: '24 horas',
-      orderAdvance: '48 horas'
-    }
-  },
-  {
-    id: 'tiramisu-revisitado',
-    name: 'Tiramisú Revisitado',
-    category: 'Pasteles clásicos',
-    price: 17.00,
-    description: 'Versión refinada del clásico italiano: mascarpone, espresso y cacao de origen en capas delicadas.',
-    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/0e25ea55a3-0f9128973255b58ca297.png',
-    similarProducts: ['opera-clasica', 'red-velvet-suave', 'eclair-cafe'],
-    fullDescription: 'Nuestra interpretación elegante del tiramisú clásico. Capas finas de bizcochos de soba empapados en espresso expresso, crema mascarpone ligera y un toque de cacao de origen.',
-    ingredients: ['Mascarpone', 'Huevos', 'Azúcar', 'Café expresso', 'Cacao', 'Bizcochos de soja'],
-    allergens: ['Huevo', 'Lácteos', 'Gluten'],
-    nutrition: {
-      calories: 280,
-      protein: '6g',
-      carbs: '32g',
-      fat: '14g'
-    }
-  },
-  {
-    id: 'fondant-coulant',
-    name: 'Fondant Coulant',
-    category: 'Postres individuales',
-    price: 8.50,
-    description: 'Bizcocho de chocolate con corazón líquido de chocolate negro 70%, servido caliente.',
-    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/52dc8885f9-7b96135997d58656e6a1.png',
-    badge: 'Favorito',
-    badgeColor: 'gold',
-    similarProducts: ['eclat-chocolat', 'creme-brulee', 'limon-merengue'],
-    fullDescription: 'El postre de chocolate por excelencia. Bizcocho exterior esponjoso que al cortarlo libera un corazón líquido de chocolate negro 70%. Servido caliente con una bola de helado de vainilla.',
-    ingredients: ['Chocolate negro 70%', 'Mantequilla', 'Huevos', 'Azúcar', 'Harina', 'Esencia de vainilla'],
-    allergens: ['Gluten', 'Huevo', 'Lácteos'],
-    nutrition: {
-      calories: 420,
-      protein: '5g',
-      carbs: '45g',
-      fat: '25g'
-    }
-  },
-  {
-    id: 'creme-brulee',
-    name: 'Crème Brûlée',
-    category: 'Postres individuales',
-    price: 7.50,
-    description: 'Crema de vainilla con cobertura de azúcar caramelizada, clásico francés.',
-    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/22201143d1-c1c1dfcfef15dd81d55f.png',
-    similarProducts: ['fondant-coulant', 'panna-cotta-rosa', 'eclair-cafe'],
-    fullDescription: 'El clásico francés en su máxima expresión. Crema catalana suave de vainilla bourbon con una capa crujiente de azúcar caramelizado con soplete justo antes de servir.',
-    ingredients: ['Nata', 'Yemas de huevo', 'Azúcar', 'Vainilla bourbon'],
-    allergens: ['Huevo', 'Lácteos'],
-    nutrition: {
-      calories: 280,
-      protein: '4g',
-      carbs: '28g',
-      fat: '18g'
-    }
-  },
-  {
-    id: 'panna-cotta-rosa',
-    name: 'Panna Cotta di Rosa',
-    category: 'Postres individuales',
-    price: 7.00,
-    description: 'Panna cotta de fresas y rosas, decorada con berries frescos y hojas de menta.',
+    id: 'roll-canela',
+    name: 'Roll de Canela',
+    category: 'Viennoiserie',
+    price: 2.00,
+    description: 'Tradicional roll de canela con masa estilo brioche y glaseado de queso crema.',
     image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/be0ca15106-b7cbc54a3b2af8cf47a6.png',
+    similarProducts: ['cheesecake-roll', 'tiramisu-roll', 'croissant-mediano'],
+    fullDescription: 'Nuestro roll de canela artesanal, elaborado con masa estilo brioche laminada a mano, rellena de mantequilla con canela Ceilán y coronada con un generoso glaseado de queso crema.',
+    ingredients: ['Harina', 'Mantequilla', 'Huevos', 'Canela Ceilán', 'Queso crema', 'Azúcar'],
+    allergens: ['Gluten', 'Huevo', 'Lácteos'],
+  },
+  {
+    id: 'cheesecake-roll',
+    name: 'Cheesecake Roll',
+    category: 'Viennoiserie',
+    price: 3.50,
+    description: 'Masa estilo brioche con relleno de tarta de queso y fresa ácida, y un glaseado de queso crema y fresa.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/75bd7fae56-e069fe5c9656d0450438.png',
+    badge: 'Favorito',
+    badgeColor: 'gold',
+    similarProducts: ['roll-canela', 'tiramisu-roll', 'cubisant'],
+    fullDescription: 'Una fusión irresistible entre la bollería artesanal y la tarta de queso. Masa brioche suave con un relleno cremoso de cheesecake y fresa ácida, terminado con glaseado de queso crema y fresa.',
+    ingredients: ['Harina', 'Mantequilla', 'Huevos', 'Queso crema', 'Fresas', 'Azúcar'],
+    allergens: ['Gluten', 'Huevo', 'Lácteos'],
+  },
+  {
+    id: 'tiramisu-roll',
+    name: 'Tiramisú Roll',
+    category: 'Viennoiserie',
+    price: 3.50,
+    description: 'Masa estilo brioche con relleno de café y chocolate capuchino, almíbar de nuestro café y cubierto de crema de mascarpone y cacao.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/0e25ea55a3-0f9128973255b58ca297.png',
     badge: 'Nuevo',
     badgeColor: 'purple',
-    similarProducts: ['creme-brulee', 'fraisier-temporada', 'limon-merengue'],
-    fullDescription: 'Una creación floral y delicada. Panna cotta infusionada con pétalos de rosa y puré de fresas frescas, decorada con una selección de berries del bosque y hojas de menta fresca.',
-    ingredients: ['Nata', 'Azúcar', 'Gelatina', 'Fresas', 'Pétalos de rosa', 'Berries', 'Menta'],
-    allergens: ['Lácteos'],
-    nutrition: {
-      calories: 220,
-      protein: '2g',
-      carbs: '24g',
-      fat: '12g'
-    }
+    similarProducts: ['cheesecake-roll', 'roll-canela', 'cubisant'],
+    fullDescription: 'La esencia del tiramisú italiano en formato roll. Masa brioche empapada en almíbar de café de especialidad, rellena de chocolate capuchino y cubierta con crema de mascarpone espolvoreada con cacao puro.',
+    ingredients: ['Harina', 'Mantequilla', 'Huevos', 'Café', 'Mascarpone', 'Chocolate', 'Cacao'],
+    allergens: ['Gluten', 'Huevo', 'Lácteos'],
   },
   {
-    id: 'eclair-cafe',
-    name: 'Éclair au Café',
-    category: 'Postres individuales',
-    price: 6.50,
-    description: 'Hojaldre relleno de crema de café y glaseado de chocolate, toque de café expresso.',
+    id: 'croissant-pequeno',
+    name: 'Croissant Pequeño',
+    category: 'Viennoiserie',
+    price: 1.50,
+    description: 'Croissant 100% mantequilla artesanal.',
     image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/539421df68-00b49ff082bf978c1d2a.png',
-    similarProducts: ['tiramisu-revisitado', 'creme-brulee', 'croissant-beurre'],
-    fullDescription: 'El éclair clásico con un toque de café. Hojaldre crujiente relleno de crema pastelera infusionada con café expresso, glaseado con chocolate negro y decorado con granos de café.',
-    ingredients: ['Harina', 'Mantequilla', 'Huevos', 'Café expresso', 'Chocolate', 'Nata'],
+    similarProducts: ['croissant-mediano', 'roll-canela', 'cubisant'],
+    fullDescription: 'Nuestro croissant artesanal en formato mini, laminado a mano con mantequilla de primera calidad. Exterior crujiente y hojaldrado, interior tierno y aireado.',
+    ingredients: ['Harina', 'Mantequilla AOP', 'Huevos', 'Azúcar', 'Levadura', 'Sal'],
     allergens: ['Gluten', 'Huevo', 'Lácteos'],
-    nutrition: {
-      calories: 250,
-      protein: '3g',
-      carbs: '28g',
-      fat: '15g'
-    }
-  }
+  },
+  {
+    id: 'croissant-mediano',
+    name: 'Croissant Mediano',
+    category: 'Viennoiserie',
+    price: 2.00,
+    description: 'Croissant 100% mantequilla artesanal.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/539421df68-00b49ff082bf978c1d2a.png',
+    badge: 'Clásico',
+    badgeColor: 'gold',
+    similarProducts: ['croissant-pequeno', 'cubisant', 'roll-canela'],
+    fullDescription: 'El croissant clásico francés en su tamaño tradicional. Laminado a mano con mantequilla AOP, dorado al horno hasta conseguir su textura perfecta.',
+    ingredients: ['Harina', 'Mantequilla AOP', 'Huevos', 'Azúcar', 'Levadura', 'Sal'],
+    allergens: ['Gluten', 'Huevo', 'Lácteos'],
+  },
+  {
+    id: 'cubisant',
+    name: 'Cubisant',
+    category: 'Viennoiserie',
+    price: 4.50,
+    description: 'Masa de croissant rellena de...',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/52dc8885f9-7b96135997d58656e6a1.png',
+    badge: 'Estrella',
+    badgeColor: 'gold',
+    similarProducts: ['croissant-mediano', 'cheesecake-roll', 'tiramisu-roll'],
+    fullDescription: 'Nuestra creación estrella: masa de croissant en forma de cubo, laminada a mano y rellena de forma generosa. Una experiencia única que combina la textura hojaldrada del croissant con rellenos sorprendentes.',
+    ingredients: ['Harina', 'Mantequilla AOP', 'Huevos', 'Azúcar', 'Relleno variado'],
+    allergens: ['Gluten', 'Huevo', 'Lácteos'],
+  },
+
+  // ── CAKES DE AUTOR ────────────────────────────
+  {
+    id: 'brownie',
+    name: 'Brownie',
+    category: 'Cakes de Autor',
+    price: 2.00,
+    description: 'Brownie de chocolate 70% con praliné de avellanas.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/9197ec4187-479ef001cb267f16f8b5.png',
+    badge: 'Favorito',
+    badgeColor: 'gold',
+    similarProducts: ['carrot-cake', 'cake-naranja', 'cake-cafe-higos'],
+    fullDescription: 'Brownie denso y jugoso elaborado con chocolate negro al 70% de cacao. Interior fundente con vetas de praliné de avellanas tostadas que aportan un crunch sutil y un sabor profundo.',
+    ingredients: ['Chocolate negro 70%', 'Mantequilla', 'Huevos', 'Azúcar', 'Avellanas', 'Harina'],
+    allergens: ['Gluten', 'Huevo', 'Lácteos', 'Frutos secos'],
+  },
+  {
+    id: 'carrot-cake',
+    name: 'Carrot Cake',
+    category: 'Cakes de Autor',
+    price: 1.80,
+    description: 'Bizcocho de zanahoria, chocolate caramelo y mousse de vainilla.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/96fb75ed41-f75b3674eca840ad9ed0.png',
+    similarProducts: ['brownie', 'cake-naranja', 'cake-cafe-higos'],
+    fullDescription: 'Nuestro carrot cake combina un bizcocho húmedo de zanahoria rallada con una capa de chocolate caramelo y una suave mousse de vainilla natural. Equilibrio perfecto entre dulzura y especias.',
+    ingredients: ['Zanahoria', 'Harina', 'Huevos', 'Chocolate caramelo', 'Vainilla', 'Canela', 'Nuez moscada'],
+    allergens: ['Gluten', 'Huevo', 'Lácteos'],
+  },
+  {
+    id: 'cake-naranja',
+    name: 'Cake de Naranja',
+    category: 'Cakes de Autor',
+    price: 2.00,
+    description: 'Bizcocho de naranja y tamarindo, chocolate blanco y chantilly cítrica.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/d5c590a30e-598ca973c003b8932b79.png',
+    badge: 'Nuevo',
+    badgeColor: 'purple',
+    similarProducts: ['carrot-cake', 'brownie', 'cake-cafe-higos'],
+    fullDescription: 'Un cake de autor que fusiona la frescura cítrica de la naranja con la acidez exótica del tamarindo. Terminado con una capa de chocolate blanco y chantilly cítrica que equilibra todos los sabores.',
+    ingredients: ['Naranja', 'Tamarindo', 'Harina', 'Huevos', 'Chocolate blanco', 'Nata', 'Mantequilla'],
+    allergens: ['Gluten', 'Huevo', 'Lácteos'],
+  },
+  {
+    id: 'cake-cafe-higos',
+    name: 'Cake Café, Higos y Miel',
+    category: 'Cakes de Autor',
+    price: 2.00,
+    description: 'Bizcocho de café y miel de castaño, mermelada de higos y chantilly de haba tonka.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/22201143d1-c1c1dfcfef15dd81d55f.png',
+    similarProducts: ['brownie', 'carrot-cake', 'cake-naranja'],
+    fullDescription: 'Un cake complejo y sofisticado. Bizcocho infusionado con café de especialidad y miel de castaño, capa de mermelada de higos maduros y terminado con una chantilly perfumada con haba tonka.',
+    ingredients: ['Café', 'Miel de castaño', 'Higos', 'Harina', 'Huevos', 'Nata', 'Haba tonka'],
+    allergens: ['Gluten', 'Huevo', 'Lácteos'],
+  },
+
+  // ── CHEESECAKES ────────────────────────────────
+  {
+    id: 'tarta-queso-cabra',
+    name: 'Tarta de Queso de Cabra',
+    category: 'Cheesecakes',
+    price: 5.00,
+    description: 'Tarta de queso de cabra artesanal, cremosa y con carácter propio.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/7438793c2a-f6fd1c1966279610809f.png',
+    badge: 'Estrella',
+    badgeColor: 'gold',
+    similarProducts: ['mini-tarta-queso-cabra', 'brownie', 'carrot-cake'],
+    fullDescription: 'Nuestra tarta de queso de cabra es una creación singular. Elaborada con queso de cabra de productores locales, ofrece una textura cremosa y un sabor suave con el carácter distintivo del queso de cabra.',
+    ingredients: ['Queso de cabra', 'Huevos', 'Nata', 'Azúcar', 'Galleta', 'Mantequilla'],
+    allergens: ['Huevo', 'Lácteos', 'Gluten'],
+  },
+  {
+    id: 'mini-tarta-queso-cabra',
+    name: 'Mini Tarta de Queso de Cabra',
+    category: 'Cheesecakes',
+    price: 1.50,
+    description: 'Versión individual de nuestra tarta de queso de cabra.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/7438793c2a-f6fd1c1966279610809f.png',
+    similarProducts: ['tarta-queso-cabra', 'brownie', 'carrot-cake'],
+    fullDescription: 'La misma receta de nuestra tarta de queso de cabra en formato mini, perfecta para disfrutar en cualquier momento. Queso de cabra local, textura cremosa y sabor inconfundible.',
+    ingredients: ['Queso de cabra', 'Huevos', 'Nata', 'Azúcar', 'Galleta', 'Mantequilla'],
+    allergens: ['Huevo', 'Lácteos', 'Gluten'],
+  },
+
+  // ── COOKIES GOURMET ────────────────────────────
+  {
+    id: 'cookie-mantequilla-salada',
+    name: 'Cookie Mantequilla Salada',
+    category: 'Cookies Gourmet',
+    price: 2.00,
+    description: 'Cookie artesanal de mantequilla salada, crujiente por fuera y tierna por dentro.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/52dc8885f9-7b96135997d58656e6a1.png',
+    similarProducts: ['cookie-choco-blanco-arandanos', 'cookie-cafe-avellana', 'cookie-chocolate'],
+    fullDescription: 'Nuestra cookie de mantequilla salada combina la mantequilla de primera calidad con escamas de sal Maldon. El resultado es una cookie con un equilibrio perfecto entre dulce y salado.',
+    ingredients: ['Mantequilla salada', 'Harina', 'Huevos', 'Azúcar moreno', 'Sal Maldon', 'Vainilla'],
+    allergens: ['Gluten', 'Huevo', 'Lácteos'],
+  },
+  {
+    id: 'cookie-choco-blanco-arandanos',
+    name: 'Cookie Chocolate Blanco y Arándanos',
+    category: 'Cookies Gourmet',
+    price: 2.00,
+    description: 'Cookie con trozos de chocolate blanco y arándanos deshidratados.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/52dc8885f9-7b96135997d58656e6a1.png',
+    similarProducts: ['cookie-mantequilla-salada', 'cookie-cafe-avellana', 'cookie-chocolate'],
+    fullDescription: 'Cookie artesanal con generosos trozos de chocolate blanco de calidad y arándanos deshidratados que aportan un toque ácido y frutal al conjunto.',
+    ingredients: ['Chocolate blanco', 'Arándanos', 'Harina', 'Mantequilla', 'Huevos', 'Azúcar'],
+    allergens: ['Gluten', 'Huevo', 'Lácteos'],
+  },
+  {
+    id: 'cookie-cafe-avellana',
+    name: 'Cookie Café, Avellana y Cacao',
+    category: 'Cookies Gourmet',
+    price: 2.00,
+    description: 'Cookie con café de especialidad, avellanas tostadas y cacao puro.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/52dc8885f9-7b96135997d58656e6a1.png',
+    similarProducts: ['cookie-mantequilla-salada', 'cookie-choco-blanco-arandanos', 'cookie-chocolate'],
+    fullDescription: 'Una cookie intensa y aromática con café de especialidad, avellanas del Piamonte tostadas y nibs de cacao. Para los amantes de los sabores profundos y tostados.',
+    ingredients: ['Café', 'Avellanas', 'Cacao', 'Harina', 'Mantequilla', 'Huevos', 'Azúcar'],
+    allergens: ['Gluten', 'Huevo', 'Lácteos', 'Frutos secos'],
+  },
+  {
+    id: 'cookie-chocolate',
+    name: 'Cookie de Chocolate',
+    category: 'Cookies Gourmet',
+    price: 2.00,
+    description: 'Cookie clásica de chocolate con trozos generosos de chocolate negro.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/52dc8885f9-7b96135997d58656e6a1.png',
+    badge: 'Clásico',
+    badgeColor: 'gold',
+    similarProducts: ['cookie-mantequilla-salada', 'cookie-choco-blanco-arandanos', 'cookie-cafe-avellana'],
+    fullDescription: 'La cookie de chocolate en su versión más generosa. Masa artesanal con trozos de chocolate negro de calidad, crujiente por fuera y fundente por dentro.',
+    ingredients: ['Chocolate negro', 'Harina', 'Mantequilla', 'Huevos', 'Azúcar', 'Vainilla'],
+    allergens: ['Gluten', 'Huevo', 'Lácteos'],
+  },
+  {
+    id: 'pack-cookies-regalo',
+    name: 'Pack Regalo Cookies',
+    category: 'Cookies Gourmet',
+    price: 10.00,
+    description: 'Caja de mini cookies o caja de cookies, perfecta para regalar.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/52dc8885f9-7b96135997d58656e6a1.png',
+    badge: 'Regalo',
+    badgeColor: 'purple',
+    similarProducts: ['cookie-mantequilla-salada', 'cookie-chocolate', 'cookie-cafe-avellana'],
+    fullDescription: 'Un pack regalo con una selección de nuestras cookies artesanales. Disponible en formato caja de mini cookies o caja de cookies estándar. El regalo perfecto para cualquier ocasión.',
+    ingredients: ['Selección variada de cookies'],
+    allergens: ['Gluten', 'Huevo', 'Lácteos', 'Frutos secos'],
+  },
+
+  // ── CREACIONES INDIVIDUALES ────────────────────
+  {
+    id: 'todo-al-verde',
+    name: 'Todo al Verde',
+    nameHighlight: 'Lima, Albahaca y Matcha',
+    category: 'Creaciones Individuales',
+    price: 4.50,
+    description: 'Mousse de Riesling, gelée de flor de saúco, cremoso de albahaca, bizcocho de té matcha y crujiente de chocolate limón.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/75bd7fae56-e069fe5c9656d0450438.png',
+    similarProducts: ['flor-de-la-pasion', 'silvestre', 'flor-de-vainilla'],
+    fullDescription: 'Una creación que celebra los verdes en todas sus formas. Mousse de vino Riesling con gelée de flor de saúco, cremoso de albahaca fresca, bizcocho húmedo de té matcha y un crujiente de chocolate al limón.',
+    ingredients: ['Riesling', 'Flor de saúco', 'Albahaca', 'Té matcha', 'Chocolate', 'Limón', 'Nata'],
+    allergens: ['Huevo', 'Lácteos', 'Gluten'],
+  },
+  {
+    id: 'flor-de-la-pasion',
+    name: 'Flor de la Pasión',
+    nameHighlight: 'Fruta de la Pasión y Guayaba Rosa',
+    category: 'Creaciones Individuales',
+    price: 6.00,
+    description: 'Mousse de fruta de la pasión, cremoso de guayaba rosa, gelée de fruta de la pasión y crujiente de chocolate caramelo.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/be0ca15106-b7cbc54a3b2af8cf47a6.png',
+    badge: 'Estrella',
+    badgeColor: 'gold',
+    similarProducts: ['todo-al-verde', 'silvestre', 'corazones-rojos'],
+    fullDescription: 'Una explosión tropical de sabores. Mousse aireada de fruta de la pasión envolviendo un cremoso de guayaba rosa, gelée vibrante de maracuyá y un crujiente de chocolate caramelo que aporta textura y profundidad.',
+    ingredients: ['Fruta de la pasión', 'Guayaba rosa', 'Chocolate caramelo', 'Nata', 'Huevos', 'Azúcar'],
+    allergens: ['Huevo', 'Lácteos', 'Gluten'],
+  },
+  {
+    id: 'silvestre',
+    name: 'Silvestre',
+    nameHighlight: 'Mascarpone y Frutos Rojos',
+    category: 'Creaciones Individuales',
+    price: 5.00,
+    description: 'Crema de mascarpone, gelée de fresas, cremoso de frambuesas, frutos rojos naturales y crujiente de chocolate rubí.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/96fb75ed41-f75b3674eca840ad9ed0.png',
+    similarProducts: ['flor-de-la-pasion', 'corazones-rojos', 'todo-al-verde'],
+    fullDescription: 'Una oda a los frutos rojos del bosque. Crema de mascarpone italiano con gelée de fresas frescas, cremoso de frambuesas, frutos rojos naturales de temporada y un crujiente de chocolate rubí que aporta notas frutales.',
+    ingredients: ['Mascarpone', 'Fresas', 'Frambuesas', 'Chocolate rubí', 'Nata', 'Huevos'],
+    allergens: ['Huevo', 'Lácteos', 'Gluten'],
+  },
+  {
+    id: 'calendario-azteca',
+    name: 'Calendario Azteca',
+    nameHighlight: 'Chocolate y Palomita Salada',
+    category: 'Creaciones Individuales',
+    price: 5.00,
+    description: 'Ganache de chocolate amargo, núcleo líquido de cacao y palomita salada, bizcocho húmedo de cacao y sablé de cacao.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/9197ec4187-479ef001cb267f16f8b5.png',
+    badge: 'Favorito',
+    badgeColor: 'gold',
+    similarProducts: ['silvestre', 'cacahuete-miel-sal', 'flor-de-vainilla'],
+    fullDescription: 'Una creación audaz que rinde homenaje al cacao ancestral. Ganache de chocolate amargo con un sorprendente núcleo líquido de cacao y palomita salada, bizcocho húmedo de cacao y sablé de cacao para un final crujiente.',
+    ingredients: ['Chocolate amargo', 'Cacao', 'Palomitas', 'Sal', 'Mantequilla', 'Huevos', 'Harina'],
+    allergens: ['Huevo', 'Lácteos', 'Gluten'],
+  },
+  {
+    id: 'corazones-rojos',
+    name: 'Corazones Rojos',
+    nameHighlight: 'Lichis y Rosas',
+    category: 'Creaciones Individuales',
+    price: 4.80,
+    description: 'Mousse de lichis, cremoso de rosas, gelée de lichis y bizcocho de frambuesas.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/d5c590a30e-598ca973c003b8932b79.png',
+    similarProducts: ['silvestre', 'flor-de-la-pasion', 'flor-de-vainilla'],
+    fullDescription: 'Delicadeza floral en estado puro. Mousse etérea de lichis con cremoso perfumado de rosas de Damasco, gelée de lichis y un bizcocho rosado de frambuesas que completa esta creación romántica.',
+    ingredients: ['Lichis', 'Agua de rosas', 'Frambuesas', 'Nata', 'Huevos', 'Azúcar'],
+    allergens: ['Huevo', 'Lácteos', 'Gluten'],
+  },
+  {
+    id: 'cacahuete-miel-sal',
+    name: 'Cacahuete, Miel y Sal',
+    category: 'Creaciones Individuales',
+    price: 5.50,
+    description: 'Mousse de chocolate con leche-caramelo y praliné de cacahuetes eagle, núcleo líquido de caramelo y miel, financier de cacahuetes y crujiente de chocolate y praliné.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/22201143d1-c1c1dfcfef15dd81d55f.png',
+    badge: 'Nuevo',
+    badgeColor: 'purple',
+    similarProducts: ['calendario-azteca', 'flor-de-vainilla', 'silvestre'],
+    fullDescription: 'Potencia y delicadeza en un mismo postre. Mousse de chocolate con leche al caramelo con praliné de cacahuetes, un sorprendente núcleo líquido de caramelo y miel, financier de cacahuetes y crujiente de chocolate con praliné.',
+    ingredients: ['Cacahuetes', 'Chocolate con leche', 'Caramelo', 'Miel', 'Mantequilla', 'Huevos', 'Harina'],
+    allergens: ['Huevo', 'Lácteos', 'Gluten', 'Cacahuetes'],
+  },
+  {
+    id: 'flor-de-vainilla',
+    name: 'Flor de Vainilla',
+    nameHighlight: 'Vainilla, Praliné y Caramelo',
+    category: 'Creaciones Individuales',
+    price: 4.20,
+    description: 'Mousse de vainilla natural, toffee montado, cremoso de praliné, joconda de vainilla y sablé de vainilla.',
+    image: 'https://storage.googleapis.com/uxpilot-auth.appspot.com/d5c590a30e-598ca973c003b8932b79.png',
+    similarProducts: ['cacahuete-miel-sal', 'calendario-azteca', 'todo-al-verde'],
+    fullDescription: 'La vainilla en su máxima expresión. Mousse de vainilla natural de Madagascar, toffee montado, cremoso de praliné, joconda de vainilla y sablé de vainilla para un final crujiente. Un homenaje a la elegancia de lo simple.',
+    ingredients: ['Vainilla de Madagascar', 'Praliné', 'Caramelo', 'Nata', 'Mantequilla', 'Huevos', 'Harina'],
+    allergens: ['Huevo', 'Lácteos', 'Gluten', 'Frutos secos'],
+  },
 ];
 
 export function getProductById(id: string): Product | undefined {
