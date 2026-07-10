@@ -25,7 +25,7 @@ const paragraphs = post.content
   .filter(line => line.length > 0);
 ---
 
-<Layout title={post.metaTitle}>
+<Layout title={post.metaTitle} description={post.metaDescription} ogImage={post.image} ogUrl={`https://matizes.es/blog/${post.slug}`} ogType="article">
   <Header />
 
   <div class="h-16 lg:h-20"></div>

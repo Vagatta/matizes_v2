@@ -55,7 +55,7 @@ const nutritionFull = product.nutritionFull ?? (product.nutrition ? {
 const formatPrice = (n: number) => n.toFixed(2).replace('.', ',');
 ---
 
-<Layout title={`${product.name} - Pastelería Mat`}>
+<Layout title={`${product.name} - Pastelería Mat`} description={product.description} ogImage={product.image} ogUrl={`https://matizes.es/productos/${product.id}`} ogType="product">
   <Header />
 
   <!-- Spacer for fixed header -->
@@ -74,8 +74,19 @@ const formatPrice = (n: number) => n.toFixed(2).replace('.', ',');
                 {product.badge}
               </div>
             )}
-            <button class="absolute top-4 right-4 bg-white/90 text-purple w-9 h-9 flex items-center justify-center hover:bg-purple hover:text-gold transition-colors">
-              <i class="fa-regular fa-heart text-sm"></i>
+            <button
+              class="heart-btn absolute top-4 right-4 w-9 h-9 flex items-center justify-center transition-colors"
+              aria-label="Añadir a favoritos"
+              aria-pressed="false"
+              data-id={product.id}
+              data-name={`${product.name}${product.nameHighlight ? ' ' + product.nameHighlight : ''}`}
+              data-price={product.price}
+              data-image={product.image}
+              data-category={product.category}
+            >
+              <svg class="heart-icon w-4 h-4 transition-transform" viewBox="0 0 24 24" aria-hidden="true" data-fa-i2svg>
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+              </svg>
             </button>
           </div>
           <div class="grid grid-cols-4 gap-3 mt-3">
@@ -145,8 +156,19 @@ const formatPrice = (n: number) => n.toFixed(2).replace('.', ',');
             >
               <i class="fa-solid fa-bag-shopping text-xs"></i> Añadir al carrito
             </button>
-            <button class="border border-purple/20 text-purple w-12 h-12 flex items-center justify-center hover:bg-purple hover:text-gold transition-colors">
-              <i class="fa-regular fa-heart"></i>
+            <button
+              class="heart-btn w-12 h-12 flex items-center justify-center transition-colors"
+              aria-label="Añadir a favoritos"
+              aria-pressed="false"
+              data-id={product.id}
+              data-name={`${product.name}${product.nameHighlight ? ' ' + product.nameHighlight : ''}`}
+              data-price={product.price}
+              data-image={product.image}
+              data-category={product.category}
+            >
+              <svg class="heart-icon w-5 h-5 transition-transform" viewBox="0 0 24 24" aria-hidden="true" data-fa-i2svg>
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+              </svg>
             </button>
           </div>
 

@@ -1,0 +1,72 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { products } from '../data/products';
+---
+
+<Layout title="Favoritos — Tus creaciones guardadas | Mat!zes" description="Guarda tus creaciones favoritas de Mat!zes y vuelve a ellas cuando quieras. Tartas, cheesecakes, viennoiserie y dulces artesanales." ogUrl="https://matizes.es/favoritos">
+  <Header />
+
+  <!-- Spacer for fixed header -->
+  <div class="h-16 lg:h-20"></div>
+
+  <!-- HERO -->
+  <section class="py-16 lg:py-24 bg-purple relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+      <div class="absolute top-0 right-0 w-96 h-96 rounded-full border border-gold" style="transform: translate(30%, -30%)"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 rounded-full border border-gold" style="transform: translate(-30%, 30%)"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 relative z-10 text-center">
+      <div class="reveal">
+        <p class="section-tag mb-4 text-gold/70">Guardados con cariño</p>
+        <h1 class="font-serif text-4xl lg:text-6xl font-light text-white">Tus <em class="italic text-gold">Favoritos</em></h1>
+        <div class="gold-line h-px w-24 mx-auto mt-6"></div>
+        <p class="text-white/70 font-light max-w-xl mx-auto mt-6">Aquí encontrarás las creaciones que has marcado como favoritas. Guarda, compara y vuelve a ellas cuando quieras.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAVORITES GRID -->
+  <section class="py-16 lg:py-24 bg-cream min-h-[50vh]" data-favorite-section>
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+      <!-- Empty state -->
+      <div data-favorite-empty class="hidden text-center py-12">
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-purple/5 text-purple mb-6">
+          <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-fa-i2svg>
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+          </svg>
+        </div>
+        <h2 class="font-serif text-2xl lg:text-3xl text-purple mb-3">Aún no tienes favoritos</h2>
+        <p class="text-gray-500 font-light max-w-md mx-auto mb-8">Descubre nuestras creaciones y guarda las que más te gusten pulsando el corazón.</p>
+        <a href="/menu" class="btn-gold inline-flex items-center gap-3 px-8 py-3.5 font-medium text-sm tracking-widest uppercase rounded-none">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-fa-i2svg>
+            <path d="M3 3v18h18"></path>
+            <path d="M7 8h.01"></path>
+            <path d="M7 12h.01"></path>
+            <path d="M7 16h.01"></path>
+            <path d="M11 8h.01"></path>
+            <path d="M11 12h.01"></path>
+            <path d="M11 16h.01"></path>
+            <path d="M15 8h6"></path>
+            <path d="M15 12h6"></path>
+            <path d="M15 16h6"></path>
+          </svg>
+          Explorar menú
+        </a>
+      </div>
+
+      <!-- Grid -->
+      <div data-favorite-grid class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+        {products.map((product) => (
+          <div data-favorite-id={product.id} class="hidden">
+            <ProductCard product={product} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>

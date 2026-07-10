@@ -93,15 +93,6 @@ function init(): void {
   // Delegación: cualquier botón con data-add-to-cart añade al carrito.
   document.addEventListener('click', (e) => {
     const target = e.target as HTMLElement;
-
-    // Heart button (prevent navigation from product card link)
-    const heartBtn = target.closest<HTMLElement>('.heart-btn');
-    if (heartBtn) {
-      e.preventDefault();
-      // Toggle wishlist logic could go here
-      return;
-    }
-
     const btn = target.closest<HTMLElement>('[data-add-to-cart]');
     if (!btn) return;
     e.preventDefault();

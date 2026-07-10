@@ -3,9 +3,23 @@ import MatizesVertical from '../components/MatizesVertical.astro';
 
 export interface Props {
 	title: string;
+	description?: string;
+	ogTitle?: string;
+	ogDescription?: string;
+	ogImage?: string;
+	ogUrl?: string;
+	ogType?: string;
 }
 
-const { title } = Astro.props;
+const {
+	title,
+	description = 'Pastelería fina artesanal en Valladolid. Creaciones de autor, tartas, cheesecakes, viennoiserie y regalos dulces elaborados con ingredientes selectos.',
+	ogTitle = title,
+	ogDescription = description,
+	ogImage = 'https://storage.googleapis.com/uxpilot-auth.appspot.com/3fd9c28d4d-cd1f86b109f2f92c0c84.png',
+	ogUrl = 'https://matizes.es',
+	ogType = 'website',
+} = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -15,6 +29,19 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={ogUrl} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:site_name" content="Mat!zes" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="canonical" href={ogUrl} />
     <script is:inline>
       (typeof window !== 'undefined') && ((window).FontAwesomeConfig = { autoReplaceSvg: 'nest' });
     </script>
@@ -25,13 +52,96 @@ const { title } = Astro.props;
     <style is:global>
         ::-webkit-scrollbar { display: none; }
         html { scroll-behavior: smooth; }
+        .heart-icon {
+          fill: none;
+          stroke: currentColor;
+          stroke-width: 2;
+          stroke-linecap: round;
+          stroke-linejoin: round;
+        }
+        .heart-btn.active .heart-icon {
+          fill: currentColor;
+          stroke: none;
+        }
+        .heart-btn {
+          /* default: white translucent */
+          background: rgba(255, 255, 255, 0.9);
+          color: #820057;
+          border: none;
+        }
+        .heart-btn:hover {
+          background: #820057;
+          color: #C9A84C;
+        }
+        /* Estudio cromático: estilos del botón de favoritos */
+        .fav-style-glass .heart-btn {
+          background: rgba(255, 255, 255, 0.35);
+          border: 1px solid rgba(255, 255, 255, 0.55);
+          backdrop-filter: blur(3px);
+          color: #820057;
+        }
+        .fav-style-glass .heart-btn:hover {
+          background: rgba(130, 0, 87, 0.85);
+          border-color: rgba(130, 0, 87, 0.85);
+          color: #C9A84C;
+        }
+        .fav-style-gold .heart-btn {
+          background: #C9A84C;
+          color: #820057;
+          border: none;
+        }
+        .fav-style-gold .heart-btn:hover {
+          background: #820057;
+          color: #C9A84C;
+        }
+        .fav-style-purple .heart-btn {
+          background: #820057;
+          color: #C9A84C;
+          border: none;
+        }
+        .fav-style-purple .heart-btn:hover {
+          background: #C9A84C;
+          color: #820057;
+        }
+        .fav-style-outline .heart-btn {
+          background: transparent;
+          border: 1.5px solid #820057;
+          color: #820057;
+        }
+        .fav-style-outline .heart-btn:hover {
+          background: #820057;
+          color: #C9A84C;
+          border-color: #820057;
+        }
+        .fav-style-clean .heart-btn {
+          background: transparent;
+          border: none;
+          color: #820057;
+        }
+        .fav-style-clean .heart-btn:hover {
+          background: #820057;
+          color: #C9A84C;
+        }
+        .cat-card-img {
+          transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.5s ease;
+        }
+        .cat-card:hover .cat-card-img {
+          transform: scale(1.06);
+          filter: brightness(1.04);
+        }
+        .cat-card-overlay {
+          transition: opacity 0.5s ease;
+        }
+        .cat-card:hover .cat-card-overlay {
+          opacity: 0.82;
+        }
         section[id] { scroll-margin-top: 5rem; }
         
-        /* Tipografías Dinámicas del Estudio */
-        html.font-variant-classic *, 
-        html.font-variant-classic *::before, 
-        html.font-variant-classic *::after { 
-            font-family: 'Cormorant Garamond', serif; 
+        /* Tipografías Dinámicas del Estudio (excluye iconos FontAwesome) */
+        html.font-variant-classic *:not(.fa):not(.fas):not(.far):not(.fab):not(.fa-solid):not(.fa-regular):not(.fa-brands):not(.fa-light),
+        html.font-variant-classic *:not(.fa):not(.fas):not(.far):not(.fab):not(.fa-solid):not(.fa-regular):not(.fa-brands):not(.fa-light)::before,
+        html.font-variant-classic *:not(.fa):not(.fas):not(.far):not(.fab):not(.fa-solid):not(.fa-regular):not(.fa-brands):not(.fa-light)::after {
+            font-family: 'Cormorant Garamond', serif;
         }
         
         /* Modificadores de tamaño dinámicos controlados por el Estudio */
@@ -77,10 +187,10 @@ const { title } = Astro.props;
             font-family: 'Jost', sans-serif; 
         }
 
-        html.font-variant-editorial *, 
-        html.font-variant-editorial *::before, 
-        html.font-variant-editorial *::after { 
-            font-family: 'Playfair Display', serif; 
+        html.font-variant-editorial *:not(.fa):not(.fas):not(.far):not(.fab):not(.fa-solid):not(.fa-regular):not(.fa-brands):not(.fa-light),
+        html.font-variant-editorial *:not(.fa):not(.fas):not(.far):not(.fab):not(.fa-solid):not(.fa-regular):not(.fa-brands):not(.fa-light)::before,
+        html.font-variant-editorial *:not(.fa):not(.fas):not(.far):not(.fab):not(.fa-solid):not(.fa-regular):not(.fa-brands):not(.fa-light)::after {
+            font-family: 'Playfair Display', serif;
         }
 
         /* Escala en Montserrat */
@@ -140,12 +250,24 @@ const { title } = Astro.props;
         .nav-link { position: relative; text-decoration: none !important; }
         .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px; background: #C9A84C; transition: width 0.3s ease; }
         .nav-link:hover::after { width: 100%; }
-        .hero-overlay { background: linear-gradient(135deg, rgba(130,0,87,0.82) 0%, rgba(130,0,87,0.4) 60%, rgba(0,0,0,0.1) 100%); }
+        .hero-overlay { background: linear-gradient(135deg, rgba(130,0,87,0.72) 0%, rgba(130,0,87,0.3) 60%, rgba(0,0,0,0.05) 100%); }
         .gold-line { background: linear-gradient(90deg, transparent, #C9A84C, transparent); }
         .btn-gold { background: #C9A84C; color: #820057; }
         .btn-gold:hover { background: #820057; color: #C9A84C; }
         .btn-purple { background: #820057; color: #C9A84C; }
         .btn-purple:hover { background: #C9A84C; color: #820057; }
+        html.btn-text-white .btn-gold,
+        html.btn-text-white .btn-gold:hover,
+        html.btn-text-white .btn-purple,
+        html.btn-text-white .btn-purple:hover {
+          color: #ffffff !important;
+        }
+        html.btn-text-black .btn-gold,
+        html.btn-text-black .btn-gold:hover,
+        html.btn-text-black .btn-purple,
+        html.btn-text-black .btn-purple:hover {
+          color: #000000 !important;
+        }
         .section-tag { letter-spacing: 0.25em; font-size: 0.7rem; text-transform: uppercase; color: #C9A84C; }
         .testimonial-card { border-left: 3px solid #C9A84C; }
         .logo-exclamation { color: #C9A84C; }
@@ -158,8 +280,12 @@ const { title } = Astro.props;
       (function() {
         var savedFont = localStorage.getItem('matizes_font_variant') || 'classic';
         var savedScale = localStorage.getItem('matizes_font_scale') || 'medium';
+        var savedFavStyle = localStorage.getItem('matizes_fav_style') || 'white';
+        var savedBtnText = localStorage.getItem('matizes_btn_text_color') || 'original';
         document.documentElement.classList.add('font-variant-' + savedFont);
         document.documentElement.classList.add('font-scale-' + savedScale);
+        document.documentElement.classList.add('fav-style-' + savedFavStyle);
+        document.documentElement.classList.add('btn-text-' + savedBtnText);
       })();
     </script>
     <!-- ===================== SPLASH SCREEN ===================== -->
@@ -303,6 +429,7 @@ const { title } = Astro.props;
     <slot />
     <script>
       import '../scripts/cart';
+      import '../scripts/favorites';
     </script>
     <script is:inline>
       (function () {
@@ -427,12 +554,33 @@ const { title } = Astro.props;
           </div>
         </div>
 
+        <div id="fav-style-section" style="border-top:1px solid rgba(255,255,255,0.1);margin-top:6px;padding-top:10px">
+          <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin:0 0 6px">Botón favoritos</p>
+          <div style="display:flex;gap:6px">
+            <button id="fav-style-white" data-fav-style="white" class="fav-style-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Blanco</button>
+            <button id="fav-style-glass" data-fav-style="glass" class="fav-style-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Cristal</button>
+            <button id="fav-style-gold" data-fav-style="gold" class="fav-style-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Oro</button>
+            <button id="fav-style-purple" data-fav-style="purple" class="fav-style-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Morado</button>
+            <button id="fav-style-outline" data-fav-style="outline" class="fav-style-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Lineal</button>
+            <button id="fav-style-clean" data-fav-style="clean" class="fav-style-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Limpio</button>
+          </div>
+        </div>
+
         <div id="scale-switch-section" style="border-top:1px solid rgba(255,255,255,0.1);margin-top:6px;padding-top:10px">
           <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin:0 0 6px">Escala de Texto</p>
           <div style="display:flex;gap:6px">
             <button id="scale-variant-standard" data-scale="standard" class="scale-variant-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Normal</button>
             <button id="scale-variant-medium" data-scale="medium" class="scale-variant-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">+8%</button>
             <button id="scale-variant-large" data-scale="large" class="scale-variant-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">+15%</button>
+          </div>
+        </div>
+
+        <div id="btn-text-color-section" style="border-top:1px solid rgba(255,255,255,0.1);margin-top:6px;padding-top:10px">
+          <p style="font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin:0 0 6px">Texto de botones</p>
+          <div style="display:flex;gap:6px">
+            <button id="btn-text-original" data-text-color="original" class="btn-text-color-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Original</button>
+            <button id="btn-text-white" data-text-color="white" class="btn-text-color-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Blanco</button>
+            <button id="btn-text-black" data-text-color="black" class="btn-text-color-btn" style="flex:1;background:none;border:1px solid rgba(255,255,255,0.08);padding:6px 8px;cursor:pointer;font-family:sans-serif;font-size:9px;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.6)">Negro</button>
           </div>
         </div>
         
@@ -542,6 +690,30 @@ const { title } = Astro.props;
           });
         });
 
+        /* ---- Favorite button style switch ---- */
+        var favStyleBtns = document.querySelectorAll('.fav-style-btn');
+        function markActiveFavStyle(style) {
+          favStyleBtns.forEach(function (b) {
+            var active = b.dataset.favStyle === style;
+            b.style.borderColor = active ? '#C9A84C' : 'rgba(255,255,255,0.08)';
+            b.style.color = active ? '#C9A84C' : 'rgba(255,255,255,0.6)';
+          });
+          document.documentElement.classList.remove('fav-style-white', 'fav-style-glass', 'fav-style-gold', 'fav-style-purple', 'fav-style-outline', 'fav-style-clean');
+          document.documentElement.classList.add('fav-style-' + style);
+        }
+
+        var savedFavStyle = 'white';
+        try { savedFavStyle = localStorage.getItem('matizes_fav_style') || 'white'; } catch (e) {}
+        markActiveFavStyle(savedFavStyle);
+
+        favStyleBtns.forEach(function (b) {
+          b.addEventListener('click', function () {
+            var s = b.dataset.favStyle;
+            try { localStorage.setItem('matizes_fav_style', s); } catch (e) {}
+            markActiveFavStyle(s);
+          });
+        });
+
         /* ---- Escala de Texto switch ---- */
         var scaleBtns = document.querySelectorAll('.scale-variant-btn');
         function markActiveScale(scale) {
@@ -563,6 +735,30 @@ const { title } = Astro.props;
             var s = b.dataset.scale;
             try { localStorage.setItem('matizes_font_scale', s); } catch (e) {}
             markActiveScale(s);
+          });
+        });
+
+        /* ---- Button text color switch ---- */
+        var btnTextBtns = document.querySelectorAll('.btn-text-color-btn');
+        function markActiveBtnText(color) {
+          btnTextBtns.forEach(function (b) {
+            var active = b.dataset.textColor === color;
+            b.style.borderColor = active ? '#C9A84C' : 'rgba(255,255,255,0.08)';
+            b.style.color = active ? '#C9A84C' : 'rgba(255,255,255,0.6)';
+          });
+          document.documentElement.classList.remove('btn-text-original', 'btn-text-white', 'btn-text-black');
+          document.documentElement.classList.add('btn-text-' + color);
+        }
+
+        var savedBtnText = 'original';
+        try { savedBtnText = localStorage.getItem('matizes_btn_text_color') || 'original'; } catch (e) {}
+        markActiveBtnText(savedBtnText);
+
+        btnTextBtns.forEach(function (b) {
+          b.addEventListener('click', function () {
+            var c = b.dataset.textColor;
+            try { localStorage.setItem('matizes_btn_text_color', c); } catch (e) {}
+            markActiveBtnText(c);
           });
         });
 

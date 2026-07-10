@@ -4,37 +4,55 @@ import MatizesLogo from './MatizesLogo.astro';
 const links = [
   { label: 'Inicio', href: '/' },
   { label: 'Menú', href: '/menu' },
+  { label: 'Favoritos', href: '/favoritos' },
   { label: 'Blog', href: '/blog' },
   { label: 'Contacto', href: '/contacto' },
 ];
 ---
 
 <header id="header" class="fixed top-0 left-0 right-0 z-50 bg-cream/95 backdrop-blur-sm border-b border-gold/20">
-  <div class="max-w-7xl mx-auto h-16 lg:h-20 grid grid-cols-3 items-center px-4 sm:px-6 lg:px-10">
-    <!-- Desktop Nav Left -->
-    <nav id="main-nav" class="hidden md:flex items-center gap-8 lg:gap-10">
+  <div class="max-w-7xl mx-auto h-16 lg:h-20 grid grid-cols-[auto_1fr_auto] lg:grid-cols-[1fr_auto_1fr] items-center px-4 sm:px-6 lg:px-10">
+    <!-- Desktop / Tablet Nav Left -->
+    <nav id="main-nav" class="hidden md:flex items-center gap-4 lg:gap-8 xl:gap-10">
       {links.map((link) => (
-        <a href={link.href} class="nav-link text-gray-600 hover:text-purple font-medium text-sm tracking-widest uppercase transition-colors">{link.label}</a>
+        <a href={link.href} class="nav-link text-gray-600 hover:text-purple font-medium text-xs lg:text-sm tracking-widest uppercase transition-colors whitespace-nowrap">{link.label}</a>
       ))}
     </nav>
     <!-- Mobile menu button left -->
     <div class="flex md:hidden items-center">
-      <button id="mobile-menu-btn" class="text-purple text-xl" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
-        <i class="fa-solid fa-bars"></i>
+      <button id="mobile-menu-btn" class="text-purple p-3 -ml-3" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" aria-label="Abrir menú">
+        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-fa-i2svg>
+          <path d="M3 6h18M3 12h18M3 18h18"></path>
+        </svg>
       </button>
     </div>
 
     <!-- Logo Center -->
     <a href="/" id="logo" aria-label="Matizes — Inicio" class="flex items-center justify-center text-purple hover:text-gold transition-colors">
-      <MatizesLogo class="h-9 lg:h-11 w-auto" />
+      <MatizesLogo class="h-8 lg:h-10 w-auto" />
     </a>
 
-    <!-- Cart Right -->
-    <div class="flex items-center justify-end gap-2">
-      <span data-cart-subtotal class="hidden text-base font-medium tracking-wide tabular-nums text-purple"></span>
-      <a href="/carrito" id="cart-icon" class="relative flex items-center p-2 -mr-2 text-purple hover:text-gold transition-colors">
-        <i class="fa-solid fa-bag-shopping text-lg lg:text-xl"></i>
-        <span data-cart-count class="hidden absolute top-0 right-0 bg-gold text-purple text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center leading-none">0</span>
+    <!-- Utilities Right -->
+    <div class="flex items-center justify-end gap-1 lg:gap-2">
+      <span data-cart-subtotal class="hidden text-xs lg:text-sm font-medium tracking-wide tabular-nums text-purple whitespace-nowrap"></span>
+      <a href="/favoritos" class="flex items-center p-2 lg:p-3 -mr-1 lg:mr-0 text-purple hover:text-gold transition-colors" aria-label="Favoritos">
+        <span class="relative inline-flex items-center justify-center">
+          <svg class="w-6 h-6 lg:w-7 lg:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-fa-i2svg>
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+          </svg>
+          <span data-favorite-count class="hidden absolute -top-1.5 -right-1.5 bg-gold text-purple !text-[10px] font-bold min-w-[1.125rem] h-[1.125rem] px-0.5 rounded-full inline-flex items-center justify-center leading-none tabular-nums !tracking-normal" style="font-family:'Jost',sans-serif">0</span>
+        </span>
+      </a>
+      <a href="/carrito" id="cart-icon" class="flex items-center p-2 lg:p-3 -mr-2 lg:-mr-3 text-purple hover:text-gold transition-colors" aria-label="Carrito">
+        <span class="relative inline-flex items-center justify-center">
+          <svg class="w-6 h-6 lg:w-7 lg:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" data-fa-i2svg>
+            <path d="M6 6h15l-1.5 9h-12z"></path>
+            <circle cx="9" cy="20" r="1.5"></circle>
+            <circle cx="18" cy="20" r="1.5"></circle>
+            <path d="M6 6L5 3H2"></path>
+          </svg>
+          <span data-cart-count class="hidden absolute -top-1.5 -right-1.5 bg-gold text-purple !text-[10px] font-bold min-w-[1.125rem] h-[1.125rem] px-0.5 rounded-full inline-flex items-center justify-center leading-none tabular-nums !tracking-normal" style="font-family:'Jost',sans-serif">0</span>
+        </span>
       </a>
     </div>
   </div>
